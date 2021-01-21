@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!-- mapper dtd 작성 -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -21,8 +22,18 @@
 	<select id="idCheck" resultType="int">
 		select count(*) as result from users where id = #{id}
 	</select>
+  
+  <select id="showmypage" resultType="Reserve_imgVO">
+		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.id=r.id left join product p 
+		on r.pro_no=p.pro_no where u.id=#{id}
+	</select>
+	<select id="getreview" resultType="Review_imgVO">
+		select r.*,p.name,tel from users u left join review r on u.id = r.id left join product p on r.pro_no=p.pro_no 
+		where u.id=#{id}
+	</select>
 	
 	
 
 	
+
 </mapper>

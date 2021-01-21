@@ -23,4 +23,9 @@ public class ProductVO {
 	private String regdate;
 	private String fileloca;
 	
+	private double latitude;
+	private double hardness;
+	
+	
+
 }

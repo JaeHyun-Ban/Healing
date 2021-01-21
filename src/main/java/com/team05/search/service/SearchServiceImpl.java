@@ -1,12 +1,14 @@
 package com.team05.search.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.team05.command.ProductVO;
 import com.team05.command.ReviewVO;
 import com.team05.command.RoomVO;
+import com.team05.command.util.Criteria;
 import com.team05.command.util.SearchAreaVO;
 import com.team05.search.mapper.SearchMapper;
 
@@ -35,9 +37,39 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public ArrayList<ReviewVO> getreview(int pro_no) {
+	public ArrayList<ReviewVO> getreview(Criteria cri,int pro_no) {
 		
-		return searchMapper.getreview(pro_no);
+		return searchMapper.getreview(cri,pro_no);
+	}
+
+	@Override
+	public int reviewtotal(int pro_no) {
+		
+		return searchMapper.reviewtotal(pro_no);
+	}
+
+	@Override
+	public int reviewtotalSum(int pro_no) {
+		
+		return searchMapper.reviewtotalSum(pro_no);
+	}
+
+	@Override
+	public String getaddress(int pro_no) {
+		
+		return searchMapper.getaddress(pro_no);
+	}
+
+	@Override
+	public String gettitle(int pro_no) {
+		
+		return searchMapper.gettitle(pro_no);
+	}
+
+	@Override
+	public ArrayList<ProductVO> searchname(String search) {
+		
+		return searchMapper.searchname(search);
 	}
 
 	

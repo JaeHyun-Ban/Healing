@@ -5,7 +5,7 @@
     
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3004837755eae7b6be51a2cfae956086&libraries=services"></script>
     <style>
 
         html,
@@ -127,7 +127,7 @@
             
         }
         
-        .guest-content .map{
+        .guest-content .map1{
             border: 1px solid #ddd;
             text-align: center;
             height: 200px;
@@ -362,9 +362,9 @@
                             <p>오시는길</p>
                             
                         </div>
-                        <div class="col-sm-12 col-md-6 map">
+                        <div class="col-sm-12 col-md-6 map1">
                             <p>지도</p>
-                            
+                            <div id="map" style="width:100%;height:350px;"></div>
                         </div>
                     </div>
                 </div>
@@ -383,9 +383,11 @@
 
                         <div class="score-wrap">
                             <div class="score-star star-45"></div>
-                            <div class="num">9.0</div>
+                            <div class="num">
+                            	<p id="review_mean"></p>
+                            </div>
                         </div>
-                        <p>전체리뷰:333</p>
+                        <p>전체리뷰:<span id="review_count"></span></p>
                     </div>
 
                     <ul id="reviewlist" style="padding: 0;">
@@ -417,7 +419,7 @@
                         </li> -->
                         
                     </ul>
-                    
+                    <button type="button" class="form-control" id="morelist">게시글(더보기)</button>
 
 
                 </div>
@@ -466,6 +468,48 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- Initialize Swiper -->
+    
+    <script>
+    var address = "${address}";
+    var protitle = "${protitle}";
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 5 // 지도의 확대 레벨
+	    };  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(address, function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+protitle+'</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+</script>
+
     <script>
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 3,
@@ -500,23 +544,30 @@
 	        function regist() {
 				/* var writer = "${uservo.id}"; */
 				var file = $("#file").val();
+				var pro_no = $("input[name='pro_no']").val();
+				var score=$("#star-result").html()
+				var title=$("input[name='review-title']").val()
+				var content = $("#comment").val()
 				
 				file=file.substring(file.lastIndexOf('.')+1,file.length).toLowerCase();
 				
 				if(file != 'jpg' && file !='png' && file !='jpeg'){
 					alert('이미지(jpg,png,jpeg)만 등록가능합니다')
 					return;
-				}/* else if(writer ==""){
+				}else if(title ==""){
+					alert("제목을 입력해주세요")
+					return;
+				}else if(content ==""){
+					alert("내용을 입력해주세요")
+					return;
+				}
+				/* else if(writer ==""){
 					alert('로그인이 필요한 서비스입니다')
 					return;
 				} */
 				
 				var formData = new FormData();
 				var data = $("#file");
-				var pro_no = $("input[name='pro_no']").val();
-				var score=$("#star-result").html()
-				var title=$("input[name='review-title']").val()
-				var content = $("#comment").val()
 				
 				formData.append("file",data[0].files[0]); //file이름으로 file데이터 저장
 				formData.append("pro_no",pro_no);
@@ -539,7 +590,8 @@
 							$("#comment").val("");
 							$("#star_grade").children("a").removeClass("on");
 							alert('등록되었습니다');
-							getlist();
+							$("#morelist").css("display","block");
+							getlist(1,true);
 						}else{
 							alert("등록실패. 관리자에게 문의하세요");
 						}
@@ -548,14 +600,30 @@
 				})	
 			}
 	        
-	        getlist();
 	        
+	        getlist(1,false);
 	        
-	        function getlist() {
+	        var pageNum =1;
+	        var str="";
+	        function getlist(page,reset) {
 		        var pro_no = $("input[name='pro_no']").val();
-				$.getJSON("getreview?pro_no="+pro_no,function(list){
+				$.getJSON("getreview/"+pro_no+"/"+page,function(map){
+					var list=map.list;
+					var count = map.count;
+					var mean = map.mean;
+					$("#review_count").html(count);
+					$("#review_mean").html(mean);
+					if(reset){
+						str="";
+						pageNum=1;
+					}
+					if(pageNum*10>= count){
+						$("#morelist").css("display","none");
+					}
+					if(list.length <=0){
+						return;
+					}
 					
-					var str="";
 					for(var i=0; i<list.length; i++){
 						str+='<li class="pic">'
 						str+='<div>'
@@ -586,6 +654,11 @@
 					$("#reviewlist").html(str)
 				})
 			}
+	        
+	        $("#morelist").click(function(){
+	        	pageNum = pageNum+1;
+	        	getlist(pageNum,false);
+	        })
 	        
 	        function timeStamp(millis) {
 				//1시간 기준으로 방금전 or xx시간
