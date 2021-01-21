@@ -6,7 +6,7 @@
 <!-- mapper에서 사용할 단축일므을 typeAliases에 기술합니다. -->
 <configuration>
  	<typeAliases>
-<<<<<<< HEAD
+
 		<typeAlias type="com.team05.command.Reserve_imgVO" alias="Reserve_imgVO"/>
 		<typeAlias type="com.team05.command.Review_imgVO" alias="Review_imgVO"/>
 		<typeAlias type="com.team05.command.ProductVO" alias="ProductVO"/>
@@ -14,16 +14,9 @@
 		<typeAlias type="com.team05.command.ReviewVO" alias="ReviewVO"/>
 		
 		<typeAlias type="com.team05.command.UserVO" alias="UserVO"/>
-=======
+
  		<typeAlias type="com.team05.command.BoardVO" alias="BoardVO"/>
- 		
- 		
- 		
-		<!-- <typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
-		<typeAlias type="com.team404.command.ReplyVO" alias="ReplyVO"/>
-		<typeAlias type="com.team404.command.UserVO" alias="UserVO"/>
-		<typeAlias type="com.team404.command.SnsBoardVO" alias="SnsBoardVO"/> -->
->>>>>>> 1553db1b8d552800a406d220986ebaaba31698cf
+
  	</typeAliases>
  	   
 </configuration>

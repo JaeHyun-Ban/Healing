@@ -27,12 +27,9 @@
 	<!-- 히카리 풀(위에 설정파일을 주입) -->
 	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg ref="hikariConfig"/>
-<<<<<<< HEAD
 	</bean>
 	
-=======
-	</bean> 
->>>>>>> 1553db1b8d552800a406d220986ebaaba31698cf
+
 	<!-- 스프링에서 제공하는 스프링JDBCTemplate객체 -->
 	
 	
@@ -42,11 +39,7 @@
 	
 	
 	<!-- 마이바티스 핵심 객체 생성 -->
-<<<<<<< HEAD
-	<!-- setter주입으로 히카리풀을 주입 -->
-=======
-	
->>>>>>> 1553db1b8d552800a406d220986ebaaba31698cf
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		
 		<property name="dataSource" ref="ds" />
@@ -59,15 +52,10 @@
 		<property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml" />
 		
 	</bean>
-<<<<<<< HEAD
 	
-=======
->>>>>>> 1553db1b8d552800a406d220986ebaaba31698cf
 	<!-- 매퍼스캔명령으로 인터페이스 위치를 지정 -->
 	<mybatis-spring:scan base-package="com.team05.*.mapper"/>
 
-	
-	
 	
 	
 	
