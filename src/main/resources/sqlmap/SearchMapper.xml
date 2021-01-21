@@ -31,6 +31,29 @@
 	</insert>
 	
 	<select id="getreview" resultType="ReviewVO">
-		select * from review where pro_no=#{pro_no} order by renum desc
+		<![CDATA[
+		select renum,id,pro_no,score,content,title,uploadpath,filename,filerealname,fileloca,regdate,updatedate from (select ROWNUM rn,r.* from (select * from review where pro_no=#{pro_no} order by renum desc) r) 
+		where rn> (#{cri.pageNum}-1)*#{cri.amount} and rn <=#{cri.pageNum}*#{cri.amount}
+		]]>
+	</select>
+	
+	<select id="reviewtotal" resultType="int">
+		select count(*) from review where pro_no=#{pro_no}  
+	</select>
+	
+	<select id="reviewtotalSum" resultType="int">
+		select sum(score) from review where pro_no=#{pro_no}
+	</select>
+	
+	<select id="getaddress" resultType="String">
+		select basic_address from product where pro_no=#{pro_no}
+	</select>
+	
+	<select id="gettitle" resultType="String">
+		select name from product where pro_no=#{pro_no}
+	</select>
+	
+	<select id="searchname" resultType="ProductVO">
+		select * from product where name like '%'||#{searchname}||'%' or basic_address like '%'||#{searchname}||'%'
 	</select>
 </mapper>

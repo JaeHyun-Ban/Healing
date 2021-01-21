@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -29,6 +31,7 @@ import com.team05.command.ReviewVO;
 import com.team05.command.Review_imgVO;
 import com.team05.command.RoomVO;
 import com.team05.command.UserVO;
+import com.team05.command.util.Criteria;
 import com.team05.command.util.SearchAreaVO;
 import com.team05.search.service.SearchService;
 
@@ -60,6 +63,12 @@ public class SearchController {
 	public String room_info(@RequestParam("pro_no") int pro_no,Model model) {
 		ArrayList<RoomVO> roomlist=searchService.getroom(pro_no);
 		
+		String address=searchService.getaddress(pro_no);
+		String protitle=searchService.gettitle(pro_no);
+		
+		
+		model.addAttribute("address", address);
+		model.addAttribute("protitle", protitle);
 		model.addAttribute("roomlist", roomlist);
 		return "search/room_info";
 	}
@@ -103,8 +112,11 @@ public class SearchController {
 	}
 	
 	
-	@RequestMapping()
-	public String search_room() {
+	@RequestMapping("search_room")
+	public String search_room(@RequestParam("search") String search,Model model) {
+		
+		ArrayList<ProductVO> productlist=searchService.searchname(search);
+		model.addAttribute("productlist", productlist);
 		return "search/search_room";
 	}
 	
@@ -129,14 +141,14 @@ public class SearchController {
 			String fileloca=sdf.format(date);
 			System.out.println(fileloca);
 			
-			//2.���옣�븷 �뤃�뜑
+			
 			String uploadpath = "D:\\spring\\upload\\"+fileloca;
 			File folder = new File(uploadpath);
-			if(!folder.exists()) { //議댁옱�븯吏��븡�쑝硫� true
-				folder.mkdir(); //�뤃�뜑�깮�꽦
+			if(!folder.exists()) { 
+				folder.mkdir(); 
 			}
 			
-			//3.�꽌踰꾩뿉 ���옣�븷 �뙆�씪 �씠由�
+			
 			String filerealname=file.getOriginalFilename();
 			long size=file.getSize();
 			String fileExtension=filerealname.substring(filerealname.lastIndexOf("."),filerealname.length());
@@ -144,7 +156,7 @@ public class SearchController {
 			UUID uuid=UUID.randomUUID();
 			String uuids=uuid.toString().replaceAll("-", "");
 			
-			String filename = uuids+fileExtension; //蹂�寃쏀빐�꽌 ���옣�븷 �뙆�씪�씠由� 
+			String filename = uuids+fileExtension; 
 	
 			File saveFile = new File(uploadpath+"\\"+filename);
 			file.transferTo(saveFile); 
@@ -170,10 +182,22 @@ public class SearchController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("getreview")
-	public ArrayList<ReviewVO> getreview(@RequestParam("pro_no") int pro_no) {
+	@RequestMapping("getreview/{pro_no}/{pageNum}")
+	public HashMap<String, Object> getreview(@PathVariable("pro_no") int pro_no,
+										@PathVariable("pageNum") int pageNum) {
 		System.out.println(pro_no);
-		return searchService.getreview(pro_no);
+		Criteria cri = new Criteria(pageNum,10);
+		//리뷰개수
+		int count=searchService.reviewtotal(pro_no);
+		//리뷰점수합
+		int total=searchService.reviewtotalSum(pro_no);
+		double mean = (double)total /count;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("count", count);
+		map.put("mean",mean);
+		map.put("list",searchService.getreview(cri,pro_no));
+		return map;
 	}
 	
 }

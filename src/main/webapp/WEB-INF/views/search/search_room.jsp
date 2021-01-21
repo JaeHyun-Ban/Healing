@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -145,96 +146,64 @@
                     </div> -->
                 </div>
                 <div class="product-list">
+                	<c:forEach items="${productlist}" var="product">
                     <div class="product-no">
-                        <div class="back-color">
+                        <!-- <div class="back-color">
                             sadfsdf
-                        </div>
+                        </div> -->
                         <div>
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" alt="">
+                            <img src="display/${product.fileloca}/${product.filename}" >
                         </div>
                         <div class="pro-left">
-                            <h3>종로h호텔</h3>
+                            <h3><a href="room_info?pro_no=${product.pro_no}">${product.name}</a></h3>
                             <span style="background-color: gold;"><em>9.0</em></span>
                             <strong>추천해요</strong>
                             <span>(244)</span>
                             <p>
-                                <span>3.8km</span> |
-                                <span>강남구 역삼동</span>
+                            	<span class="latlng"></span> |
+                                <span>${product.basic_address}</span>
+                            	<script>
+                            		var lat1 =sessionStorage.getItem("lat1"); 
+                            		var lng1 =sessionStorage.getItem("lng1")
+                            		var lat2 = "${product.latitude}";
+                            		var lng2 = "${product.hardness}";
+                            		
+                            		function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
+                            		
+                            			function deg2rad(deg) {
+                            		        return deg * (Math.PI/180)
+                            		    }
+
+                            		    var R = 6371; // Radius of the earth in km
+                            		    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+                            		    var dLon = deg2rad(lng2-lng1);
+                            		    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+                            		    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                            		    var d = R * c; // Distance in km
+                            		    
+                            		    return d;
+                            		}
+                            		
+                            		$(".latlng").html(getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2));
+                            	</script>
+                                
                             </p>
                         </div>
                         <div class="pro-right">
                             <p>
                                 <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
                                 <span>대실</span>
-                                <strong>20000</strong>
+                                <strong>${product.half_price}</strong>
                             </p>
                             <p>
                                 <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
                                 <span>숙박</span>
-                                <strong>40000</strong>
+                                <strong>${product.rental_price}</strong>
                             </p>
                         </div>
                     </div>
-                    <div class="product-no">
-                        <div class="back-color">
-                            sadfsdf
-                        </div>
-                        <div>
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" alt="">
-                        </div>
-                        <div class="pro-left">
-                            <h3>종로h호텔</h3>
-                            <span style="background-color: gold;"><em>9.0</em></span>
-                            <strong>추천해요</strong>
-                            <span>(244)</span>
-                            <p>
-                                <span>3.8km</span> |
-                                <span>강남구 역삼동</span>
-                            </p>
-                        </div>
-                        <div class="pro-right">
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
-                                <span>대실</span>
-                                <strong>20000</strong>
-                            </p>
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
-                                <span>숙박</span>
-                                <strong>40000</strong>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="product-no">
-                        <div class="back-color">
-                            sadfsdf
-                        </div>
-                        <div>
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" alt="">
-                        </div>
-                        <div class="pro-left">
-                            <h3>종로h호텔</h3>
-                            <span style="background-color: gold;"><em>9.0</em></span>
-                            <strong>추천해요</strong>
-                            <span>(244)</span>
-                            <p>
-                                <span>3.8km</span> |
-                                <span>강남구 역삼동</span>
-                            </p>
-                        </div>
-                        <div class="pro-right">
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
-                                <span>대실</span>
-                                <strong>20000</strong>
-                            </p>
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
-                                <span>숙박</span>
-                                <strong>40000</strong>
-                            </p>
-                        </div>
-                    </div>
+                   
+                    </c:forEach>
                     
                 </div>
 

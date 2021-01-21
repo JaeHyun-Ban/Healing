@@ -79,7 +79,7 @@
             </div>
 
             <div class="container" style="margin-top: 50px ;">
-                <form action="/action_page.php">
+                <form action="search/search_room">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="혹시 찾으시는 곳이 있나요?" name="search"
                             style="height: 40px;">
@@ -170,5 +170,29 @@
 
 
 
+<script>
+
+
+function seccess(position){
+    console.log(position);
+    console.log("위도:"+position.coords.latitude);
+    console.log("경도:"+position.coords.longitude);
+    var lat1=position.coords.latitude;
+    var lng1=position.coords.longitude;
+    
+    sessionStorage.setItem("lat1", lat1 );
+    sessionStorage.setItem("lng1", lng1 );
+}
+
+function fail(){
+    alert('위치정보를 얻는데 실패했습니다');
+}
+
+
+(function(){
+    navigator.geolocation.getCurrentPosition(seccess,fail);
+})();
+
+</script>
 
         
