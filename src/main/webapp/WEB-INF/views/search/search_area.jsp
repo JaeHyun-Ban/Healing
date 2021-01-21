@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -71,9 +72,7 @@
             padding-top: 60px;
         }
 
-        .on{
-            color: red;
-        }
+        
         .date-wrap{
             padding: 10px;
             border-bottom: 1px solid #ddd;
@@ -92,39 +91,50 @@
                             <input type="text" id="datepicker2">까지
                         </div>
                     </div>
+                    <form action="search_area" name="areaform">
                     <div class="check-wrap">
                         <h3 style="padding: 20px 10px;">상세조건</h3>
                         <div>
                             <button type="button" class="btn" style="width: 45%;">초기화</button>   
-                            <button type="button" class="btn btn-danger" style="width: 45%;" id="btn1">적용</button>
+                            <button type="button" class="btn btn-danger" style="width: 45%;" id="apply">적용</button>
                         </div>
                         <div style="padding: 10px;">
-                            <form action="">
+                            
                                 <h4>테마</h4>
-                                    <input type="checkbox" name="thema" value="">호텔<br>
-                                    <input type="checkbox" name="thema" value="">모텔<br>
-                                    <input type="checkbox" name="thema" value="">관광<br>
+                                    <input type="radio" name="thema" ${searchvo.thema =='all'?'checked':'' } value="all">전체<br>
+                                    <input type="radio" name="thema" ${searchvo.thema =='hotel'?'checked':'' } value="hotel">호텔<br>
+                                    <input type="radio" name="thema" ${searchvo.thema =='motel'?'checked':'' } value="motel">모텔<br>
                                 <hr>
                                 <h4>지역설정</h4>
-                                    <span>서울</span>
+                                    <span>${searchvo.city}</span>
                                     <span>></span>
-                                    <span>강남</span>
+                                    <span>${searchvo.gu}</span>
                                     <button type="button" class="btn" id="area-change">변경</button>
+                                    <input type="hidden" name="city" value="${searchvo.city}">
+                                    <input type="hidden" name="gu" value="${searchvo.gu}">
                                 <hr>
                                 <h4>가격</h4>
-                                <p>
+                                  <p>
                                     <label for="amount">가격:</label>
                                     <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                                   </p>
                                    
                                   <div id="slider-range"></div>
-                            </form>
+                                  <input type="hidden" name="price1" >
+                                  <input type="hidden" name="price2" >
+                               	 <hr>
+                               	 	<h4>순서</h4>
+                                    <input type="radio" name="order" ${searchvo.order =='rowprice'?'checked':'' } value="rowprice">낮은가격순<br>
+                                    <input type="radio" name="order" ${searchvo.order =='highprice'?'checked':'' } value="highprice">높은가격순<br>
+                                  	<input type="radio" name="order" ${searchvo.order =='distance'?'checked':'' } value="distance">거리순<br>
+                                    <input type="radio" name="order" ${searchvo.order =='recom'?'checked':'' } value="recom">추천순<br>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-12 col-md-8 list-wrap">
-                <div class="head-check">
+                <!-- <div class="head-check">
                     <ul class="btn-wrap">
                         <li href="#" data-sort="distance" class="on">거리순</li>
                         <li href="#" data-sort="reco" class="">추천순</li>
@@ -133,106 +143,43 @@
                     </ul>
 
 
-                    <!-- <div class="container">
-                        <div class="btn-group btn-wrap">
-                            <button type="button" data-sort="distance" class="btn btn-primary on">거리순</button>
-                            <button type="button" data-sort="reco" class="btn btn-primary">추천순</button>
-                            <button type="button" data-sort="rowprice" class="btn btn-primary">낮은가격순</button>
-                            <button type="button" data-sort="highprice" class="btn btn-primary">높은가격순</button>
-                        </div>
-                    </div> -->
-                </div>
+                    
+                </div> -->
                 <div class="product-list">
+                	<c:forEach items="${list}" var="productvo">
                     <div class="product-no">
-                        <div class="back-color">
+                        <!-- <div class="back-color">
                             sadfsdf
-                        </div>
+                        </div> -->
                         <div>
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" alt="">
+                            
+                            <img src="display/${productvo.fileloca}/${productvo.filename}">
                         </div>
                         <div class="pro-left">
-                            <h3>종로h호텔</h3>
+                            <h3><a href="room_info?pro_no=${productvo.pro_no}">${productvo.name }</a></h3>
                             <span style="background-color: gold;"><em>9.0</em></span>
                             <strong>추천해요</strong>
                             <span>(244)</span>
                             <p>
                                 <span>3.8km</span> |
-                                <span>강남구 역삼동</span>
+                                <span>${productvo.basic_address}</span>
+                                
                             </p>
                         </div>
                         <div class="pro-right">
                             <p>
                                 <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
                                 <span>대실</span>
-                                <strong>20000</strong>
+                                <strong>${productvo.half_price }</strong>
                             </p>
                             <p>
                                 <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
                                 <span>숙박</span>
-                                <strong>40000</strong>
+                                <strong>${productvo.rental_price }</strong>
                             </p>
                         </div>
                     </div>
-                    <div class="product-no">
-                        <div class="back-color">
-                            sadfsdf
-                        </div>
-                        <div>
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" alt="">
-                        </div>
-                        <div class="pro-left">
-                            <h3>종로h호텔</h3>
-                            <span style="background-color: gold;"><em>9.0</em></span>
-                            <strong>추천해요</strong>
-                            <span>(244)</span>
-                            <p>
-                                <span>3.8km</span> |
-                                <span>강남구 역삼동</span>
-                            </p>
-                        </div>
-                        <div class="pro-right">
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
-                                <span>대실</span>
-                                <strong>20000</strong>
-                            </p>
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
-                                <span>숙박</span>
-                                <strong>40000</strong>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="product-no">
-                        <div class="back-color">
-                            sadfsdf
-                        </div>
-                        <div>
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" alt="">
-                        </div>
-                        <div class="pro-left">
-                            <h3>종로h호텔</h3>
-                            <span style="background-color: gold;"><em>9.0</em></span>
-                            <strong>추천해요</strong>
-                            <span>(244)</span>
-                            <p>
-                                <span>3.8km</span> |
-                                <span>강남구 역삼동</span>
-                            </p>
-                        </div>
-                        <div class="pro-right">
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
-                                <span>대실</span>
-                                <strong>20000</strong>
-                            </p>
-                            <p>
-                                <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
-                                <span>숙박</span>
-                                <strong>40000</strong>
-                            </p>
-                        </div>
-                    </div>
+                    </c:forEach>
                     
                 </div>
 
@@ -241,18 +188,7 @@
     </div>
     
     <script>
-        var wrap=document.querySelector(".btn-wrap")
-        wrap.onclick = function(){
-            
-            event.preventDefault();
-            if(event.target.localName != "li"){
-                return;
-            }
-            var target=document.querySelector(".on")
-            target.classList.remove("on")
-            event.target.classList.add("on")
-        }
-
+        
         $(function(){
             $("#datepicker1").datepicker();
             $("#datepicker1").datepicker("option","dateFormat","yy-mm-dd")
@@ -276,17 +212,21 @@
             "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
         } );
 
-        btn1.onclick = function(){
-            var result=$("#amount").val().split(" ~ ")
-            var score1=result[0].substring(0,result[0].indexOf("만"))
-            var score2=result[1].substring(0,result[1].indexOf("만"))
-            console.log(score1)
-            console.log(score2)
-        }
+        
     </script>
     <script>
         
         $("#area-change").on("click",function(){
-            location.href = "index04(지역선택페이지).html"
+            location.href="select_area";
         })
+        $("#apply").on("click",function(){
+        	var result=$("#amount").val().split(" ~ ")
+            var price1=result[0].substring(0,result[0].indexOf("만"))*10000
+            var price2=result[1].substring(0,result[1].indexOf("만"))*10000
+            $("input[name=price1]").val(price1)
+            $("input[name=price2]").val(price2)
+            document.areaform.submit();
+        })
+        
+        
     </script>

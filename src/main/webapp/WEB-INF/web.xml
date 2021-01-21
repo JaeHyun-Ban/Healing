@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- 스프링이 가동 되면서 가장 처음 설정파일로 등록(DB관련된 설정이나, 외부설정) -->
-	<!-- <context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/springconfig/DB-context.xml</param-value>
-	</context-param> -->
+	</context-param>
 	<!-- 스프링이 처음 동작하면서 가장 처음 실행 -->
-	<!-- <listener>
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener> -->
+	</listener>
 
 
 	<!-- 디스패처 서블릿이 첫번째 frontconroller로 등록 -->

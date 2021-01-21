@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 	<style>
       * {
         box-sizing: border-box
@@ -109,7 +111,7 @@
     </style>
     
     
-    
+  <div class="container">  
     <div class="tab">
       <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">내정보</button>
       <button class="tablinks" onclick="openCity(event, 'Paris')">예약내역</button>
@@ -124,45 +126,40 @@
         <tbody class="m-control">
           <tr>
             <td class="m-title">*ID</td>
-            <td><input type="text" class="form-control m-md"></td>
+            <td><input type="text" class="form-control m-md" value="${uservo.userId}" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*이름</td>
-            <td><input type="text" class="form-control m-md"></td>
+            <td><input type="text" class="form-control m-md" value="${uservo.name }" readonly></td>
           </tr>
 
           <tr>
             <td class="m-title">*이메일</td>
-            <td><input type="email" class="form-control m-md" style="display: inline; width: 50%;">@
-              <select class="form-control m-sm" style="display: inline; width: 40%;">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
+            <td>
+            	<input type="email" class="form-control m-md" value="${uservo.email}">
             </td>
           </tr>
           <tr>
             <td class="m-title">*휴대폰</td>
             <td><input type="text" class="form-control m-sm" placeholder="010" style="display: inline; width: 32%;">-
-              <input type="text" class="form-control m-sm" style="display: inline; width: 32%;">-
-              <input type="text" class="form-control m-sm" style="display: inline; width: 32%;">
+              <input type="text" class="form-control m-sm" style="display: inline; width: 32%;" value="">-
+              <input type="text" class="form-control m-sm" style="display: inline; width: 32%;" value="">
             </td>
           </tr>
           <tr>
             <td class="m-title">*주소</td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" value="${uservo.basic_address}"></td>
           </tr>
           <tr>
             <td class="m-title">*상세주소</td>
-            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control" value="${uservo.detail_address}"></td>
           </tr>
         </tbody>
       </table>
       <hr>
       <div class="title-foot">
-        <button type="button" class="btn">수정</button>
-        <button type="button" class="btn">삭제</button>
+        <button type="button" class="btn" id="update-btn">수정</button>
+        <button type="button" class="btn" id="delete-btn">삭제</button>
       </div>
     </div>
 
@@ -170,119 +167,31 @@
       <h3>예약내역</h3>
       <hr style="margin-bottom: 10px;">
       <div class="my-content">
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-
-
+        
+        <c:forEach items="">
+	        <div class="reserve">
+	          <div class="motelimg">
+	            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
+	          </div>
+	          <div class="left">
+	            <h4>종로h모텔</h4>
+	            <p>
+	              <span>
+	                <em>9.0</em>
+	              </span>
+	            </p>
+	            <p>예약날짜</p>
+	            <p>객실정보</p>
+	          </div>
+	          <div class="right">
+	            <h3 style="text-align: right;">38000원</h3>
+	          </div>
+	        </div>
+        </c:forEach>
+        
       </div>
       <hr>
-      <div class="container">
+      <%-- <div class="container">
         <ul class="pagination">
           <li><a href="#" data-page="${pagevo.startPage-1}">이전</a></li>
           <li><a href="#">1</a></li>
@@ -292,7 +201,7 @@
           <li><a href="#">5</a></li>
           <li><a href="#" data-page="${pagevo.endPage+1}">다음</a></li>
         </ul>
-      </div>
+      </div> --%>
 
     </div>
 
@@ -300,106 +209,28 @@
       <h3>내가쓴 후기</h3>
       <hr style="margin-bottom: 10px;">
       <div class="my-content">
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="human.png" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span><em>9.0</em></span>
-            </p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <p><strong>정말정말 추천해요~~</strong></p>
-            <p>객실이 깨끗하고 좋네요</p>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="human.png" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span><em>9.0</em></span>
-            </p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <p><strong>정말정말 추천해요~~</strong></p>
-            <p>객실이 깨끗하고 좋네요</p>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="human.png" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span><em>9.0</em></span>
-            </p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <p><strong>정말정말 추천해요~~</strong></p>
-            <p>객실이 깨끗하고 좋네요</p>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="human.png" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span><em>9.0</em></span>
-            </p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <p><strong>정말정말 추천해요~~</strong></p>
-            <p>객실이 깨끗하고 좋네요</p>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="human.png" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span><em>9.0</em></span>
-            </p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <p><strong>정말정말 추천해요~~</strong></p>
-            <p>객실이 깨끗하고 좋네요</p>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="human.png" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span><em>9.0</em></span>
-            </p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <p><strong>정말정말 추천해요~~</strong></p>
-            <p>객실이 깨끗하고 좋네요</p>
-          </div>
-        </div>
+      	<c:forEach items="${reviewlist}" var="review">
+	        <div class="reserve">
+	          <div class="motelimg">
+	            <img src="../search/display/${review.fileloca}/${review.filename}" alt="">
+	          </div>
+	          <div class="left">
+	            <h4>${review.name }</h4>
+	            <p>
+	              <span><em>9.0</em></span>
+	            </p>
+	            <p>전화번호:${review.tel}</p>
+	          </div>
+	          <div class="right">
+	            <p><strong>${review.title }</strong></p>
+	            <p>${review.content }</p>
+	          </div>
+	        </div>
+        </c:forEach>
       </div>
       <hr>
 
-      <div class="container">
+      <%-- <div class="container">
         <ul class="pagination">
           <li><a href="#" data-page="${pagevo.startPage-1}">이전</a></li>
           <li><a href="#">1</a></li>
@@ -409,7 +240,7 @@
           <li><a href="#">5</a></li>
           <li><a href="#" data-page="${pagevo.endPage+1}">다음</a></li>
         </ul>
-      </div>
+      </div> --%>
     </div>
 
 
@@ -417,121 +248,30 @@
       <h3>찜목록</h3>
       <hr style="margin-bottom: 10px;">
       <div class="my-content">
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-        <div class="reserve">
-          <div class="motelimg">
-            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
-          </div>
-          <div class="left">
-            <h4>종로h모텔</h4>
-            <p>
-              <span>
-                <em>9.0</em>
-              </span>
-            </p>
-            <p>예약날짜</p>
-            <p>객실정보</p>
-          </div>
-          <div class="right">
-            <h3 style="text-align: right;">38000원</h3>
-          </div>
-        </div>
-
-
-
+      	<c:forEach items="">
+	        <div class="reserve">
+	          <div class="motelimg">
+	            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
+	          </div>
+	          <div class="left">
+	            <h4>종로h모텔</h4>
+	            <p>
+	              <span>
+	                <em>9.0</em>
+	              </span>
+	            </p>
+	            <p>예약날짜</p>
+	            <p>객실정보</p>
+	          </div>
+	          <div class="right">
+	            <h3 style="text-align: right;">38000원</h3>
+	          </div>
+	        </div>
+        </c:forEach>
       </div>
       <hr>
 
-      <div class="container">
+      <%-- <div class="container">
         <ul class="pagination">
           <li><a href="#" data-page="${pagevo.startPage-1}">이전</a></li>
           <li><a href="#">1</a></li>
@@ -541,9 +281,9 @@
           <li><a href="#">5</a></li>
           <li><a href="#" data-page="${pagevo.endPage+1}">다음</a></li>
         </ul>
-      </div>
+      </div> --%>
     </div>
-
+</div>
     <script>
       function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
@@ -561,4 +301,15 @@
 
       // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click();
+    </script>
+    
+    <script>
+    	$("#update-btn").click(function () {
+			
+		})
+		$("#delete-btn").click(function () {
+			
+		})
+		
+		
     </script>
