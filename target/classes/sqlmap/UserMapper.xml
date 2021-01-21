@@ -7,14 +7,19 @@
 <mapper namespace="com.team05.user.mapper.UserMapper">
 
 	<!-- 회원가입 진행 -->
-	<insert id="join">
+	<insert id="userJoin">
 		insert into users (id, pwd, name, phone, email, email2, zipNo, addrBasic, addrDetail)
 		values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
 	</insert>
 	
+	<!-- 로그인 처리 -->
+	<select id="userLogin" resultType="UserVO">
+		select * from users where id = #{id} and pwd = #{pwd}
+	</select>
+	
 	<!-- ID중복 확인 -->
 	<select id="idCheck" resultType="int">
-		
+		select count(*) as result from users where id = #{id}
 	</select>
 	
 	

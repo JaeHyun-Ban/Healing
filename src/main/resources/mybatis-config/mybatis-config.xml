@@ -11,6 +11,8 @@
 		<typeAlias type="com.team05.command.ProductVO" alias="ProductVO"/>
 		<typeAlias type="com.team05.command.RoomVO" alias="RoomVO"/>
 		<typeAlias type="com.team05.command.ReviewVO" alias="ReviewVO"/>
+		
+		<typeAlias type="com.team05.command.UserVO" alias="UserVO"/>
  	</typeAliases>
  	   
 </configuration>

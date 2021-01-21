@@ -13,6 +13,21 @@ create table users(
 );
 alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
 
+-- 예약정보 테이블
+drop table reservation;
+create table reservation(
+    resno NUMBER(10) not null, --pk
+    checkin  VARCHAR2(30) not null,
+    checkout VARCHAR2(30) not null,
+    price VARCHAR2(30) not null,
+    type VARCHAR2(30) not null,
+    regdate date default sysdate,
+    id VARCHAR2(50) not null, --fk
+    pro_no NUMBER(10) not null --fk
+);
+alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
+
+==============================================================================
 
 --질문게시판 테이블
 create table qboard(
@@ -51,21 +66,6 @@ create table notice(
 );
 alter table notice add CONSTRAINT notice_pk PRIMARY KEY (nno);
 create SEQUENCE notice_seq INCREMENT by 1 START WITH 1 NOCACHE;
-
--- 예약정보 테이블
-drop table reservation;
-create table reservation(
-    resno NUMBER(10) not null, --pk
-    checkin  VARCHAR2(30) not null,
-    checkout VARCHAR2(30) not null,
-    price VARCHAR2(30) not null,
-    type VARCHAR2(30) not null,
-    regdate date default sysdate,
-    id VARCHAR2(50) not null, --fk
-    pro_no NUMBER(10) not null --fk
-);
-alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
-
 
 -- 상품(호텔, 모텔) 테이블
 create table product(

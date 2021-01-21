@@ -13,11 +13,19 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Override
-	public int join(UserVO vo) {
-		return userMapper.join(vo);
+	public int userJoin(UserVO vo) {
+		return userMapper.userJoin(vo);
 	}
 	
+	@Override
+	public UserVO userLogin(UserVO vo) {
+		return userMapper.userLogin(vo);
+	}
 	
+	@Override
+	public int idCheck(UserVO vo) {
+		return userMapper.idCheck(vo);
+	}
 	
 
 }

@@ -21,7 +21,7 @@
 					<div class="form-group">
 						<label for="id">아이디</label>
 						<div class="input-shadow">
-							<input type="text" class="form-control" id="id" required
+							<input type="text" class="form-control" id="id" name="id" required="required" 
 								oninvalid="this.setCustomValidity('아이디를 입력하세요')" />
 						</div>
 					</div>
@@ -29,7 +29,7 @@
 
 						<label for="pwd">비밀번호</label>
 						<div class="input-shadow">
-							<input type="password" class="form-control" id="pwd" required
+							<input type="password" class="form-control" id="pwd" name="pwd" required="required"
 								oninvalid="this.setCustomValidity('비밀번호를 입력하세요')">
 						</div>
 					</div>
@@ -48,6 +48,15 @@
 
 </section>
 
+<!-- 메세지 알림창 -->
+<script>
+	var msg = "${msg}";
+	if(msg != ""){
+		swal({
+			title: msg
+		})
+	}
+</script>
 
 <script>
 	//회원가입 페이지 이동

@@ -40,9 +40,9 @@
 }
 
 .input-shadow {
-  border: none;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px rgba(150, 149, 149, 0.753);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgb(202 202 202 / 75%);
 }
 .addr-btn {
   padding-bottom: 10px;
