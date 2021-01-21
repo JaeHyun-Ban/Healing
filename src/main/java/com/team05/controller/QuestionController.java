@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("question")
 public class QuestionController {
 	
-	@RequestMapping("question_board")
+	@RequestMapping("board")
 	public String question_board() {
 		return "question/question_board";
 	}
 	
-	@RequestMapping("question_detail")
+	@RequestMapping("detail")
 	public String question_detail() {
 		return "question/question_detail";
 	}
-	@RequestMapping("question_write")
+	@RequestMapping("write")
 	public String question_write() {
 		return "question/question_write";
 	}

@@ -12,49 +12,47 @@
 	<!-- 외부 설정파일을 읽어서 사용할 수 있도록 해주는 클래스 -->
 	<!-- classpath:/ 는 src/main/resources 폴더아래에 있는 파일을 참조할 수 있습니다. -->
 	
-	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:/db-config/Hikari.properties"/>
-	</bean> -->
+	</bean>
 		
 	<!-- 히카리 설정파일 빈 -->
-	<!-- <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="${ds.driverClassName}" />
-		<property name="jdbcUrl" value="${ds.jdbcUrl}"/>엔드포인트 :xe (11g)  /XEPDB1 (18c)
+		<property name="jdbcUrl" value="${ds.jdbcUrl}"/><!-- 엔드포인트 :xe (11g)  /XEPDB1 (18c) -->
 		<property name="username" value="${ds.username}" />
 		<property name="password" value="${ds.password}" />
-	</bean> -->
+	</bean>
 	
 	<!-- 히카리 풀(위에 설정파일을 주입) -->
-	<!-- <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg ref="hikariConfig"/>
-	</bean> -->
-	
+	</bean> 
 	<!-- 스프링에서 제공하는 스프링JDBCTemplate객체 -->
-	<!-- 
+	
+	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="ds"  />
-	</bean>
-	-->
+	</bean> 
 	
 	
 	<!-- 마이바티스 핵심 객체 생성 -->
-	<!-- setter주입으로 히카리풀을 주입 -->
-	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		
 		<property name="dataSource" ref="ds" />
-		마이바티스의 구현체 mapper를 묶어서 관리하기 위한 경로 설정
+		<!-- 마이바티스의 구현체 mapper를 묶어서 관리하기 위한 경로 설정 -->
 
 		<property name="mapperLocations" value="classpath:/sqlmap/*.xml" />
 
-		마이바티스의 부가적인 설정파일 위치
+		<!-- 마이바티스의 부가적인 설정파일 위치 -->
 		
 		<property name="configLocation" value="classpath:/mybatis-config/mybatis-config.xml" />
 		
-	</bean> -->
-	
+	</bean>
 	<!-- 매퍼스캔명령으로 인터페이스 위치를 지정 -->
-	<!-- <mybatis-spring:scan base-package="com.team404.*.mapper"/>
- -->
+	<mybatis-spring:scan base-package="com.team05.*.mapper"/>
+
 	
 	
 	
