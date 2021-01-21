@@ -14,8 +14,8 @@ import com.team05.user.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-//	@Autowired
-//	@Qualifier("UserService")
+	@Autowired
+	@Qualifier("UserService")
 	private UserService userService;
 	
 	//회원가입 와면 이동
@@ -27,11 +27,17 @@ public class UserController {
 	//회원가입 데이터 처리
 	@RequestMapping(value = "/userJoin", method = RequestMethod.POST)
 	public String userJoin(UserVO vo, RedirectAttributes ra) {
-		System.out.println(vo.toString());
+//		System.out.println(vo.toString());//데이터 넘어오는지 확인
 		
+		int result = userService.join(vo);
+		//검증
+		if(result == 1) {//성공
+			ra.addFlashAttribute("msg", "가입을 축하합니다!");
+		} else {//실패
+			ra.addFlashAttribute("msg", "가입에 실패했습니다");
+		}
 		
-		
-		return "redirect:/user/login"; //완료시 로그인페이지로 이동
+		return "redirect:/user/login";//로그인페이지 이동
 	}
 	
 	@RequestMapping("login")

@@ -5,11 +5,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.team05.user.mapper.UserMapper">
+
+	<!-- 회원가입 진행 -->
+	<insert id="join">
+		insert into users (id, pwd, name, email, email2, zipNo, addrBasic, addrDetail)
+		values(#{id}, #{pwd}, #{name}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
+	</insert>
+	
 	<!-- ID중복 확인 -->
 	<select id="idCheck" resultType="int">
 		
 	</select>
 	
-	<!-- 회원가입 진행 -->
+	
+
 	
 </mapper>

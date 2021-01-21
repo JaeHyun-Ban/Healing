@@ -29,11 +29,9 @@
 					<div class="title-box">회원가입</div>
 					<div class="form-group">
 						<label for="id">아이디</label>
-						<button type="button" class="btn btn-warning btn-idChk"
-							onclick="idChk()">아이디 중복 체크</button>
+						<button type="button" class="btn btn-warning btn-idChk"	onclick="idChk()">아이디 중복 체크</button>
 						<div class="input-shadow">
-							<input id="id" type="text" class="form-control" name="id"
-								placeholder="영어,숫자 8글자 이상">
+							<input id="id" type="text" class="form-control" name="id" placeholder="영어,숫자 8글자 이상">
 						</div>
 					</div>
 
@@ -91,12 +89,12 @@
 						</div>
 						<div class="input-shadow">
 							<!-- 기본 주소-->
-							<input type="text" class="form-control" id="addrBasic"
+							<input type="text" class="form-control" id="addrBasic" name="addrBasic"
 								placeholder="기본주소" readonly>
-						</div>
+						</div>S
 						<div class="input-shadow">
 							<!-- 상세 주소 -->
-							<input type="text" class="form-control" id="addrDetail"
+							<input type="text" class="form-control" id="addrDetail" name="addrDetail"
 								placeholder="상세주소">
 							<!-- </div> -->
 						</div>
@@ -106,10 +104,11 @@
 					<div class="form-group">
 						<button type="button" class="btn btn-primary btn-block btn-join"
 							id="joinBtn">회원가입</button>
-						<button type="button" class="btn btn-success btn-block btn-login">로그인</button>
+						<button type="button" class="btn btn-success btn-block btn-login"
+							id="loginBtn">로그인</button>
 					</div>
-
 				</form>
+				
 			</div>
 		</div>
 	</div>
@@ -154,11 +153,7 @@
 <script>
 	//팝업으로 열기
 	function goPopup() {
-		var pop = window
-				.open(
-						"${pageContext.request.contextPath}/resources/popup/jusoPopup.jsp",
-						"pop",
-						"width=570,height=420, scrollbars=yes, resizable=yes");
+		var pop = window.open("${pageContext.request.contextPath}/resources/popup/jusoPopup.jsp","pop",	"width=570,height=420, scrollbars=yes, resizable=yes");
 	}
 	//값을 받아오는 함수
 	function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail,
@@ -180,6 +175,13 @@
 		$("#joinForm").submit();//Form전송
 
 	})
+</script>
+
+<!-- 로그인 페이지 이동 -->
+<script type="text/javascript">
+	document.getElementById('loginBtn').onclick = function() {
+		location.href = 'login';
+	}
 </script>
 
 

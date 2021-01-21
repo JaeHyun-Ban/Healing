@@ -28,9 +28,9 @@ public class UserVO {
 	private String phone;
 	private String email;
 	private String email2;
-	private String basic_address;
-	private String detail_address;
-	private String post_zipNum;
+	private String zipNo;
+	private String addrBasic;
+	private String addrDetail;
 	private Timestamp regdate;;
 	
 	//마이페이지...?

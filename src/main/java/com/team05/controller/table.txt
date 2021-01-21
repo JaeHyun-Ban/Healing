@@ -6,11 +6,10 @@ create table users(
     phone VARCHAR2(50) not null,
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
-    basic_address VARCHAR2(50),
-    detail_address VARCHAR2(50),
-    post_zipNum VARCHAR2(50),
+    addrBasic VARCHAR2(50),
+    addrDetail VARCHAR2(50),
+    zipNo VARCHAR2(50),
     regdate date default sysdate,
-    grade_num NUMBER(10) not null --fk
 );
 alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
 
@@ -40,13 +39,6 @@ create table qboard_reply(
 alter table qboard_reply add CONSTRAINT reply_pk PRIMARY KEY (qreno);
 create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
 
-
--- 회원등급 테이블
-create table user_grade(
-    grade_num NUMBER(10) not null, --pk
-    grade_name VARCHAR2(50) not null
-);
-alter table user_grade add CONSTRAINT grade_pk PRIMARY KEY (grade_num);
 
 -- 공지사항 테이블
 create table notice(
