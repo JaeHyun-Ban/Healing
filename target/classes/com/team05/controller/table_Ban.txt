@@ -58,6 +58,7 @@ create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
 -- 공지사항 테이블
 create table notice(
     nno NUMBER(10) not null, -- pk
+    nviews NUMBER(10) not null,
     ntitle VARCHAR2(100) not null,
     ncontent VARCHAR2(500) not null,
     regdate date default sysdate,
