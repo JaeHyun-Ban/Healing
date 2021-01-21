@@ -1,5 +1,13 @@
 package com.team05.user.service;
 
-public interface UserService {
+import java.util.ArrayList;
 
+import com.team05.command.Reserve_imgVO;
+import com.team05.command.ReviewVO;
+import com.team05.command.Review_imgVO;
+import com.team05.command.UserVO;
+
+public interface UserService {
+	public ArrayList<Reserve_imgVO> showmypage(UserVO uservo);
+	public ArrayList<Review_imgVO> getreview(UserVO uservo);
 }

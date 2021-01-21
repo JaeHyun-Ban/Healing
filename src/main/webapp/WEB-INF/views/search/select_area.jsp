@@ -54,11 +54,11 @@
       
     }
     /* ================================ */
-    ul{
+    .tabcontent ul{
         margin: 0; padding: 0;
     }
-    li{
-        list-style: none;
+    .tabcontent li{
+        
         border-bottom: 1px solid #ddd;
         padding: 25px 5px;
         
@@ -76,7 +76,7 @@
   </style>
   
   
-  
+<div class="container">
   <div class="tab">
     <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">서울</button>
     <button class="tablinks" onclick="openCity(event, 'Paris')">경기</button>
@@ -122,10 +122,22 @@
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>
         </li>
+        <li class="space">
+            <span class="left">수원</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">수원</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
         
     </ul>
   </div>
-
+</div>
 
   
 
@@ -152,14 +164,14 @@
         $(".seoul").on("click",function(){
           var big = "서울";
           var small = event.target.children[0].innerHTML
-          
+          location.href="search_area1?city="+big+"&gu="+small
           
         })
         
         $(".gyeonggi").on("click",function(){
           var big = "경기";
           var small = event.target.children[0].innerHTML
-          
+          location.href="search_area?city="+big+"&gu="+small
         })
 
 
