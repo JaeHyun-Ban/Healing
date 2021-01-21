@@ -6,14 +6,28 @@ create table users(
     phone VARCHAR2(50) not null,
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
-    basic_address VARCHAR2(50),
-    detail_address VARCHAR2(50),
-    post_zipNum VARCHAR2(50),
-    regdate date default sysdate,
-    grade_num NUMBER(10) not null --fk
+    addrBasic VARCHAR2(50),
+    addrDetail VARCHAR2(50),
+    zipNo VARCHAR2(50),
+    regdate date default sysdate
 );
 alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
 
+-- 예약정보 테이블
+drop table reservation;
+create table reservation(
+    resno NUMBER(10) not null, --pk
+    checkin  VARCHAR2(30) not null,
+    checkout VARCHAR2(30) not null,
+    price VARCHAR2(30) not null,
+    type VARCHAR2(30) not null,
+    regdate date default sysdate,
+    id VARCHAR2(50) not null, --fk
+    pro_no NUMBER(10) not null --fk
+);
+alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
+
+==============================================================================
 
 --질문게시판 테이블
 create table qboard(
@@ -41,16 +55,10 @@ alter table qboard_reply add CONSTRAINT reply_pk PRIMARY KEY (qreno);
 create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
 
 
--- 회원등급 테이블
-create table user_grade(
-    grade_num NUMBER(10) not null, --pk
-    grade_name VARCHAR2(50) not null
-);
-alter table user_grade add CONSTRAINT grade_pk PRIMARY KEY (grade_num);
-
 -- 공지사항 테이블
 create table notice(
     nno NUMBER(10) not null, -- pk
+    nviews NUMBER(10) not null,
     ntitle VARCHAR2(100) not null,
     ncontent VARCHAR2(500) not null,
     regdate date default sysdate,
@@ -59,21 +67,6 @@ create table notice(
 );
 alter table notice add CONSTRAINT notice_pk PRIMARY KEY (nno);
 create SEQUENCE notice_seq INCREMENT by 1 START WITH 1 NOCACHE;
-
--- 예약정보 테이블
-drop table reservation;
-create table reservation(
-    resno NUMBER(10) not null, --pk
-    checkin  VARCHAR2(30) not null,
-    checkout VARCHAR2(30) not null,
-    price VARCHAR2(30) not null,
-    type VARCHAR2(30) not null,
-    regdate date default sysdate,
-    id VARCHAR2(50) not null, --fk
-    pro_no NUMBER(10) not null --fk
-);
-alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
-
 
 -- 상품(호텔, 모텔) 테이블
 create table product(

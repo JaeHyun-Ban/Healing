@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css">
 
 
+
         <!-- 배너영역 -->
 
         <section class="banner">
@@ -170,6 +171,7 @@
 
 
 
+
 <script>
 
 
@@ -194,5 +196,6 @@ function fail(){
 })();
 
 </script>
+
 
         

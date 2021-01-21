@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- mapper dtd 작성 -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- dtd라는 파일을 참조하는 마이바티스 문서라는 것을 선언 -->
+  
+<mapper namespace="com.team05.user.mapper.UserMapper">
 
-<!-- 구현 클래스의 위치 -->
+	<!-- 회원가입 진행 -->
+	<insert id="userJoin">
+		insert into users (id, pwd, name, phone, email, email2, zipNo, addrBasic, addrDetail)
+		values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
+	</insert>
+	
+	<!-- 로그인 처리 -->
+	<select id="userLogin" resultType="UserVO">
+		select * from users where id = #{id} and pwd = #{pwd}
+	</select>
+	
+	<!-- ID중복 확인 -->
+	<select id="idCheck" resultType="int">
+		select count(*) as result from users where id = #{id}
+	</select>
+  
+  <!-- 구현 클래스의 위치 -->
 <mapper namespace="com.team05.user.mapper.UserMapper">
 	
 	<select id="showmypage" resultType="Reserve_imgVO">
@@ -15,7 +33,8 @@
 		select r.*,p.name,tel from users u left join review r on u.id = r.id left join product p on r.pro_no=p.pro_no 
 		where u.id=#{id}
 	</select>
-
+	
+	
 
 
 </mapper>
