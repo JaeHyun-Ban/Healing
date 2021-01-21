@@ -91,7 +91,7 @@
 							<!-- 기본 주소-->
 							<input type="text" class="form-control" id="addrBasic" name="addrBasic"
 								placeholder="기본주소" readonly>
-						</div>S
+						</div>
 						<div class="input-shadow">
 							<!-- 상세 주소 -->
 							<input type="text" class="form-control" id="addrDetail" name="addrDetail"

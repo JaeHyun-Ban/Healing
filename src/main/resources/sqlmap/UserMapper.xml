@@ -8,8 +8,8 @@
 
 	<!-- 회원가입 진행 -->
 	<insert id="join">
-		insert into users (id, pwd, name, email, email2, zipNo, addrBasic, addrDetail)
-		values(#{id}, #{pwd}, #{name}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
+		insert into users (id, pwd, name, phone, email, email2, zipNo, addrBasic, addrDetail)
+		values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
 	</insert>
 	
 	<!-- ID중복 확인 -->

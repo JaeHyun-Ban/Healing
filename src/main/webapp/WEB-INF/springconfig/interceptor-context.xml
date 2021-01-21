@@ -9,8 +9,8 @@
 
 	<!-- <bean id="userAuthHandler" class="com.team404.common.util.interceptor.UserAuthHandler"/>
 	<bean id="boardAuthHandler" class="com.team404.common.util.interceptor.BoardAuthHandler"/>
-	<bean id="userLoginSucessHandler" class="com.team404.common.util.interceptor.UserLoginSucessHandler"/>
-	 -->
+	<bean id="userLoginSucessHandler" class="com.team404.common.util.interceptor.UserLoginSucessHandler"/> -->
+	
 	
 	<mvc:interceptors>
 	

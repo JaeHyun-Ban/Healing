@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -18,7 +19,7 @@
             font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
             font-size: 14px;
             color: #000;
-            margin: 0;
+            margin-top:150px;
             padding: 0;
         }
 
@@ -90,7 +91,7 @@
             box-sizing: border-box;
         }
 
-        .room-content>.left>.reserve {
+        .room-content>.left .reserve {
             text-align: right;
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
@@ -222,10 +223,7 @@
     
     
     <div class="container">
-        <h2>Dynamic Tabs</h2>
-        <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class
-            with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
-
+        
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">객실</a></li>
             <li><a data-toggle="tab" href="#menu1">숙소정보</a></li>
@@ -235,159 +233,82 @@
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
+            	<c:forEach items="${roomlist}" var="room">
                 <div class="room">
                     <div class="room-img">
                         <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg">
                     </div>
                     <div>
-                        <strong>스탠다드</strong>
+                        <strong>${room.title }</strong>
                     </div>
                     <div class="room-content">
                         <div class="left" style="border-right: 1px solid #7777;">
                             <p>대실</p>
-                            <div class="reserve">
-                                <span>예약</span>
-                                <b style="color: red;">20000원</b>
-                            </div>
-                            <div class="re-time">
-                                <div class="left">
-                                    <span>마감시간</span>
-                                    <span>이용시간</span>
-                                </div>
-                                <div class="right">
-                                    <span>22시까지</span>
-                                    <span>8시간</span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-danger" style="width: 100%;">예약하기</button>
-                            </div>
+                            <form action="reservation" method="get">
+	                            <div class="reserve">
+	                                <span>예약</span>
+	                                <b style="color: red;">${room.half_price }</b>
+	                            </div>
+	                            <div class="re-time">
+	                                <div class="left">                               
+	                                    <span>이용시간</span>
+	                                </div>
+	                                <div class="right">
+	                                    <select name="time1">
+	                                    	<option value="10">10:00</option>
+	                                    	<option value="11">11:00</option>
+	                                    	<option value="12">12:00</option>
+	                                    	<option value="13">13:00</option>
+	                                    	<option value="14">14:00</option>
+	                                    	<option value="15">15:00</option>
+	                                    	<option value="16">16:00</option>
+	                                    	<option value="17">17:00</option>
+	                                    	<option value="18">18:00</option>
+	                                    	<option value="19">19:00</option>
+	                                    	<option value="20">20:00</option>
+	                                    </select>~
+	                                    <span> ${room.half_time} 시간</span>
+	                                </div>
+	                            </div>
+	                            <input type="hidden" name="pro_no" value="${room.pro_no }">
+	                            <input type="hidden" name="room_no" value="${room.room_no }">
+	                            <input type="hidden" name="pro_type" value="half">
+	                            
+	                            <input type="hidden" name="time2" value="${room.half_time }">
+	                            <input type="hidden" name="price" value="${room.half_price }">
+	                            <div>
+	                                <button type="submit" class="btn btn-danger" id="half" style="width: 100%;">예약하기</button>
+	                            </div>
+                            </form>
                         </div>
                         <div class="left">
                             <p>숙박</p>
-                            <div class="reserve">
-                                <span>예약</span>
-                                <b style="color: red;">20000원</b>
-                            </div>
-                            <div class="re-time">
-                                <div class="left">
-                                    <span>마감시간</span>
-                                    <span>이용시간</span>
-                                </div>
-                                <div class="right">
-                                    <span>22시까지</span>
-                                    <span>8시간</span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-danger" style="width: 100%;">예약하기</button>
-                            </div>
+                            <form action="">
+	                            <div class="reserve">
+	                                <span>예약</span>
+	                                <b style="color: red;">${room.rental_price }</b>
+	                            </div>
+	                            <div class="re-time">
+	                                <div class="left">
+	                                    <span>체크인</span>
+	                                    <span>체크아웃</span>
+	                                </div>
+	                                <div class="right">
+	                                    <span>${room.checkin }</span>
+	                                    <span>${room.checkout }</span>
+	                                </div>
+	                            </div>
+	                            <div>
+	                                <button type="button" class="btn btn-danger" id="rental" style="width: 100%;">예약하기</button>
+	                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-                <div class="room">
-                    <div class="room-img">
-                        <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg">
-                    </div>
-                    <div>
-                        <strong>스탠다드</strong>
-                    </div>
-                    <div class="room-content">
-                        <div class="left" style="border-right: 1px solid #7777;">
-                            <p>대실</p>
-                            <div class="reserve">
-                                <span>예약</span>
-                                <b style="color: red;">20000원</b>
-                            </div>
-                            <div class="re-time">
-                                <div class="left">
-                                    <span>마감시간</span>
-                                    <span>이용시간</span>
-                                </div>
-                                <div class="right">
-                                    <span>22시까지</span>
-                                    <span>8시간</span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-danger" style="width: 100%;">예약하기</button>
-                            </div>
-                        </div>
-                        <div class="left">
-                            <p>숙박</p>
-                            <div class="reserve">
-                                <span>예약</span>
-                                <b style="color: red;">20000원</b>
-                            </div>
-                            <div class="re-time">
-                                <div class="left">
-                                    <span>마감시간</span>
-                                    <span>이용시간</span>
-                                </div>
-                                <div class="right">
-                                    <span>22시까지</span>
-                                    <span>8시간</span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-danger" style="width: 100%;">예약하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="room">
-                    <div class="room-img">
-                        <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg">
-                    </div>
-                    <div>
-                        <strong>스탠다드</strong>
-                    </div>
-                    <div class="room-content">
-                        <div class="left" style="border-right: 1px solid #7777;">
-                            <p>대실</p>
-                            <div class="reserve">
-                                <span>예약</span>
-                                <b style="color: red;">20000원</b>
-                            </div>
-                            <div class="re-time">
-                                <div class="left">
-                                    <span>마감시간</span>
-                                    <span>이용시간</span>
-                                </div>
-                                <div class="right">
-                                    <span>22시까지</span>
-                                    <span>8시간</span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-danger" style="width: 100%;">예약하기</button>
-                            </div>
-                        </div>
-                        <div class="left">
-                            <p>숙박</p>
-                            <div class="reserve">
-                                <span>예약</span>
-                                <b style="color: red;">20000원</b>
-                            </div>
-                            <div class="re-time">
-                                <div class="left">
-                                    <span>마감시간</span>
-                                    <span>이용시간</span>
-                                </div>
-                                <div class="right">
-                                    <span>22시까지</span>
-                                    <span>8시간</span>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-danger" style="width: 100%;">예약하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </c:forEach>
+                
+			</div>
+                
 
 
             <div id="menu1" class="tab-pane fade">
@@ -467,8 +388,12 @@
                         <p>전체리뷰:333</p>
                     </div>
 
-                    <ul style="padding: 0;">
-                        <li class="pic">
+                    <ul id="reviewlist" style="padding: 0;">
+                    	
+                        <!-- <li class="pic">
+                        	<div>
+                                <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" width="300px" height="200px">
+                            </div>
                             <div class="img">
                                 <img src="human.png" alt="">
                             </div>
@@ -489,61 +414,18 @@
                             <div class="date">
                                 <span>2시간전</span>
                             </div>
-                        </li>
-                        <li class="pic">
-                            <div class="img">
-                                <img src="human.png" alt="">
-                            </div>
-                            <p>
-                                <strong>제목</strong>
-                            </p>
-                            <div class="score-wrap">
-                                <div class="score-star star-45"></div>
-                                <div class="num">9.0</div>
-                            </div>
-                            <div class="name">
-                                <b>스탠다드 객실이용고객.</b>
-                                <strong>회원id</strong>
-                            </div>
-                            <div class="txt">
-                                객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.
-                            </div>
-                            <div class="date">
-                                <span>2시간전</span>
-                            </div>
-                        </li>
-                        <li class="pic">
-                            <div class="img">
-                                <img src="human.png" alt="">
-                            </div>
-                            <p>
-                                <strong>제목</strong>
-                            </p>
-                            <div class="score-wrap">
-                                <div class="score-star star-45"></div>
-                                <div class="num">9.0</div>
-                            </div>
-                            <div class="name">
-                                <b>스탠다드 객실이용고객.</b>
-                                <strong>회원id</strong>
-                            </div>
-                            <div class="txt">
-                                객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.객실이너무좋네요.
-                            </div>
-                            <div class="date">
-                                <span>2시간전</span>
-                            </div>
-                        </li>
+                        </li> -->
+                        
                     </ul>
                     
 
 
                 </div>
                 <div class="writer">
-                    <form action="#" class="reply-wrap">
-                        <div class="fileDiv">
+                    
+                        <!-- <div class="fileDiv">
                             <img id="fileImg" src="../resources/img/img_ready.png">
-                        </div>
+                        </div> -->
                         <div class="reply-content">
                             <div class="reply-img">
                                 <img src="img/human.png">
@@ -556,11 +438,11 @@
                                 <a href="#" data-star="5">★</a>
                                 <span style="font-size: 20px;">나의별점:</span>
                                 <strong id="star-result" style="font-size: 20px;"></strong>
-                                <input type="hidden" name="">
+                                
                             </p>
                             
                             
-                            <input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" style="width: 50%;">
+                            <input type="text" class="form-control" placeholder="제목을 입력하세요" name="review-title" style="width: 50%;">
                             <br>
                             <textarea class="form-control" rows="5" id="comment"></textarea>
                             <div class="reply-group"> <!-- 부모상자 -->
@@ -568,10 +450,10 @@
                                     <label for="file">이미지업로드</label> 
                                     <input type="file" name="file" id="file">
                                 </div>
-                                <button class="right btn btn-info">등록하기</button>
+                                <button type="button" class="right btn btn-info" id="uploadBtn">등록하기</button>
                             </div>
                         </div>
-                    </form>
+                   
                     
                     
                 </div>
@@ -610,5 +492,134 @@
             $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
             $("#star-result").html(event.target.dataset.star)
         });
+        
+       
+        $(document).ready(function(){
+        	$("#uploadBtn").click(regist);
+        	
+	        function regist() {
+				/* var writer = "${uservo.id}"; */
+				var file = $("#file").val();
+				
+				file=file.substring(file.lastIndexOf('.')+1,file.length).toLowerCase();
+				
+				if(file != 'jpg' && file !='png' && file !='jpeg'){
+					alert('이미지(jpg,png,jpeg)만 등록가능합니다')
+					return;
+				}/* else if(writer ==""){
+					alert('로그인이 필요한 서비스입니다')
+					return;
+				} */
+				
+				var formData = new FormData();
+				var data = $("#file");
+				var pro_no = $("input[name='pro_no']").val();
+				var score=$("#star-result").html()
+				var title=$("input[name='review-title']").val()
+				var content = $("#comment").val()
+				
+				formData.append("file",data[0].files[0]); //file이름으로 file데이터 저장
+				formData.append("pro_no",pro_no);
+				formData.append("score",score);
+				formData.append("title",title);
+				formData.append("content",content);
+				
+				
+				
+				$.ajax({
+					type:"post",
+					url:"upload",
+					processData:false, //폼형식이 &변수=값의 형태로 변경되는 것을 막는다.
+					contentType:false, //false로 지정하면 기본으로 "multipart/form-data" 으로 선언됨
+					data:formData, //폼데이터객체
+					success:function(result){
+						if(result=="success"){
+							$("#file").val("");
+							$("input[name='review-title']").val("");
+							$("#comment").val("");
+							$("#star_grade").children("a").removeClass("on");
+							alert('등록되었습니다');
+							getlist();
+						}else{
+							alert("등록실패. 관리자에게 문의하세요");
+						}
+					},
+					error:function(status,error){}
+				})	
+			}
+	        
+	        getlist();
+	        
+	        
+	        function getlist() {
+		        var pro_no = $("input[name='pro_no']").val();
+				$.getJSON("getreview?pro_no="+pro_no,function(list){
+					
+					var str="";
+					for(var i=0; i<list.length; i++){
+						str+='<li class="pic">'
+						str+='<div>'
+						str+='<img src=display/'+list[i].fileloca+"/"+list[i].filename+' width="300px" height="200px">'
+						str+='</div>'
+						str+='<div class="img">'
+						str+='<img src="human.png" alt="">'
+						str+='</div>'
+						str+='<p>'
+						str+='<strong>'+list[i].title+'</strong>'
+						str+='</p>'
+						str+='<div class="score-wrap">'
+						str+='<div class="score-star star-45"></div>'
+						str+='<div class="num">'+list[i].score+".0"+'</div>'
+						str+='</div>'
+						str+='<div class="name">'
+						str+='<b>스탠다드 객실이용고객.</b>'
+						str+='<strong>'+list[i].id+'</strong>'
+						str+='</div>'
+						str+='<div class="txt">'
+						str+=list[i].content
+						str+='</div>'
+						str+='<div class="date">'
+						str+='<span>'+timeStamp(list[i].regdate)+'</span>'
+						str+='</div>'
+						str+='</li>'
+					}
+					$("#reviewlist").html(str)
+				})
+			}
+	        
+	        function timeStamp(millis) {
+				//1시간 기준으로 방금전 or xx시간
+				//1일 기준으로 날짜 출력
+				var date = new Date(); //현재시간
+				var gap = date- millis; //밀리초
+				console.log(gap);
+				
+				//1000*60*60 //1시간
+				//1000*60*60*24 //1일
+				var result ="";
+				if(gap <1000*60*60){
+					result="방금전";
+				}else if(gap <1000*60*60*24){
+					var time=parseInt(gap/(1000*60*60));
+					result=time+"시간전";
+				}else{	
+					var date = new Date(millis);
+					var year=date.getFullYear();
+					var month=date.getMonth()+1;
+					var day=date.getDate();
+					var hour=date.getHours();
+					var minute=date.getMinutes();
+					var second=date.getSeconds();
+					result = year+"년"+month+"월"+day+"일"+(hour <10?"0"+hour:hour)+":"+(minute <10?"0"+minute:minute)+":"+(second <10?"0"+second:second)
+				}
+				return result;
+				
+			}
+	        
+        })
+        
+        
+        
+        
     </script>
     

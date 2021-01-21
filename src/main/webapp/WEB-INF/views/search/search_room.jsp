@@ -103,9 +103,9 @@
                         <div style="padding: 10px;">
                             <form action="">
                                 <h4>테마</h4>
-                                <input type="checkbox" name="thema" value="">호텔<br>
-                                <input type="checkbox" name="thema" value="">모텔<br>
-                                <input type="checkbox" name="thema" value="">관광<br>
+                                <input type="radio" name="thema" checked value="">호텔<br>
+                                <input type="radio" name="thema" value="">모텔<br>
+                                <input type="radio" name="thema" value="">전체<br>
                                 <hr>
                                 <h4>거리설정</h4>
                                 <input type="radio" name="range" checked>기준거리 <br>
