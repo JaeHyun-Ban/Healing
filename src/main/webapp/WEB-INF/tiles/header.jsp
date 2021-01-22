@@ -7,11 +7,13 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <!-- 화면이 휴대폰사이즈로 줄었을때 나오는 영역 -->
-                        <button type="button" class="navbar-toggle topmenu" data-toggle="collapse"
+                        <button type="button" class="navbar-toggle topmenubtn" data-toggle="collapse"
                             data-target="#myNavbar">
                             <span class="glyphicon glyphicon-th-list"></span>
                         </button>
-                        <p class="title">쉬엇다 갈래?</p>
+                       		 <li class = "title">
+                                <a href="${pageContext.request.contextPath }">쉬었다갈래?</a>
+                            </li>
                     </div>
 
                     <!-- 메뉴 작성부분 -->
@@ -19,17 +21,34 @@
 
                         <ul class="nav navbar-nav topmenu">
                             <li>
-                                <a href="##">공지사항</a>
+                                <a href="${pageContext.request.contextPath }/notice/board">공지사항</a>
                             </li>
                             <li>
                                 <a href="##">고객센터</a>
                             </li>
+                            
+                            <c:choose>
+                            <c:when test="${sessionScope.userVO == null}">
                             <li>
-                                <a href="##">로그인</a>
+                                <a href="${pageContext.request.contextPath }/user/login">로그인</a>
                             </li>
                             <li>
-                                <a href="##">회원가입</a>
+                                <a href="${pageContext.request.contextPath }/user/join">회원가입</a>
                             </li>
+                            </c:when>
+                            
+                            <c:otherwise>
+                            
+                            <li>
+                                <a href="${pageContext.request.contextPath }/user/logout">로그아웃</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath }/user/mypage">마이페이지</a>
+                            </li>
+                            
+                            </c:otherwise>
+                            </c:choose>
+                            
                         </ul>
                     </div>
                 </div>

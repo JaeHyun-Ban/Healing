@@ -9,6 +9,8 @@
 
       body {
         font-family: "Lato", sans-serif;
+        margin-top:200px;
+        margin-bottom:200px;
       }
 
       /* Style the tab */

@@ -66,6 +66,9 @@ public class UserController {
 		if(result != null) { //로그인 성공
 			session.setAttribute("userVO", result);//세션생성
 			ra.addFlashAttribute("userVO", result);
+			
+			System.out.println(session.getAttribute("userVO") + "입니다");
+			
 			return "redirect:/";
 		} else {//로그인 실패
 			ra.addFlashAttribute("msg", "로그인을 실패 하였습니다.");//실패문구
@@ -96,12 +99,15 @@ public class UserController {
 		model.addAttribute("reservelist", reservelist);
 
 		ArrayList<Review_imgVO> reviewlist=userService.getreview(uservo);
-		model.addAttribute("reviewlist", reviewlist);
-
-		System.out.println(reservelist.toString());
-		System.out.println(reviewlist.toString());
+		model.addAttribute("reviewlist", reviewlist);				
 
 		return "user/mypage";
+	}
+	
+	@RequestMapping("logout")
+	public String userLogout(HttpSession session) {
+		session.invalidate();	
+		return "redirect:/"; //홈으로
 	}
 	
 	
