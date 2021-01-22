@@ -8,5 +8,7 @@ public interface NoticeBoardMapper {
 	
 	public void regist(BoardVO vo);
 	public ArrayList<BoardVO> getList();
+	public BoardVO getContent(int nno);
+	public int update(BoardVO vo);
 
 }

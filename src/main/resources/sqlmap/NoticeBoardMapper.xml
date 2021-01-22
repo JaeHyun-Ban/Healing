@@ -7,7 +7,7 @@
 <mapper namespace="com.team05.noticeboard.mapper.NoticeBoardMapper">
 
 	<insert id="regist">
-		insert into notice(nno, ntitle, id, ncontent)
+		insert into notice(nno, ntitle, nid, ncontent)
 		values(notice_seq.nextval, #{ntitle}, '관리자', #{ncontent} )
 	</insert>
 	
@@ -20,5 +20,20 @@
 		          from notice
 		          order by nno desc)a) 
 	</select>
+	
+	<select id="getContent" resultType="BoardVO">
+		select * from NOTICE where nno =#{nno}
+	</select>
+	
+	<update id="update">
+		update NOTICE
+		set 
+			ntitle = #{ntitle},
+			ncontent = #{ncontent},
+			updatedate = sysdate
+		where nno = #{nno}
+	
+	</update>
+	
 	
 </mapper>

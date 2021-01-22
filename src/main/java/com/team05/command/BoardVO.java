@@ -16,7 +16,7 @@ public class BoardVO {
 	private int nno;
 	private int nviews;
 	private String ntitle;
-	private String id;
+	private String nid;
 	private String ncontent;
 	private Timestamp regdate;
 	private Timestamp updatedate;

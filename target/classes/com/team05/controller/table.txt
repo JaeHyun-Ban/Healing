@@ -51,12 +51,12 @@ alter table user_grade add CONSTRAINT grade_pk PRIMARY KEY (grade_num);
 -- 공지사항 테이블
 create table notice(
     nno NUMBER(10) not null, -- pk
-    nviews NUMBER(10) not null,
+    nviews NUMBER(10) default 0,
     ntitle VARCHAR2(100) not null,
     ncontent VARCHAR2(500) not null,
     regdate date default sysdate,
     updatedate date default sysdate,
-    id VARCHAR2(50) not null --fk
+    nid VARCHAR2(50) not null --fk
 );
 alter table notice add CONSTRAINT notice_pk PRIMARY KEY (nno);
 create SEQUENCE notice_seq INCREMENT by 1 START WITH 1 NOCACHE;
