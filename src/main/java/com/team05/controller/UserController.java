@@ -1,10 +1,13 @@
 package com.team05.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,11 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team05.command.Reserve_imgVO;
+import com.team05.command.Review_imgVO;
 import com.team05.command.UserVO;
 import com.team05.user.service.UserService;
 
 @Controller
-//@RequestMapping("/user")
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
@@ -81,10 +86,26 @@ public class UserController {
 		return result;
 	}
 	
+	//============================================================================
 	@RequestMapping("mypage")
-	public String mypage() {
+	public String mypage(HttpSession session,Model model) {
+//		UserVO uservo=(UserVO)session.getAttribute("uservo");
+		UserVO uservo = new UserVO();
+		uservo.setId("test");
+		ArrayList<Reserve_imgVO> reservelist=userService.showmypage(uservo);
+		model.addAttribute("reservelist", reservelist);
+
+		ArrayList<Review_imgVO> reviewlist=userService.getreview(uservo);
+		model.addAttribute("reviewlist", reviewlist);
+
+		System.out.println(reservelist.toString());
+		System.out.println(reviewlist.toString());
+
 		return "user/mypage";
 	}
+	
+	
+	
 	
 
 }
