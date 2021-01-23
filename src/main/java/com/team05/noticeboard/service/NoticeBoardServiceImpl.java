@@ -25,6 +25,17 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 		
 		noticeBoardMapper.regist(vo);
 	}
+
+	@Override
+	public BoardVO getContent(int nno) {
+		return noticeBoardMapper.getContent(nno);
+	}
+
+	@Override
+	public int update(BoardVO vo) {
+		
+		return noticeBoardMapper.update(vo);
+	}
 	
 	
 	

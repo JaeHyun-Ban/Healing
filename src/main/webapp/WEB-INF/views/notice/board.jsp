@@ -31,12 +31,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="vo" items="${list }">
+								<c:forEach var="vo" items="${list}">
 								<tr>
 									<td>${vo.nno }</td>
-									<td><a href="#">${vo.ntitle }</a></td>
-									<td>${vo.id }</td>
-									<td><fmt:formatDate value="${vo.updatedate }" pattern="yyyy년MM월dd일  hh시mm분"/></td>
+									<td><a href="detail?nno=${vo.nno }">${vo.ntitle }</a></td>
+									<td>${vo.nid }</td>
+									<td><fmt:formatDate value="${vo.updatedate }" pattern="yyyy년MM월dd일 "/></td>
 									<td>${vo.nviews }</td>
 								</tr>
 								</c:forEach>

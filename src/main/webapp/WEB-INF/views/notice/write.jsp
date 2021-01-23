@@ -17,7 +17,7 @@
 							<dl>
 								<dt class="title-dt">제목</dt>
 								<dd>
-									<input type="text" name="title" placeholder="제목입력">
+									<input type="text" name="ntitle" placeholder="제목입력">
 								</dd>
 							</dl>
 						</div>
@@ -38,12 +38,12 @@
 	                        </div>
 	                        </div> -->
 						<div class="write-content">
-							<textarea placeholder="내용입력" name="content" ></textarea>
+							<textarea placeholder="내용입력" name="ncontent" ></textarea>
 						</div>
 	
 						<div class="write-button">
-							<button type="button" class="btn btn-info" onclick="regist()">공지 등록</button>
 							<button type="button" class="btn btn-info" onclick="location.href='board'">목록</button>
+							<button type="button" class="btn btn-info" onclick="regist()">공지 등록</button>
 						</div>
 					</div>
 				</form>
@@ -60,16 +60,13 @@
 		
 
 		function regist() {
-			if (document.registForm.title.value === '') {
+			if (document.registForm.ntitle.value === '') {
 				alert("제목을 입력해주세요.")
 				return;
-			} else if (document.registForm.content.value === '') {
+			} else if (document.registForm.ncontent.value === '') {
 				alert("내용을 입력해주세요.")
 				return;
 			} else {
-				console.log(document.registForm.title.value);
-				console.log(document.registForm.content.value);
-				console.log(document.registForm);
 				document.registForm.submit(); 
 			}
 
