@@ -82,16 +82,16 @@ public class UserController {
 		System.out.println("아이디 중복확인 시작");
 		//중복확인
 		int result = userService.idCheck(vo);
-		
+		System.out.println(result);
 		return result;
 	}
 	
 	//============================================================================
 	@RequestMapping("mypage")
-	public String mypage(HttpSession session,Model model) {
+	public String mypage(HttpSession session, Model model) {
 //		UserVO uservo=(UserVO)session.getAttribute("uservo");
 		UserVO uservo = new UserVO();
-		uservo.setId("test");
+		uservo.setUserId("test");
 		ArrayList<Reserve_imgVO> reservelist=userService.showmypage(uservo);
 		model.addAttribute("reservelist", reservelist);
 

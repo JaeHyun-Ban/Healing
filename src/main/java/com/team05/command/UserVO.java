@@ -1,11 +1,14 @@
 package com.team05.command;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserVO {
 //	-- 유저 테이블
 //	create table users(
@@ -22,9 +25,9 @@ public class UserVO {
 //	);
 //	alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
 	
-	private String id;
-	private String pwd;
-	private String name;
+	private String userId;
+	private String userPwd;
+	private String userName;
 	private String phone;
 	private String email;
 	private String email2;

@@ -1,8 +1,8 @@
 -- 유저 테이블
 create table users(
-    id VARCHAR2(50) not null, --pk 
-    pwd VARCHAR2(50) not null,
-    name VARCHAR2(50) not null,
+    userId VARCHAR2(50) not null, --pk 
+    userPwd VARCHAR2(50) not null,
+    userName VARCHAR2(50) not null,
     phone VARCHAR2(50) not null,
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
@@ -11,7 +11,7 @@ create table users(
     zipNo VARCHAR2(50),
     regdate date default sysdate
 );
-alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
+alter table users add CONSTRAINT user_pk PRIMARY KEY (userId);
 
 -- 예약정보 테이블
 drop table reservation;
