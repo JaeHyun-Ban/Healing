@@ -224,7 +224,7 @@
 	}
 </script>
 
-
+<!-- 회원가입 버튼 클릭 -->
 <script type="text/javascript">
 	//JQuery: #아이디
 	$("#joinBtn").click(function() { //클릭이벤트

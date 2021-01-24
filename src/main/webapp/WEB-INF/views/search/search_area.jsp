@@ -80,6 +80,23 @@
         
 
     </style>
+    <script type="text/javascript">
+    function getDistanceFromLatLonInKm(lat2,lng2) {
+    	var lat1 =sessionStorage.getItem("lat1"); 
+		var lng1 =sessionStorage.getItem("lng1");
+		function deg2rad(deg) {
+	        return deg * (Math.PI/180)
+	    }
+
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	    var dLon = deg2rad(lng2-lng1);
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
+	</script>
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-4 filter-wrap">
@@ -146,23 +163,30 @@
                     
                 </div> -->
                 <div class="product-list">
-                	<c:forEach items="${list}" var="productvo">
+                	<c:forEach items="${productlist}" var="product">
                     <div class="product-no">
                         <!-- <div class="back-color">
                             sadfsdf
                         </div> -->
                         <div>
                             
-                            <img src="display/${productvo.fileloca}/${productvo.filename}">
+                            <img src="display/${product.fileloca}/${product.filename}">
                         </div>
                         <div class="pro-left">
-                            <h3><a href="room_info?pro_no=${productvo.pro_no}">${productvo.name }</a></h3>
+                            <h3><a href="room_info?pro_no=${product.pro_no}">${product.name }</a></h3>
                             <span style="background-color: gold;"><em>9.0</em></span>
                             <strong>추천해요</strong>
                             <span>(244)</span>
                             <p>
-                                <span>3.8km</span> |
-                                <span>${productvo.basic_address}</span>
+                                <span id="${product.name}"></span> |
+                                <script>
+	                            		var lat2 = "${product.latitude}";
+	                            		var lng2 = "${product.hardness}";
+	                            		var result=getDistanceFromLatLonInKm(lat2,lng2);
+		                            	$("#${product.name}").html(result);	                            			
+	                            		
+                            		</script>
+                                <span>${product.basic_address}</span>
                                 
                             </p>
                         </div>
@@ -170,12 +194,12 @@
                             <p>
                                 <span style="background-color: rgb(243, 162, 162); color: white;">예약</span> 
                                 <span>대실</span>
-                                <strong>${productvo.half_price }</strong>
+                                <strong>${product.half_price }</strong>
                             </p>
                             <p>
                                 <span style="background-color: rgb(243, 162, 162); color: white;">예약</span>
                                 <span>숙박</span>
-                                <strong>${productvo.rental_price }</strong>
+                                <strong>${product.rental_price }</strong>
                             </p>
                         </div>
                     </div>

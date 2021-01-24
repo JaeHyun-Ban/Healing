@@ -82,6 +82,23 @@
         
 
     </style>
+    <script type="text/javascript">
+    function getDistanceFromLatLonInKm(lat2,lng2) {
+    	var lat1 =sessionStorage.getItem("lat1"); 
+		var lng1 =sessionStorage.getItem("lng1");
+		function deg2rad(deg) {
+	        return deg * (Math.PI/180)
+	    }
+
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+	    var dLon = deg2rad(lng2-lng1);
+	    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
+	</script>
     
     
     <div class="container">
@@ -95,6 +112,7 @@
                             <input type="text" id="datepicker2">까지
                         </div>
                     </div>
+                    <form action="search_room" name="searchform">
                     <div class="check-wrap">
                         <h3 style="padding: 20px 10px;">상세조건</h3>
                         <div>
@@ -102,18 +120,18 @@
                             <button type="button" class="btn btn-danger" style="width: 45%;" id="btn1">적용</button>
                         </div>
                         <div style="padding: 10px;">
-                            <form action="">
+                            
                                 <h4>테마</h4>
-                                <input type="radio" name="thema" checked value="">호텔<br>
-                                <input type="radio" name="thema" value="">모텔<br>
-                                <input type="radio" name="thema" value="">전체<br>
-                                <hr>
+	                                <input type="radio" name="thema" ${searchNameVO.thema =='all'?'checked':'' } value="all">전체<br>
+	                                <input type="radio" name="thema" ${searchNameVO.thema =='hotel'?'checked':'' } value="hotel">호텔<br>
+	                                <input type="radio" name="thema" ${searchNameVO.thema =='motel'?'checked':'' } value="motel">모텔<br>
+	                                <hr>
                                 <h4>거리설정</h4>
-                                <input type="radio" name="range" checked>기준거리 <br>
-                                <input type="radio" name="range">10km<br>
-                                <input type="radio" name="range">20km<br>
-                                <input type="radio" name="range">30km<br>
-                                <hr>
+	                                <input type="radio" name="range" ${searchNameVO.range ==9999?'checked':'' } value="9999">기준거리 <br>
+	                                <input type="radio" name="range" ${searchNameVO.range ==10?'checked':'' } value="10">10km<br>
+	                                <input type="radio" name="range" ${searchNameVO.range ==20?'checked':'' } value="20">20km<br>
+	                                <input type="radio" name="range" ${searchNameVO.range ==30?'checked':'' } value="30">30km<br>
+	                                <hr>
                                 <h4>가격</h4>
                                 <p>
                                     <label for="amount">가격:</label>
@@ -121,13 +139,25 @@
                                   </p>
                                    
                                   <div id="slider-range"></div>
-                            </form>
+                            	<hr>
+	                            <h4>순서</h4>
+	                            	<input type="radio" name="order" ${searchNameVO.order =='rowprice'?'checked':'' } value="rowprice">낮은가격순<br>
+	                                <input type="radio" name="order" ${searchNameVO.order =='highprice'?'checked':'' } value="highprice">높은가격순<br>
+	                              	<input type="radio" name="order" ${searchNameVO.order =='distance'?'checked':'' } value="distance">거리순<br>
+	                                <input type="radio" name="order" ${searchNameVO.order =='recom'?'checked':'' } value="recom">추천순<br>	
+									
+									<input type="hidden" name="price1">
+									<input type="hidden" name="price2">
+									<input type="hidden" name="searchname" value="${searchNameVO.searchname}">
+													
                         </div>
+                        
                     </div>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-12 col-md-8 list-wrap">
-                <div class="head-check">
+                <!-- <div class="head-check">
                     <ul class="btn-wrap">
                         <li href="#" data-sort="distance" class="on">거리순</li>
                         <li href="#" data-sort="reco" class="">추천순</li>
@@ -136,17 +166,12 @@
                     </ul>
 
 
-                    <!-- <div class="container">
-                        <div class="btn-group btn-wrap">
-                            <button type="button" data-sort="distance" class="btn btn-primary on">거리순</button>
-                            <button type="button" data-sort="reco" class="btn btn-primary">추천순</button>
-                            <button type="button" data-sort="rowprice" class="btn btn-primary">낮은가격순</button>
-                            <button type="button" data-sort="highprice" class="btn btn-primary">높은가격순</button>
-                        </div>
-                    </div> -->
-                </div>
+                   
+                </div> -->
                 <div class="product-list">
                 	<c:forEach items="${productlist}" var="product">
+                	
+                	
                     <div class="product-no">
                         <!-- <div class="back-color">
                             sadfsdf
@@ -160,33 +185,20 @@
                             <strong>추천해요</strong>
                             <span>(244)</span>
                             <p>
-                            	<span class="latlng"></span> |
+                            	<span id="${product.name}"></span> |
+                            		<script>
+	                            		var lat2 = "${product.latitude}";
+	                            		var lng2 = "${product.hardness}";
+	                            		var range = "${searchNameVO.range}";
+	                            		var result=getDistanceFromLatLonInKm(lat2,lng2);
+	                            		
+	                            		if(range<= result){
+	                            			$("#${product.name}").parent().parent().parent().css("display","none");
+	                            		}else{
+		                            		$("#${product.name}").html(result);	                            			
+	                            		}
+                            		</script>
                                 <span>${product.basic_address}</span>
-                            	<script>
-                            		var lat1 =sessionStorage.getItem("lat1"); 
-                            		var lng1 =sessionStorage.getItem("lng1")
-                            		var lat2 = "${product.latitude}";
-                            		var lng2 = "${product.hardness}";
-                            		
-                            		function getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2) {
-                            		
-                            			function deg2rad(deg) {
-                            		        return deg * (Math.PI/180)
-                            		    }
-
-                            		    var R = 6371; // Radius of the earth in km
-                            		    var dLat = deg2rad(lat2-lat1);  // deg2rad below
-                            		    var dLon = deg2rad(lng2-lng1);
-                            		    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-                            		    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-                            		    var d = R * c; // Distance in km
-                            		    
-                            		    return d;
-                            		}
-                            		
-                            		$(".latlng").html(getDistanceFromLatLonInKm(lat1,lng1,lat2,lng2));
-                            	</script>
-                                
                             </p>
                         </div>
                         <div class="pro-right">
@@ -212,18 +224,7 @@
     </div>
     
     <script>
-        var wrap=document.querySelector(".btn-wrap")
-        wrap.onclick = function(){
-            
-            event.preventDefault();
-            if(event.target.localName != "li"){
-                return;
-            }
-            var target=document.querySelector(".on")
-            target.classList.remove("on")
-            event.target.classList.add("on")
-        }
-
+       
         $(function(){
             $("#datepicker1").datepicker();
             $("#datepicker1").datepicker("option","dateFormat","yy-mm-dd")
@@ -247,13 +248,34 @@
             "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
         } );
 
-        btn1.onclick = function(){
+        /* btn1.onclick = function(){
             var result=$("#amount").val().split(" ~ ")
             var score1=result[0].substring(0,result[0].indexOf("만"))
             var score2=result[1].substring(0,result[1].indexOf("만"))
             console.log(score1)
             console.log(score2)
-        }
+        } */
     </script>
     
+    <script>
+      	
+    	$("#btn1").click(select);
+    	function select(){
+    		
+    		var result=$("#amount").val().split(" ~ ")
+    		var price1=result[0].substring(0,result[0].indexOf("만"))*10000
+            var price2=result[1].substring(0,result[1].indexOf("만"))*10000
+            
+            $("input[name='price1']").val(price1);
+            $("input[name='price2']").val(price2);
+            
+            document.searchform.submit();
+    	} 
+    	
+    	$(document).ready(function(){
+	    	
+    		
+    	})
+    	
+    </script>
     

@@ -54,6 +54,25 @@
 	</select>
 	
 	<select id="searchname" resultType="ProductVO">
-		select * from product where name like '%'||#{searchname}||'%' or basic_address like '%'||#{searchname}||'%'
+		select * from product 
+		<choose>
+			<when test="thema =='all'">where 1=1</when>		
+			<otherwise>where pro_type=#{thema}</otherwise>
+		</choose>
+		<![CDATA[
+		and rental_price <=#{price2} and rental_price >=#{price1} 
+		]]>
+		and name like '%'||#{searchname}||'%' or basic_address like '%'||#{searchname}||'%'
+		<if test="order=='rowprice'">order by rental_price</if>
+		<if test="order=='highprice'">order by rental_price desc</if>
 	</select>
+	
+	
+	<select id="getproductTitle" resultType="String">
+		select name from product where pro_no=#{pro_no}
+	</select>
+	
+	<insert id="reservationForm">
+		insert into reservation values (reservation_seq.nextval,#{checkin},#{checkout},#{price},#{reserve_type},sysdate,#{id},#{pro_no},#{room_no})
+	</insert>
 </mapper>

@@ -6,6 +6,7 @@
   
 <mapper namespace="com.team05.user.mapper.UserMapper">
 
+
 	<!-- 회원가입 진행 -->
 	<insert id="userJoin">
 		insert into users (id, pwd, name, phone, email, email2, zipNo, addrBasic, addrDetail)
@@ -22,19 +23,23 @@
 		select count(*) as result from users where id = #{id}
 	</select>
   
-  <!-- 구현 클래스의 위치 -->
-<mapper namespace="com.team05.user.mapper.UserMapper">
-	
+	<!-- ==================================================== -->
 	<select id="showmypage" resultType="Reserve_imgVO">
 		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.id=r.id left join product p 
 		on r.pro_no=p.pro_no where u.id=#{id}
 	</select>
+	
 	<select id="getreview" resultType="Review_imgVO">
 		select r.*,p.name,tel from users u left join review r on u.id = r.id left join product p on r.pro_no=p.pro_no 
 		where u.id=#{id}
 	</select>
 	
+	<update id="update">
+		update users set pwd=#{pwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where id=#{id}
+	</update>
 	
-
-
-</mapper>
+	<delete id="delete">
+		delete from users where id=#{id}
+	</delete>
+</mapper>	
+	

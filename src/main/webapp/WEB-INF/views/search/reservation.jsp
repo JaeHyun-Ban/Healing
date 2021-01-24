@@ -9,7 +9,7 @@
             출처: https://araikuma.tistory.com/62 [프로그램 개발 지식 공유]-->
         <div class="row">
           <div class="res-form col-xs-12 col-sm-7 col-md-7">
-            <form action="#">
+            <form action="reservationForm">
               <div class="res-content">
 
                 <div class="left">
@@ -20,11 +20,11 @@
                   <div class="info">
                     <p>
                       <strong>숙소이름</strong>
-                      롯데호텔
+                     ${infovo.pro_title}
                     </p>
                     <p>
                       <strong>객실 타입</strong>
-                      슈퍼 더블룸
+                      ${infovo.title}
                     </p>
                     <p>
                       <strong>기간</strong>
@@ -32,11 +32,11 @@
                     </p>
                     <p>
                       <strong>체크인</strong>
-                      15:00
+                      ${infovo.checkin}
                     </p>
                     <p>
                       <strong>체크아웃</strong>
-                      11:00
+                      ${infovo.checkout}
                   </div>
                 </div>
               </div>
@@ -45,7 +45,7 @@
               <div class="form-group res-content2">
                 <div>
                   <label>이름</label>
-                  <input class="form-control" type="text" style="width: 30%">
+                  <input class="form-control" type="text" style="width: 30%" value="${userVO.id}">
                   <label>휴대폰 번호</label>
                   <p>개인 정보 보호를 위해 안심번호로 숙소에 전송됩니다.</p>
                   <input class="form-control" type="text" style="width: 50%">
@@ -86,9 +86,17 @@
                 </p>
               </section>
               <!-- ====================================== -->
-              <h3 class="pay">총 결제 금액: 400000원</h3>
-              <button type="button" class="btnpay btn btn-primary btn-block">결제하기</button>
-
+              <h3 class="pay">총 결제 금액: ${infovo.price}원</h3>
+              <button type="submit" class="btnpay btn btn-primary btn-block">결제하기</button>
+				
+				<!-- 예약시 넘길폼값 -->
+				<input type="hidden" name="checkin" value="${infovo.checkin}">
+				<input type="hidden" name="checkout" value="${infovo.checkout}">
+				<input type="hidden" name="price" value="${infovo.price}">
+				<input type="hidden" name="reserve_type" value="${infovo.pro_type}">
+				<input type="hidden" name="id" value="${userVO.id}">
+				<input type="hidden" name="pro_no" value="${infovo.pro_no}">
+				<input type="hidden" name="room_no" value="${infovo.room_no}">
             </form>
           </div>
         </div>

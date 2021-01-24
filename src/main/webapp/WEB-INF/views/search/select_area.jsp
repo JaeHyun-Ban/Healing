@@ -129,7 +129,7 @@
             </span>
         </li>
         <li class="space">
-            <span class="left">수원</span>
+            <span class="left">평택</span>
             <span class="right">
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>

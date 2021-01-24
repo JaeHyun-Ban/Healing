@@ -9,6 +9,8 @@ import com.team05.command.UserVO;
 public interface UserMapper {
 	public ArrayList<Reserve_imgVO> showmypage(UserVO uservo);
 	public ArrayList<Review_imgVO> getreview(UserVO uservo);
+	public int update(UserVO uservo);
+	public int delete(String id);
 	
 	public int userJoin(UserVO vo);
 	public UserVO userLogin(UserVO vo);//로그인 처리

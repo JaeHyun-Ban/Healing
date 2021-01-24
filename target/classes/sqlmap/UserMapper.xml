@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- mapper dtd 작성 -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.team05.user.mapper.UserMapper">
+
 
 	<!-- 회원가입 진행 -->
 	<insert id="userJoin">
@@ -23,17 +23,23 @@
 		select count(*) as result from users where id = #{id}
 	</select>
   
-  <select id="showmypage" resultType="Reserve_imgVO">
+	<!-- ==================================================== -->
+	<select id="showmypage" resultType="Reserve_imgVO">
 		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.id=r.id left join product p 
 		on r.pro_no=p.pro_no where u.id=#{id}
 	</select>
+	
 	<select id="getreview" resultType="Review_imgVO">
 		select r.*,p.name,tel from users u left join review r on u.id = r.id left join product p on r.pro_no=p.pro_no 
 		where u.id=#{id}
 	</select>
 	
+	<update id="update">
+		update users set pwd=#{pwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where id=#{id}
+	</update>
 	
-
+	<delete id="delete">
+		delete from users where id=#{id}
+	</delete>
+</mapper>	
 	
-
-</mapper>

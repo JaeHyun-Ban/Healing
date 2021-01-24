@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,14 +26,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team05.command.ProductVO;
+import com.team05.command.ReservationVO;
 import com.team05.command.ReviewVO;
 import com.team05.command.Review_imgVO;
 import com.team05.command.RoomVO;
 import com.team05.command.UserVO;
 import com.team05.command.util.Criteria;
+import com.team05.command.util.Room_infoVO;
 import com.team05.command.util.SearchAreaVO;
+import com.team05.command.util.SearchNameVO;
 import com.team05.search.service.SearchService;
 
 @Controller
@@ -42,21 +47,42 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 	
-	@RequestMapping("reservation")
-	public String reservation(@RequestParam("pro_no") int pro_no,
-							@RequestParam("room_no") int room_no,
-							@RequestParam("pro_type") String pro_type,
-							@RequestParam("time1") int time1,
-							@RequestParam("time2") int time2,
-							@RequestParam("price") int price) {
+	@RequestMapping(value = "reservation",method=RequestMethod.POST)
+	public String reservation(Room_infoVO infovo,Model model) {
+		System.out.println(infovo.toString());
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH");
+		Date date1 = new Date();
+		Date date2 = new Date();
+		if(infovo.getCheckin()== null) {
+			date1.setHours(infovo.getTime1());
+			date2.setHours(infovo.getTime1()+infovo.getTime2());			
+		}else {
+			int checkin_time=Integer.parseInt(infovo.getCheckin().split(":")[0]);
+			int checkout_time=Integer.parseInt(infovo.getCheckout().split(":")[0]);
+			date1.setHours(checkin_time);
+			date2.setDate(date1.getDate()+1);
+			date2.setHours(checkout_time);
+		}
+		String checkin=format1.format(date1);
+		String checkout = format1.format(date2);
+		infovo.setCheckin(checkin);
+		infovo.setCheckout(checkout);
 		
-		System.out.println(pro_no);
-		System.out.println(room_no);
-		System.out.println(pro_type);
-		System.out.println(time1);
-		System.out.println(time2);
-		System.out.println(price);
+		String pro_title=searchService.getproductTitle(infovo.getPro_no());
+		infovo.setPro_title(pro_title);
+		model.addAttribute("infovo", infovo);
+
 		return "search/reservation";
+	}
+	@RequestMapping("reservationForm")
+	public String reservationForm(ReservationVO vo,RedirectAttributes ra) {
+		int result =searchService.reservationForm(vo);
+		if(result ==1) {
+			ra.addFlashAttribute("msg", "예약이 완료되었습니다");
+		}else {
+			ra.addFlashAttribute("msg", "예약 실패!, 관리자에게 문의하세요");
+		}
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "room_info",method = RequestMethod.GET)
@@ -82,11 +108,11 @@ public class SearchController {
 	@RequestMapping("search_area")
 	public String search_area(SearchAreaVO searchvo,Model model) {
 		
-		ArrayList<ProductVO> list=searchService.getlist(searchvo);
-		model.addAttribute("list", list);
+		ArrayList<ProductVO> productlist=searchService.getlist(searchvo);
+		model.addAttribute("productlist", productlist);
 		model.addAttribute("searchvo", searchvo);
 		
-		System.out.println(list.toString());
+		System.out.println(productlist.toString());
 		return "search/search_area";
 	}
 	
@@ -113,10 +139,13 @@ public class SearchController {
 	
 	
 	@RequestMapping("search_room")
-	public String search_room(@RequestParam("search") String search,Model model) {
+	public String search_room(SearchNameVO searchNameVO,Model model) {
+		System.out.println(searchNameVO.toString());
 		
-		ArrayList<ProductVO> productlist=searchService.searchname(search);
+		ArrayList<ProductVO> productlist=searchService.searchname(searchNameVO);
+		System.out.println(productlist.toString());
 		model.addAttribute("productlist", productlist);
+		model.addAttribute("searchNameVO",searchNameVO);
 		return "search/search_room";
 	}
 	
@@ -134,8 +163,8 @@ public class SearchController {
 						@RequestParam("title") String title,
 						@RequestParam("content") String content,HttpSession session) {
 		try {
-//			UserVO uservo=(UserVO)session.getAttribute("uservo");
-//			String writer=uservo.getId();
+			UserVO uservo=(UserVO)session.getAttribute("uservo");
+			String writer=uservo.getId();
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String fileloca=sdf.format(date);
@@ -161,8 +190,8 @@ public class SearchController {
 			File saveFile = new File(uploadpath+"\\"+filename);
 			file.transferTo(saveFile); 
 			
-			String id= "test";
-			ReviewVO vo = new ReviewVO(0,id,pro_no,score,content,title,uploadpath,filename,filerealname,fileloca,null,null);
+			
+			ReviewVO vo = new ReviewVO(0,writer,pro_no,score,content,title,uploadpath,filename,filerealname,fileloca,null,null);
 			boolean result = searchService.insertReview(vo);
 			
 			if(result) {
