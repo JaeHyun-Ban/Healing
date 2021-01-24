@@ -20,8 +20,8 @@ public class ProductVO {
 	private String uploadpath;
 	private String filename;
 	private String filerealname;
-	private String regdate;
 	private String fileloca;
+	private String regdate;
 	
 	private double latitude;
 	private double hardness;

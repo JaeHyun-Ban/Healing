@@ -244,7 +244,7 @@
                     <div class="room-content">
                         <div class="left" style="border-right: 1px solid #7777;">
                             <p>대실</p>
-                            <form action="reservation" method="get">
+                            <form action="reservation" method="post">
 	                            <div class="reserve">
 	                                <span>예약</span>
 	                                <b style="color: red;">${room.half_price }</b>
@@ -270,12 +270,13 @@
 	                                    <span> ${room.half_time} 시간</span>
 	                                </div>
 	                            </div>
-	                            <input type="hidden" name="pro_no" value="${room.pro_no }">
-	                            <input type="hidden" name="room_no" value="${room.room_no }">
+	                            <input type="hidden" name="title" value="${room.title}">
+	                            <input type="hidden" name="pro_no" value="${room.pro_no}">
+	                            <input type="hidden" name="room_no" value="${room.room_no}">
 	                            <input type="hidden" name="pro_type" value="half">
 	                            
-	                            <input type="hidden" name="time2" value="${room.half_time }">
-	                            <input type="hidden" name="price" value="${room.half_price }">
+	                            <input type="hidden" name="time2" value="${room.half_time}">
+	                            <input type="hidden" name="price" value="${room.half_price}">
 	                            <div>
 	                                <button type="submit" class="btn btn-danger" id="half" style="width: 100%;">예약하기</button>
 	                            </div>
@@ -283,7 +284,7 @@
                         </div>
                         <div class="left">
                             <p>숙박</p>
-                            <form action="">
+                            <form action="reservation" method="post">
 	                            <div class="reserve">
 	                                <span>예약</span>
 	                                <b style="color: red;">${room.rental_price }</b>
@@ -298,8 +299,15 @@
 	                                    <span>${room.checkout }</span>
 	                                </div>
 	                            </div>
+	                            <input type="hidden" name="title" value="${room.title}">
+	                            <input type="hidden" name="pro_no" value="${room.pro_no}">
+	                            <input type="hidden" name="room_no" value="${room.room_no}">
+	                            <input type="hidden" name="pro_type" value="rental">
+	                            <input type="hidden" name="checkin" value="${room.checkin}">
+	                            <input type="hidden" name="checkout" value="${room.checkout}">
+	                            <input type="hidden" name="price" value="${room.rental_price}">
 	                            <div>
-	                                <button type="button" class="btn btn-danger" id="rental" style="width: 100%;">예약하기</button>
+	                                <button type="submit" class="btn btn-danger" id="rental" style="width: 100%;">예약하기</button>
 	                            </div>
                             </form>
                         </div>
@@ -542,7 +550,7 @@
         	$("#uploadBtn").click(regist);
         	
 	        function regist() {
-				/* var writer = "${uservo.id}"; */
+				var writer = "${uservo.id}";
 				var file = $("#file").val();
 				var pro_no = $("input[name='pro_no']").val();
 				var score=$("#star-result").html()
@@ -561,10 +569,10 @@
 					alert("내용을 입력해주세요")
 					return;
 				}
-				/* else if(writer ==""){
+				 else if(writer ==""){
 					alert('로그인이 필요한 서비스입니다')
 					return;
-				} */
+				} 
 				
 				var formData = new FormData();
 				var data = $("#file");
@@ -690,6 +698,7 @@
 			}
 	        
         })
+        
         
         
         

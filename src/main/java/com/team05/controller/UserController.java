@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -91,15 +92,28 @@ public class UserController {
 	
 	//============================================================================
 	@RequestMapping("mypage")
+<<<<<<< HEAD
 	public String mypage(HttpSession session, Model model) {
 //		UserVO uservo=(UserVO)session.getAttribute("uservo");
 		UserVO uservo = new UserVO();
 		uservo.setUserId("test");
+=======
+	public String mypage(HttpSession session,Model model) {
+		UserVO uservo=(UserVO)session.getAttribute("userVO");
+		
+>>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 		ArrayList<Reserve_imgVO> reservelist=userService.showmypage(uservo);
 		model.addAttribute("reservelist", reservelist);
 
 		ArrayList<Review_imgVO> reviewlist=userService.getreview(uservo);
+<<<<<<< HEAD
 		model.addAttribute("reviewlist", reviewlist);				
+=======
+		model.addAttribute("reviewlist", reviewlist);
+
+		System.out.println(reservelist.toString());
+		System.out.println(reviewlist.toString());
+>>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 
 		return "user/mypage";
 	}
@@ -110,9 +124,38 @@ public class UserController {
 		return "redirect:/"; //홈으로
 	}
 	
+	@RequestMapping("update")
+	public String update(UserVO uservo,RedirectAttributes ra,HttpSession session) {
+		
+		System.out.println(uservo.toString());
+		int result=userService.update(uservo);
+		if(result==1) {
+			session.setAttribute("userVO", uservo);
+			ra.addFlashAttribute("msg", "수정이 완료되었습니다");
+		}else {
+			ra.addFlashAttribute("msg", "수정에 실패하였습니다. 관리자에게 문의하세요");
+		}
+		
+		return "redirect:/";
+	}
 	
+	@RequestMapping("delete")
+	public String delete(@RequestParam("id") String id,RedirectAttributes ra,HttpSession session) {
+		int result=userService.delete(id);
+		if(result ==1) {
+			session.removeAttribute("userVO");
+			ra.addFlashAttribute("msg", "회원 탈퇴 되었습니다");
+		}else {
+			ra.addFlashAttribute("msg", "회원 탈퇴 실패하였습니다. 관리자에게 문의하세요");
+		}
+		return "redirect:/";
+		
+	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 
 }
 

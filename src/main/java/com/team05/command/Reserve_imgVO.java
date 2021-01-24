@@ -18,10 +18,11 @@ public class Reserve_imgVO {
 	private String checkin;
 	private String checkout;
 	private int price;
-	private String type;
+	private String reserve_type;
 	private Timestamp regdate;
 	private String id;
 	private int pro_no;
+	private int room_no;
 	
 	private String name;
 	private String uploadpath;

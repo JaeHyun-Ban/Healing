@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.team05.command.ProductVO;
+import com.team05.command.ReservationVO;
 import com.team05.command.ReviewVO;
 import com.team05.command.RoomVO;
 import com.team05.command.util.Criteria;
 import com.team05.command.util.SearchAreaVO;
+import com.team05.command.util.SearchNameVO;
 import com.team05.search.mapper.SearchMapper;
 
 @Service
@@ -67,9 +69,21 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public ArrayList<ProductVO> searchname(String search) {
+	public ArrayList<ProductVO> searchname(SearchNameVO searchNameVOh) {
 		
-		return searchMapper.searchname(search);
+		return searchMapper.searchname(searchNameVOh);
+	}
+
+	@Override
+	public String getproductTitle(int pro_no) {
+		
+		return searchMapper.getproductTitle(pro_no);
+	}
+
+	@Override
+	public int reservationForm(ReservationVO vo) {
+		
+		return searchMapper.reservationForm(vo);
 	}
 
 	

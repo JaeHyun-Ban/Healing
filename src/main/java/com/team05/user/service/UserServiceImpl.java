@@ -41,5 +41,20 @@ public class UserServiceImpl implements UserService {
 	public ArrayList<Review_imgVO> getreview(UserVO uservo) {
 		return userMapper.getreview(uservo);
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public int update(UserVO uservo) {
+		
+		return userMapper.update(uservo);
+	}
+
+	@Override
+	public int delete(String id) {
+		
+		return userMapper.delete(id);
+	}
+>>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 
 }
