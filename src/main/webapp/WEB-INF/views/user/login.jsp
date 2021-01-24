@@ -70,7 +70,16 @@
 <!-- 로그인 버튼 처리 -->
 <script>
 $("#loginBtn").click(function() {
-	$("#loginForm").submit();
+	//console.log($("#userId").val());
+	if($("#userId").val() == '' || $("#userPwd").val() == ''){
+		swal({
+			title : '아이디, 비밀번호를 확인해주세요'
+		})
+		return;
+	}else {
+		$("#loginForm").submit();
+		
+	}
 })
 
 </script>

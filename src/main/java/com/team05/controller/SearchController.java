@@ -164,7 +164,7 @@ public class SearchController {
 						@RequestParam("content") String content,HttpSession session) {
 		try {
 			UserVO uservo=(UserVO)session.getAttribute("uservo");
-			String writer=uservo.getId();
+			String writer=uservo.getUserId();
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String fileloca=sdf.format(date);

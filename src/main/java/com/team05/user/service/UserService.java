@@ -18,11 +18,9 @@ public interface UserService {
 	public ArrayList<Reserve_imgVO> showmypage(UserVO uservo);
 	
 	public ArrayList<Review_imgVO> getreview(UserVO uservo);
-<<<<<<< HEAD
-=======
+
 	
 	public int update(UserVO uservo);
 	public int delete(String id);
-	
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
+
 }

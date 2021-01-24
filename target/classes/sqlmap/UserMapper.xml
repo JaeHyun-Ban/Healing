@@ -25,13 +25,8 @@
   
 	<!-- ==================================================== -->
 	<select id="showmypage" resultType="Reserve_imgVO">
-<<<<<<< HEAD
 		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.userId=r.id left join product p 
 		on r.pro_no=p.pro_no where u.userId=#{id}
-=======
-		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.id=r.id left join product p 
-		on r.pro_no=p.pro_no where u.id=#{id}
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 	</select>
 	
 	<select id="getreview" resultType="Review_imgVO">
@@ -39,10 +34,6 @@
 		where u.userId=#{id}
 	</select>
 	
-<<<<<<< HEAD
-</mapper>	
-	
-=======
 	<update id="update">
 		update users set pwd=#{pwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where id=#{id}
 	</update>
@@ -50,6 +41,6 @@
 	<delete id="delete">
 		delete from users where id=#{id}
 	</delete>
+
 </mapper>	
 	
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490

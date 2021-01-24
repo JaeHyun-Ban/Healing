@@ -36,15 +36,9 @@ public class NoticeController {
 		model.addAttribute("list",list);
 		model.addAttribute("pageVO",pageVO);
 		
-<<<<<<< HEAD
 //		ArrayList<BoardVO> list = noticeBoardService.getList();
 //		model.addAttribute("list", list);
-	
-=======
-		
-		
-		
->>>>>>> 935c80b58902425a3c8a13c88009ded64202508c
+
 		return "notice/board";
 	}
 	

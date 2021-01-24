@@ -92,28 +92,19 @@ public class UserController {
 	
 	//============================================================================
 	@RequestMapping("mypage")
-<<<<<<< HEAD
-	public String mypage(HttpSession session, Model model) {
-//		UserVO uservo=(UserVO)session.getAttribute("uservo");
-		UserVO uservo = new UserVO();
-		uservo.setUserId("test");
-=======
 	public String mypage(HttpSession session,Model model) {
 		UserVO uservo=(UserVO)session.getAttribute("userVO");
 		
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 		ArrayList<Reserve_imgVO> reservelist=userService.showmypage(uservo);
 		model.addAttribute("reservelist", reservelist);
 
 		ArrayList<Review_imgVO> reviewlist=userService.getreview(uservo);
-<<<<<<< HEAD
-		model.addAttribute("reviewlist", reviewlist);				
-=======
+
 		model.addAttribute("reviewlist", reviewlist);
 
 		System.out.println(reservelist.toString());
 		System.out.println(reviewlist.toString());
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
+
 
 		return "user/mypage";
 	}
@@ -152,14 +143,7 @@ public class UserController {
 		
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
-
 }
-
-
 
 
 
