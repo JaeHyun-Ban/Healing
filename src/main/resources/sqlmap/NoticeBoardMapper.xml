@@ -13,27 +13,40 @@
 	
 	
 	<select id="getList" resultType="BoardVO">
+		<![CDATA[
 		select *
 		from (
-		    select a.*
+		    select rownum as rn,
+		    	  a.*
 		    from (select *
 		          from notice
-		          order by nno desc)a) 
+		          order by nno desc)a
+		          ) 
+		    where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}  ]]>
 	</select>
 	
 	<select id="getContent" resultType="BoardVO">
 		select * from NOTICE where nno =#{nno}
 	</select>
 	
+	<select id="getTotal" resultType="int">
+		select count(*) as total 
+		from notice
+	</select>
+	
+	
 	<update id="update">
-		update NOTICE
+		update notice
 		set 
 			ntitle = #{ntitle},
 			ncontent = #{ncontent},
 			updatedate = sysdate
 		where nno = #{nno}
-	
 	</update>
+	
+	<delete id="delete">
+		delete from notice where nno = #{nno}
+	</delete>
 	
 	
 </mapper>

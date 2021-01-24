@@ -18,8 +18,19 @@ public class BoardVO {
 	private String ntitle;
 	private String nid;
 	private String ncontent;
+	
 	private Timestamp regdate;
 	private Timestamp updatedate;
+	
+	
+	
+	//question
+	private int qno;
+	private int qviews;
+	private String qtitle;
+	private String qid;
+	private String qcontent;
+	
 	
 	
 }

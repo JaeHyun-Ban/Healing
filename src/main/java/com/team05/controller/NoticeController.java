@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team05.command.BoardVO;
 import com.team05.noticeboard.service.NoticeBoardService;
+import com.team05.command.BoardVO;
+import com.team05.common.util.Criteria;
+import com.team05.common.util.PageVO;
 
 @Controller
 @RequestMapping("/notice")
@@ -24,11 +26,25 @@ public class NoticeController {
 	
 	
 	@RequestMapping("/board")
-	public String noticeboard(Model model) {
+	public String noticeboard(Model model, Criteria cri) {
 		
+
+		
+		int total = noticeBoardService.getTotal(cri);
+		PageVO pageVO = new PageVO(cri,total);
+		ArrayList<BoardVO> list = noticeBoardService.getList(cri);
+		model.addAttribute("list",list);
+		model.addAttribute("pageVO",pageVO);
+		
+<<<<<<< HEAD
 //		ArrayList<BoardVO> list = noticeBoardService.getList();
 //		model.addAttribute("list", list);
 	
+=======
+		
+		
+		
+>>>>>>> 935c80b58902425a3c8a13c88009ded64202508c
 		return "notice/board";
 	}
 	
@@ -73,7 +89,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String Update(BoardVO vo, RedirectAttributes RA) {
+	public String update(BoardVO vo, RedirectAttributes RA) {
 		
 		int result = noticeBoardService.update(vo);
 		if(result == 1) {
@@ -82,6 +98,20 @@ public class NoticeController {
 			RA.addFlashAttribute("msg","수정에 실패하였습니다.");
 		}
 				
+		return "redirect:/notice/board";
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String freeDelete(@RequestParam("nno") int nno, RedirectAttributes RA) {
+		
+		int result = noticeBoardService.delete(nno);
+		
+		if(result == 1) {
+			RA.addFlashAttribute("msg", nno + "번 공지가 삭제 되었습니다");
+		} else {
+			RA.addFlashAttribute("msg", "공지글 삭제에 실패했습니다");
+		}
+		
 		return "redirect:/notice/board";
 	}
 	

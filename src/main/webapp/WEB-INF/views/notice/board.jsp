@@ -47,16 +47,29 @@
 					<div class="write-button">
 						<button type="button" class="btn btn-info btn-sm" onclick="location.href='write' ">게시글작성</button>
 					</div>
-	
+					
+					<form action="board" name="pageForm">
 					<div class="paging">
-						<ul class="pagination">
-							<li><a href="#">이전</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">다음</a></li>
+						<ul class="pagination pagination-sm">
+						
+						<c:if test="${pageVO.prev }">
+							<li><a href="board?pageNum=${pageVO.startPage-1 }&amount=${pageVO.amount }">이전</a></li>
+						</c:if>
+						 <c:forEach var="num" begin="${pageVO.startPage }" end="${pageVO.endPage }">
+                        <li class="${num == pageVO.pageNum ? 'active' : '' }">
+                        	<a href="board?pageNum=${num }&amount=${pageVO.amount}">${num }</a>
+                        </li>
+                        </c:forEach>
+						<c:if test="${pageVO.next }">
+                        <li>
+                        	<a herf="board?pageNum=${pageVO.endPage+1 }&amount=${pageVO.amount}">다음</a>
+                        </li>
+                        </c:if>
 						</ul>
 					</div>
+					<input type="hidden" name="pageNum" value="${pageVO.cri.pageNum }">
+                    <input type="hidden" name="amount" value="${pageVO.cri.amount }">
+					</form>
 				</div>
 	
 			</div>
@@ -65,6 +78,7 @@
 	
 	
 	<script type="text/javascript">
+	
 			window.onload = function() {
 			 if(history.state === '' ) return;
 			 
@@ -74,5 +88,7 @@
 				 history.replaceState('', null, null); 
 			 }
 		}
+			
+
 	</script>
 	
