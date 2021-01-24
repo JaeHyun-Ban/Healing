@@ -18,8 +18,6 @@ import com.team05.noticeboard.service.NoticeBoardService;
 @RequestMapping("/notice")
 public class NoticeController {
 	
-	
-	
 	@Autowired
 	@Qualifier("noticeBoardService")
 	private NoticeBoardService noticeBoardService;
@@ -28,11 +26,9 @@ public class NoticeController {
 	@RequestMapping("/board")
 	public String noticeboard(Model model) {
 		
-		ArrayList<BoardVO> list = noticeBoardService.getList();
-		model.addAttribute("list", list);
-		
-		
-		
+//		ArrayList<BoardVO> list = noticeBoardService.getList();
+//		model.addAttribute("list", list);
+	
 		return "notice/board";
 	}
 	

@@ -41,7 +41,7 @@
 						<div class="input-shadow">
 							<input id="userPwd" type="password" class="form-control"
 								name="userPwd"
-								placeholder="8자이상 최소 하나의 영어(소문자), 숫자, 특수문자(~!@#\$%\^&\*)를 포함"
+								placeholder="8자이상 영어(소문자), 숫자, 특수문자 포함"
 								required="required"
 								oninvalid="this.setCustomValidity('비밀번호를 입력하세요')">
 						</div>
@@ -67,6 +67,7 @@
 					</div>
 					<div class="form-group">
 						<label for="phone">휴대폰</label>
+						<span id="phWran" style="float: right"></span>
 						<div class="input-shadow">
 							<input id="phone" type="text" class="form-control" name="phone"
 								placeholder="- 를 제외하고 입력하세요" />
@@ -123,11 +124,12 @@
 	</div>
 </section>
 
+
 <script>
 	//아이디 중복확인 alert창(시간나면 modal시도)
 	function idChk() {
 		var userId = document.getElementById("userId");
-		console.log(userId.value);
+
 		if (userId.value === "") {
 			swal({
 				title : '아이디를 입력해주세요'
@@ -139,10 +141,12 @@
 			$.ajax({
 				type : "POST",
 				url : "idCheck", //뭐엿지 이거 -> 컨트롤러로 보내는 요청
-				data : JSON.stringify({"userId" : userId.value}),
+				data : JSON.stringify({
+					"userId" : userId.value
+				}),
 				contentType : "application/json; charset=utf-8", //전송 타입
 				success : function(data) {//성공시
-					console.log(data);//확인해보기
+					//console.log(data);//확인해보기
 					var regexId = /^[A-Za-z0-9+]{8,}$/; //아이디 정규표현식
 					//중복 O + id정규 표현식 X
 					if (data === 1 || regexId.test(userId.value) === false) {
@@ -194,8 +198,6 @@
 	pwdChk.onkeyup = function() {
 		if (userPwd.value !== pwdChk.value) { //다름
 			pwdChk.style.border = "1px solid #fe5757";
-			pwdWran.innerHTML = "비밀번호를 다시 확인해주세요";
-			pwdWran.color = "red";
 		} else {//같음
 			pwdChk.style.border = "1px solid #71e901";
 			pwdWran.innerHTML = "";//경고문구 제거
@@ -230,7 +232,7 @@
 <script>
 	var userName = document.getElementById("userName");
 	var nameWran = document.getElementById("nameWran");
-	
+
 	//이름 패턴(한글, 영어(대,소))
 	var regexName = /^[가-힣A-Za-z]{1,}/;
 	userName.onkeyup = function() {
@@ -238,7 +240,7 @@
 			nameWran.innerHTML = "잘못된 이름 형식입니다";
 			nameWran.style.color = "red";
 			userName.style.borderColor = "#fe5757";//#적색
-			
+
 		} else {
 			nameWran.innerHTML = "";
 			userName.style.borderColor = "#e5e5e5";
@@ -249,13 +251,13 @@
 <!-- 휴대폰번호 검증 -->
 <script>
 	var phone = document.getElementById("phone");
+	var phWarn = document.getElementById("phWarn");
 	var regexPh = /^[0-9]{10,11}/;
-	console.log(phone);
+
 	phone.onkeyup = function() {
 		if (regexPh.test(phone.value) !== true) {
-			console.log(phone.value);
 			phone.style.borderColor = "#fe5757";//적색
-			$("#phone").fo
+			
 			// phone.style.borderColor = "#71e901";//녹색
 		} else {
 			phone.style.borderColor = "#e5e5e5";
@@ -265,34 +267,78 @@
 
 <!-- 회원가입 버튼 클릭시 최종 확인 -->
 <script type="text/javascript">
-	joinBtn.onclick = function () {
-	
-		/* 아이디 확인 검사: readonly면 ok */
-		if(userId.getAttribute('readonly') === null){
-			swal({
-				icon: 'error',
-				title: '아이디 중복체크를 눌러주세요'
-			})
-			console.log(userId.value);
-			userId.focus();
-			return;
-		//비밀번호 확인 검사
-		} else if(userPwd.value === '' && pwdChk.value === '' || userPwd.value !== pwdChk.value){
-			userPwd.focus();
-			swal({
-				icon: 'error',
-				title: '비밀번호를 다시 확인해주세요'
-			})
-			return;
-		//이름 확인 검사
-		} else if(regexName.test(userName.value) !== true || userName.value ){
-			
-		}
+
+	joinBtn.onclick = function() {
+		var email = document.getElementById("email");
+		var zipNo = document.getElementById("zipNo");
+		var addrBasic = document.getElementById("addrBasic");
+		var addrDetail = document.getElementById("addrDetail");
 		
+		//console.log(email);
+
+		/* 아이디 확인 검사: readonly면 ok */
+		if (userId.getAttribute('readonly') === null) {
+			swal({
+				icon : 'error',
+				title : '아이디 중복체크를 눌러주세요'
+			})
+			
+			userId.focus();//위치로 이동
+			return;
+			//비밀번호 확인 검사
+			//조건: 1.비밀번호  공백, 서로 다름
+		} else if (userPwd.value === '' && pwdChk.value === ''
+				|| userPwd.value !== pwdChk.value) {
+			
+			swal({
+				icon : 'error',
+				title : '비밀번호를 다시 확인해주세요'
+			})
+			userPwd.focus();
+			return;
+			//이름 확인 검사
+			//조건: 1.정규식과 다름, 2.공백
+		} else if (regexName.test(userName.value) !== true || userName.value === "") {
+			swal({
+				icon : 'error',
+				title : '이름을 다시 확인해주세요'
+			})
+			userName.focus();
+			return;
+			//휴대폰 검사 확인
+			//조건:1.공백, 2.조건
+		} else if(phone.value === "" || regexPh.test(phone.value) !== true){
+			swal({
+				icon : 'error',
+				title : '휴대폰번호를 다시 확인주세요'
+			});
+			pwdWran.innerHTML = "휴대폰번호를 다시 확인해주세요";
+			pwdWran.color = "red";
+			phone.focus();
+			return;
+			//이메일 검사
+			//조건: 1.공백
+		} else if(email.value === ""){
+			swal({
+				icon : 'error',
+				title : '이메일을 작성해주세요'
+			})
+			email.focus();
+			return;
+			//주소검사
+			//조건: 1.공백(3칸)
+		} else if(zipNo.value === "" || addrBasic.value === "" || addrDetail.value === ""){
+		
+			swal({
+				icon : 'error',
+				title : '주소를 작성해주세요'
+			})
+			addrDetail.focus();
+			return;
+		}
+
 	}
 
-	
-	
 	/* //JQuery: #아이디
 	$("#joinBtn").click(function() { //클릭이벤트
 		$("#joinForm").submit();//Form전송
