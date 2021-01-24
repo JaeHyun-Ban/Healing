@@ -67,10 +67,11 @@ create table reservation(
     checkin  VARCHAR2(30) not null,
     checkout VARCHAR2(30) not null,
     price VARCHAR2(30) not null,
-    type varchar(30) not null, --숙박/대실
+    reserve_type varchar(30) not null, --숙박/대실
     regdate date DEFAULT sysdate, --예약날짜 
     id VARCHAR2(50) not null, --fk
-    pro_no NUMBER(10) not null --fk
+    pro_no NUMBER(10) not null, --fk
+    room_no number(10) not null
 );
 alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
 

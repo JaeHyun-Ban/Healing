@@ -82,7 +82,7 @@
             <div class="container" style="margin-top: 50px ;">
                 <form action="search/search_room">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="혹시 찾으시는 곳이 있나요?" name="search"
+                        <input type="text" class="form-control" placeholder="혹시 찾으시는 곳이 있나요?" name="searchname"
                             style="height: 40px;">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"
@@ -173,7 +173,10 @@
 
 
 <script>
-
+var msg = "${msg}";
+if(msg !=""){
+	alert(msg);
+}
 
 function seccess(position){
     console.log(position);

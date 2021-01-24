@@ -34,5 +34,15 @@
 		where u.userId=#{id}
 	</select>
 	
+<<<<<<< HEAD
+=======
+	<update id="update">
+		update users set pwd=#{pwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from users where id=#{id}
+	</delete>
+>>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
 </mapper>	
 	

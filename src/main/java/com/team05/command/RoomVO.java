@@ -12,7 +12,7 @@ public class RoomVO {
 	private String title;
 	private String checkin;
 	private String checkout;
-	private String half_time;
+	private int half_time;
 	private int rental_price;
 	private int half_price;
 	private int pro_no;

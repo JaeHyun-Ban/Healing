@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 	<style>
       * {
         box-sizing: border-box
@@ -123,46 +124,69 @@
 
     <div id="London" class="tabcontent">
       <h3 style="margin-bottom: 20px;">내정보</h3>
-
+	<form action="update" name="myinfo">
       <table class="table">
         <tbody class="m-control">
           <tr>
             <td class="m-title">*ID</td>
-            <td><input type="text" class="form-control m-md" value="${uservo.userId}" readonly></td>
+            <td><input type="text" class="form-control m-md" name="id" value="${userVO.id}" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*이름</td>
-            <td><input type="text" class="form-control m-md" value="${uservo.name }" readonly></td>
+            <td><input type="text" class="form-control m-md" name="name" value="${userVO.name }" readonly></td>
           </tr>
-
+          <tr>
+            <td class="m-title">*비밀번호</td>
+            <td><input type="password" class="form-control m-md"  id="pwd" name="pwd"></td>
+          </tr>
+          <tr>
+            <td class="m-title">*비밀번호 확인</td>
+            <td><input type="password" class="form-control m-md" id="pwdChk"></td>
+          </tr>
           <tr>
             <td class="m-title">*이메일</td>
             <td>
-            	<input type="email" class="form-control m-md" value="${uservo.email}">
+            	<input id="email" type="text" class="form-control" name="email" value="${userVO.email }"/>
+							<select class="form-control" name="email2" id="email2">
+								<option ${userVO.email2=='@naver.com'?'selected':'' }>@naver.com</option>
+								<option ${userVO.email2=='@daum.net'?'selected':'' }>@daum.net</option>
+								<option ${userVO.email2=='@gmail.com'?'selected':'' }>@gmail.com</option>
+							</select>
             </td>
           </tr>
           <tr>
             <td class="m-title">*휴대폰</td>
             <td><input type="text" class="form-control m-sm" placeholder="010" style="display: inline; width: 32%;">-
-              <input type="text" class="form-control m-sm" style="display: inline; width: 32%;" value="">-
-              <input type="text" class="form-control m-sm" style="display: inline; width: 32%;" value="">
+              <input type="text" class="form-control m-sm" id="phone1" style="display: inline; width: 32%;" value="">-
+              <input type="text" class="form-control m-sm" id="phone2" style="display: inline; width: 32%;" value="">
+            	<input type="hidden" name="phone">
+            </td>
+          </tr>
+          <tr>
+            <td class="m-title">*우편번호</td>
+            <td>
+            	<input id="zipNo" type="text" class="form-control addr-input"
+								name="zipNo" placeholder="우편번호" style="display: inline; width: 70%" value="${userVO.zipNo }" readonly>
+            	<button class="btn btn-warning btn-addrfind" type="button"
+							onclick="goPopup()">주소찾기</button>
             </td>
           </tr>
           <tr>
             <td class="m-title">*주소</td>
-            <td><input type="text" class="form-control" value="${uservo.basic_address}"></td>
+            <td><input type="text" class="form-control" id="addrBasic"  name="addrBasic" value="${userVO.addrBasic}" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*상세주소</td>
-            <td><input type="text" class="form-control" value="${uservo.detail_address}"></td>
+            <td><input type="text" class="form-control" id="addrDetail" name="addrDetail" value="${userVO.addrDetail}" readonly></td>
           </tr>
         </tbody>
       </table>
       <hr>
       <div class="title-foot">
         <button type="button" class="btn" id="update-btn">수정</button>
-        <button type="button" class="btn" id="delete-btn">삭제</button>
+        <button type="button" class="btn" id="delete-btn" onclick="location.href='delete?id=${userVO.id}'">회원탈퇴</button>
       </div>
+      </form>
     </div>
 
     <div id="Paris" class="tabcontent">
@@ -170,23 +194,28 @@
       <hr style="margin-bottom: 10px;">
       <div class="my-content">
         
-        <c:forEach items="">
+        <c:forEach items="${reservelist}" var="reserve">
 	        <div class="reserve">
 	          <div class="motelimg">
 	            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
 	          </div>
 	          <div class="left">
-	            <h4>종로h모텔</h4>
+	            <h4>${reserve.name}</h4>
 	            <p>
 	              <span>
 	                <em>9.0</em>
 	              </span>
 	            </p>
 	            <p>예약날짜</p>
+	            ${reserve.regdate}
+	            
+	            ${reserve.checkin}
+	            ${reserve.checkout}
+	            
 	            <p>객실정보</p>
 	          </div>
 	          <div class="right">
-	            <h3 style="text-align: right;">38000원</h3>
+	            <h3 style="text-align: right;">${reserve.price}원</h3>
 	          </div>
 	        </div>
         </c:forEach>
@@ -232,17 +261,7 @@
       </div>
       <hr>
 
-      <%-- <div class="container">
-        <ul class="pagination">
-          <li><a href="#" data-page="${pagevo.startPage-1}">이전</a></li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#" data-page="${pagevo.endPage+1}">다음</a></li>
-        </ul>
-      </div> --%>
+      
     </div>
 
 
@@ -273,17 +292,6 @@
       </div>
       <hr>
 
-      <%-- <div class="container">
-        <ul class="pagination">
-          <li><a href="#" data-page="${pagevo.startPage-1}">이전</a></li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#" data-page="${pagevo.endPage+1}">다음</a></li>
-        </ul>
-      </div> --%>
     </div>
 </div>
     <script>
@@ -304,14 +312,69 @@
       // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click();
     </script>
-    
+    	
+    	
     <script>
-    	$("#update-btn").click(function () {
-			
-		})
-		$("#delete-btn").click(function () {
-			
-		})
+    	$(document).ready(function(){		
+	    	
+
+	    	var phone="${userVO.phone}";
+	    	var phone1=phone.substr(3,4);
+	    	var phone2=phone.substr(7,phone.length);
+	    	$("#phone1").val(phone1)
+	    	$("#phone2").val(phone2)
+	    	
+    	})
 		
+    	$("#update-btn").click(function(){
+    		
+    		var phone="010"+$("#phone1").val() +$("#phone2").val()
+    		$("input[name='phone']").val(phone)
+    		document.myinfo.submit();
+    	})
+    	
 		
     </script>
+    <!-- 주소 검색 팝업 -->
+	<script>
+		//팝업으로 열기
+		function goPopup() {
+			var pop = window
+					.open("${pageContext.request.contextPath}/resources/popup/jusoPopup.jsp",
+							"pop",
+							"width=570,height=420, left=300, top=75, scrollbars=yes, resizable=yes");
+		}
+		//값을 받아오는 함수
+		function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail,
+				roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,
+				detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn,
+				buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
+			//주소, 상세주소, 우편번호만 받아 대입
+			document.getElementById("zipNo").value = zipNo;
+			document.getElementById("addrBasic").value = roadAddrPart1;
+			document.getElementById("addrDetail").value = addrDetail;
+		}
+		
+		
+		//비밀번호 검사
+		var pwd = document.getElementById("pwd");
+		pwd.onkeyup = function() {
+			//정규표현식
+			//https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/%EC%A0%95%EA%B7%9C%EC%8B%9D
+			//var regexPwd = /^[~!@#$%^&*()].{1}[a-z0-9+].{7,}]$/;
+			var regexPwd = /^(?=.*[0-9])(?=.[a-z])[~!@#$%^&*()].{1}[a-z0-9+].{7,}]$/;
+			//if(regexPW.test)
+			if (regexPwd.test(pwd.value) == true) {
+				document.getElementById("pwd").style.border = "2px solid green";
+			} else {
+				document.getElementById("pwd").style.border = "2px solid red";
+			}
+		}
+		//비밀번호 확인 검사
+		var pwdChk = document.getElementById("pwdChk");
+		pwdChk.onkeyup = function () {
+			
+		}
+	</script>
+	
+	
