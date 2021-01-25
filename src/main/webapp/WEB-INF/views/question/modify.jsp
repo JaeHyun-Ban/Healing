@@ -14,18 +14,18 @@
 					<div class="detail-body">
 						<div class="box">
 							<div class="first">							
-								<span style="font-size: 20px">제목:<input type="text" name="ntitle" value="${vo.ntitle }"/></span>
-								<span ><strong >${vo.nno }</strong></span><strong>num:</strong>
-								<input type="hidden" name="nno" value="${vo.nno }"/>
+								<span style="font-size: 20px">제목:<input type="text" name="qtitle" value="${vo.qtitle }"/></span>
+								<span ><strong >${vo.qno }</strong></span><strong>num:</strong>
+								<input type="hidden" name="qno" value="${vo.qno }"/>
 							</div>
 							<div class="second">
-								<span>조회수:<strong >${vo.nviews }</strong></span> <span>작성일:<strong><fmt:formatDate value="${vo.updatedate }" pattern="yyyy년MM월dd일 "/></strong></span>
-								<span> 작성자:<strong >${vo.nid }</strong></span>  
+								<span>조회수:<strong >${vo.qviews }</strong></span> <span>작성일:<strong><fmt:formatDate value="${vo.updatedate }" pattern="yyyy년MM월dd일 "/></strong></span>
+								<span> 작성자:<strong >${vo.qid }</strong></span>  
 							</div>
 							<div class="third">
 								<div class="content">내용</div>
 								<div class="content-detail">
-									<textarea name="ncontent">${vo.ncontent }</textarea>
+									<textarea name="qcontent">${vo.qcontent }</textarea>
 								</div>
 							</div>
 	
@@ -53,11 +53,11 @@
 	var updatebtn = document.getElementById("updatebtn");
 	updatebtn.onclick = function(){
 
-			if (document.update.ntitle.value === '') {
+			if (document.update.qtitle.value === '') {
 				alert("제목은 필수 입니다");
 				document.update.ntitle.focus();
 				return;
-			} else if (document.update.ncontent.value === '') {
+			} else if (document.update.qcontent.value === '') {
 				alert("제목은 필수 입니다");
 				document.update.ncontent.focus();
 				return;

@@ -7,8 +7,8 @@
 <configuration>
  	<typeAliases>
  		<typeAlias type="com.team05.command.BoardVO" alias="BoardVO"/>
- 		
- 		
+ 		<typeAlias type="com.team05.command.QuestionVO" alias="QuestionVO"/>
+ 		<typeAlias type="com.team05.command.ReplyVO" alias="ReplyVO"/>
  		
 		<!-- <typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
 		<typeAlias type="com.team404.command.ReplyVO" alias="ReplyVO"/>

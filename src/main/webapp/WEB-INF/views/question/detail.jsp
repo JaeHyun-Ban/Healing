@@ -15,25 +15,23 @@
 				<div class="detail-body">
 					<div class="box">
 						<div class="first">
-							<span><input type="text" placeholder="첫번쨰 글"></span> <strong>num
-								: 1</strong>
+							<span style="font-size: 20px">제목:${vo.qtitle }</span> <strong>num: ${vo.qno }</strong>
 						</div>
 						<div class="second">
-							<span>조회수<strong>23</strong></span> <span>작성일:<strong>2021-01-19</strong></span>
-							<span>작성자:<strong>홍길동</strong></span>
+							<span>조회수:<strong>${vo.qviews }</strong></span> <span>작성일:<strong><fmt:formatDate value="${vo.updatedate }" pattern="yyyy년MM월dd일 "/></strong></span>
+							<span>작성자:<strong>${vo.qid }</strong></span>  
 						</div>
 						<div class="third">
 							<div class="content">내용</div>
 							<div class="content-detail">
-								<textarea>동해물과 백두산이 마르고 닳도록</textarea>
+								<textarea readonly>${vo.qcontent }</textarea>
 							</div>
 						</div>
 	
 					</div>
 					<div class="button">
-						<button type="button" class="btn btn-danger btn-lage disabled">삭제</button>
-						<button type="button" class="btn btn-success btn-large disabled">수정</button>
-						<button type="button" class="btn btn-info btn-large">목록</button>
+							<button type="button" class="btn btn-success btn-large disabled" onclick="location.href='modify?qno=${vo.qno}'">수정</button>
+							<button type="button" class="btn btn-info btn-large" onclick="location.href='board'">목록</button>
 	
 					</div>
 	
