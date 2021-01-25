@@ -93,7 +93,9 @@
         width: 150px;
         height: 150px;
       }
-
+	  .my-content .right{
+	  	text-align: right;
+	  }	
 
 
       .pagination {
@@ -198,22 +200,22 @@
 	            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
 	          </div>
 	          <div class="left">
-	            <h4>${reserve.name}</h4>
-	            <p>
-	              <span>
-	                <em>9.0</em>
-	              </span>
-	            </p>
+	            <h4 style="margin-bottom: 25px">
+	            	<a href="../search/room_info?pro_no=${reserve.pro_no}">${reserve.name}</a>
+	            </h4>
+	            
 	            <p>예약날짜</p>
-	            ${reserve.regdate}
-	            
-	            ${reserve.checkin}
-	            ${reserve.checkout}
-	            
-	            <p>객실정보</p>
+	            <p>체크인</p>
+	            <p>체크아웃</p>
+	           
 	          </div>
 	          <div class="right">
-	            <h3 style="text-align: right;">${reserve.price}원</h3>
+	            <h3 style="margin: 0">${reserve.price}원</h3>
+	            <h4>${reserve.reserve_type=='half'?'대실':'숙박'}</h4>
+	            <p>${reserve.regdate}</p>
+	            <p>${reserve.checkin}:00시</p>
+	            <p>${reserve.checkout}:00시</p>
+	            
 	          </div>
 	        </div>
         </c:forEach>
@@ -373,6 +375,21 @@
 		pwdChk.onkeyup = function () {
 			
 		}
+		
+		
+		var uservo = "${userVO}";
+		$(document).ready(function() {
+			setInterval(function(){
+				console.log(uservo);
+				if(uservo ==null){
+					window.location="login";
+				}
+			},100)
+			
+		})
+		
+		
+		
 	</script>
 	
 	

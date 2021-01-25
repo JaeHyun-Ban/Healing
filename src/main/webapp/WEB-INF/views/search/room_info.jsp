@@ -620,7 +620,7 @@
 					var count = map.count;
 					var mean = map.mean;
 					$("#review_count").html(count);
-					$("#review_mean").html(mean);
+					$("#review_mean").html(mean.toFixed(2));
 					if(reset){
 						str="";
 						pageNum=1;

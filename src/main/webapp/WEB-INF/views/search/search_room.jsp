@@ -157,33 +157,35 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-8 list-wrap">
-                <!-- <div class="head-check">
-                    <ul class="btn-wrap">
-                        <li href="#" data-sort="distance" class="on">거리순</li>
-                        <li href="#" data-sort="reco" class="">추천순</li>
-                        <li href="#" data-sort="rowprice" class="">낮은가격순</li>
-                        <li href="#" data-sort="highprice" class="">높은가격순</li>
-                    </ul>
-
-
-                   
-                </div> -->
+               
                 <div class="product-list">
                 	<c:forEach items="${productlist}" var="product">
                 	
                 	
                     <div class="product-no">
-                        <!-- <div class="back-color">
-                            sadfsdf
-                        </div> -->
+                        
                         <div>
                             <img src="display/${product.fileloca}/${product.filename}" >
                         </div>
                         <div class="pro-left">
                             <h3><a href="room_info?pro_no=${product.pro_no}">${product.name}</a></h3>
-                            <span style="background-color: gold;"><em>9.0</em></span>
+                            <span style="background-color: gold;">
+                            	<script type="text/javascript">
+                            			reviewmean();
+                            			function reviewmean() {
+											$.getJSON("reviewcountMean/"+${product.pro_no},function(map){
+												console.log(map.count);
+												console.log(map.mean);
+												$("#${product.name}").parent().prev().html("("+map.count+")");
+												$("#${product.name}").parent().prev().prev().prev().children().last().html(map.mean.toFixed(1));
+									
+											})
+										}	
+                            	</script>
+                            	<em></em>
+                            </span>
                             <strong>추천해요</strong>
-                            <span>(244)</span>
+                            	<span></span>
                             <p>
                             	<span id="${product.name}"></span> |
                             		<script>
@@ -195,7 +197,7 @@
 	                            		if(range<= result){
 	                            			$("#${product.name}").parent().parent().parent().css("display","none");
 	                            		}else{
-		                            		$("#${product.name}").html(result);	                            			
+		                            		$("#${product.name}").html(result.toFixed(2)+"km");	                            			
 	                            		}
                             		</script>
                                 <span>${product.basic_address}</span>
@@ -248,13 +250,7 @@
             "만원 ~ " + $( "#slider-range" ).slider( "values", 1 )+"만원" );
         } );
 
-        /* btn1.onclick = function(){
-            var result=$("#amount").val().split(" ~ ")
-            var score1=result[0].substring(0,result[0].indexOf("만"))
-            var score2=result[1].substring(0,result[1].indexOf("만"))
-            console.log(score1)
-            console.log(score2)
-        } */
+        
     </script>
     
     <script>
