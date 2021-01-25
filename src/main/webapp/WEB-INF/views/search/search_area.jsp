@@ -174,16 +174,30 @@
                         </div>
                         <div class="pro-left">
                             <h3><a href="room_info?pro_no=${product.pro_no}">${product.name }</a></h3>
-                            <span style="background-color: gold;"><em>9.0</em></span>
+                            <span style="background-color: gold;">
+                            		<script type="text/javascript">
+                            			reviewmean();
+                            			function reviewmean() {
+											$.getJSON("reviewcountMean/"+${product.pro_no},function(map){
+												console.log(map.count);
+												console.log(map.mean);
+												$("#${product.name}").parent().prev().html("("+map.count+")");
+												$("#${product.name}").parent().prev().prev().prev().children().last().html(map.mean.toFixed(1));
+									
+											})
+										}	
+                            		</script>
+                            	<em></em>
+                            </span>
                             <strong>추천해요</strong>
-                            <span>(244)</span>
+	                            <span></span>
                             <p>
                                 <span id="${product.name}"></span> |
                                 <script>
 	                            		var lat2 = "${product.latitude}";
 	                            		var lng2 = "${product.hardness}";
 	                            		var result=getDistanceFromLatLonInKm(lat2,lng2);
-		                            	$("#${product.name}").html(result);	                            			
+		                            	$("#${product.name}").html(result.toFixed(2)+"km");	                            			
 	                            		
                             		</script>
                                 <span>${product.basic_address}</span>

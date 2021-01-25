@@ -34,7 +34,7 @@ public class UserVO {
 	private String zipNo;
 	private String addrBasic;
 	private String addrDetail;
-	private Timestamp regdate;;
+	private Timestamp regdate;
 	
 	//마이페이지...?
 	

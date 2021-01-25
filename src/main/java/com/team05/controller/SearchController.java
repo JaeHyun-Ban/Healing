@@ -229,4 +229,25 @@ public class SearchController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping("reviewcountMean/{pro_no}")
+	public HashMap<String, Object> reviewcountMean(@PathVariable("pro_no") int pro_no){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//리뷰개수
+		int count=searchService.reviewtotal(pro_no);
+		if(count == 0) {		
+			map.put("count", 0);
+			map.put("mean", 0);
+			return map;
+		}
+		//리뷰점수합
+		int total=searchService.reviewtotalSum(pro_no);
+		
+		double mean = (double)total /count;
+		
+		map.put("count", count);
+		map.put("mean", mean);
+		return map;
+	}
+	
 }

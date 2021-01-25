@@ -66,10 +66,14 @@ public class UserController {
 		
 		if(result != null) { //로그인 성공
 			session.setAttribute("userVO", result);//세션생성
+<<<<<<< HEAD
 			ra.addFlashAttribute("userVO", result);
 			
 			System.out.println(session.getAttribute("userVO") + "입니다");
 			
+=======
+//			ra.addFlashAttribute("userVO", result);
+>>>>>>> df160e59c8e8be85118c40214b2fcd920727041f
 			return "redirect:/";
 		} else {//로그인 실패
 			ra.addFlashAttribute("msg", "로그인을 실패 하였습니다.");//실패문구
@@ -134,7 +138,7 @@ public class UserController {
 	public String delete(@RequestParam("id") String id,RedirectAttributes ra,HttpSession session) {
 		int result=userService.delete(id);
 		if(result ==1) {
-			session.removeAttribute("userVO");
+			session.invalidate();
 			ra.addFlashAttribute("msg", "회원 탈퇴 되었습니다");
 		}else {
 			ra.addFlashAttribute("msg", "회원 탈퇴 실패하였습니다. 관리자에게 문의하세요");

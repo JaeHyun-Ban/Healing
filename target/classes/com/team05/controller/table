@@ -1,15 +1,16 @@
 -- 유저 테이블
 create table users(
     id VARCHAR2(50) not null, --pk 
-    pw VARCHAR2(50) not null,
+    pwd VARCHAR2(50) not null,
     name VARCHAR2(50) not null,
     phone VARCHAR2(50) not null,
     email varchar2(100),
-    basic_address VARCHAR2(50),
-    detail_address VARCHAR2(50),
-    post_zipNum VARCHAR2(50),
-    regdate date default sysdate,
-    grade_num NUMBER(10) not null --fk
+    email2 varchar2(100),
+    zipNo VARCHAR2(50),
+    addrbasic VARCHAR2(50),
+    addrdetail VARCHAR2(50),
+    regdate date default sysdate
+    
 );
 alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
 
