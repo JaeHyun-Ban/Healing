@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team05.noticeboard.service.NoticeBoardService;
-import com.team05.command.BoardVO;
+import com.team05.command.NoticeVO;
 import com.team05.common.util.Criteria;
 import com.team05.common.util.PageVO;
 
@@ -32,7 +32,8 @@ public class NoticeController {
 		
 		int total = noticeBoardService.getTotal(cri);
 		PageVO pageVO = new PageVO(cri,total);
-		ArrayList<BoardVO> list = noticeBoardService.getList(cri);
+		ArrayList<NoticeVO> list = noticeBoardService.getList(cri);
+		
 		model.addAttribute("list",list);
 		model.addAttribute("pageVO",pageVO);
 		
@@ -51,7 +52,7 @@ public class NoticeController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String noticedetail(@RequestParam("nno") int nno, Model model) {
 		
-		BoardVO vo = noticeBoardService.getContent(nno);
+		NoticeVO vo = noticeBoardService.getContent(nno);
 		model.addAttribute("vo",vo);
 		
 		return "notice/detail";
@@ -61,7 +62,7 @@ public class NoticeController {
 	@RequestMapping(value="/modify", method = RequestMethod.GET)
 	public String noticemodify(@RequestParam("nno") int nno, Model model) {
 		
-		BoardVO vo = noticeBoardService.getContent(nno);
+		NoticeVO vo = noticeBoardService.getContent(nno);
 		model.addAttribute("vo",vo);
 		
 		return "notice/modify";
@@ -74,7 +75,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/registForm", method = RequestMethod.POST)
-	public String registForm(BoardVO vo, RedirectAttributes RA) {
+	public String registForm(NoticeVO vo, RedirectAttributes RA) {
 		
 		noticeBoardService.regist(vo); 
 		RA.addFlashAttribute("msg", "정상적으로 등록 되었습니다"); 
@@ -83,7 +84,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(BoardVO vo, RedirectAttributes RA) {
+	public String update(NoticeVO vo, RedirectAttributes RA) {
 		
 		int result = noticeBoardService.update(vo);
 		if(result == 1) {

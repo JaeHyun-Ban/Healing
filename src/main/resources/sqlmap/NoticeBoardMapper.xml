@@ -12,7 +12,7 @@
 	</insert>
 	
 	
-	<select id="getList" resultType="BoardVO">
+	<select id="getList" resultType="NoticeVO">
 		<![CDATA[
 		select *
 		from (
@@ -25,7 +25,7 @@
 		    where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}  ]]>
 	</select>
 	
-	<select id="getContent" resultType="BoardVO">
+	<select id="getContent" resultType="NoticeVO">
 		select * from NOTICE where nno =#{nno}
 	</select>
 	

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team05.command.BoardVO;
+import com.team05.command.NoticeVO;
 import com.team05.command.QuestionVO;
 import com.team05.common.util.Criteria;
 import com.team05.common.util.PageVO;

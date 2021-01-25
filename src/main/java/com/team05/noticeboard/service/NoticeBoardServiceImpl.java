@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team05.command.BoardVO;
+import com.team05.command.NoticeVO;
 import com.team05.common.util.Criteria;
 import com.team05.noticeboard.mapper.NoticeBoardMapper;
 
@@ -17,18 +17,18 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	
 
 	@Override
-	public void regist(BoardVO vo) {
+	public void regist(NoticeVO vo) {
 		
 		noticeBoardMapper.regist(vo);
 	}
 
 	@Override
-	public BoardVO getContent(int nno) {
+	public NoticeVO getContent(int nno) {
 		return noticeBoardMapper.getContent(nno);
 	}
 
 	@Override
-	public int update(BoardVO vo) {
+	public int update(NoticeVO vo) {
 		
 		return noticeBoardMapper.update(vo);
 	}
@@ -39,7 +39,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	}
 
 	@Override
-	public ArrayList<BoardVO> getList(Criteria cri) {
+	public ArrayList<NoticeVO> getList(Criteria cri) {
 		
 		return noticeBoardMapper.getList(cri);
 	}

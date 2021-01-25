@@ -15,18 +15,11 @@
 		
 		<typeAlias type="com.team05.command.UserVO" alias="UserVO"/>
 
- 		<typeAlias type="com.team05.command.BoardVO" alias="BoardVO"/>
-<<<<<<< HEAD
+ 		<typeAlias type="com.team05.command.NoticeVO" alias="NoticeVO"/>
 
-=======
  		<typeAlias type="com.team05.command.QuestionVO" alias="QuestionVO"/>
  		<typeAlias type="com.team05.command.ReplyVO" alias="ReplyVO"/>
- 		
-		<!-- <typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
-		<typeAlias type="com.team404.command.ReplyVO" alias="ReplyVO"/>
-		<typeAlias type="com.team404.command.UserVO" alias="UserVO"/>
-		<typeAlias type="com.team404.command.SnsBoardVO" alias="SnsBoardVO"/> -->
->>>>>>> bbb28ca439b94da7bc613f9a822d58487d930f15
+
  	</typeAliases>
  	   
 </configuration>

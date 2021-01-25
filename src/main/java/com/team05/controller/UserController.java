@@ -66,14 +66,12 @@ public class UserController {
 		
 		if(result != null) { //로그인 성공
 			session.setAttribute("userVO", result);//세션생성
-<<<<<<< HEAD
+
 			ra.addFlashAttribute("userVO", result);
 			
 			System.out.println(session.getAttribute("userVO") + "입니다");
 			
-=======
-//			ra.addFlashAttribute("userVO", result);
->>>>>>> df160e59c8e8be85118c40214b2fcd920727041f
+
 			return "redirect:/";
 		} else {//로그인 실패
 			ra.addFlashAttribute("msg", "로그인을 실패 하였습니다.");//실패문구

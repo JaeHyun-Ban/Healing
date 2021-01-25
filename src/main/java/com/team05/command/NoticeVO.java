@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardVO {
+public class NoticeVO {
 	
 	//notice
 	private int nno;
@@ -19,8 +19,7 @@ public class BoardVO {
 	private String ncontent;
 	private Timestamp regdate;
 	private Timestamp updatedate;
-	
-	//???????????????
+
 	
 	
 	
