@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BoardVO {
 	
-	
 	//notice
 	private int nno;
 	private int nviews;
@@ -22,7 +21,7 @@ public class BoardVO {
 	private Timestamp regdate;
 	private Timestamp updatedate;
 	
-	
+	//???????????????
 	
 	//question
 	private int qno;

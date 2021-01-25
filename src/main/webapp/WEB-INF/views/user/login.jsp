@@ -49,6 +49,7 @@
 						alt=""
 						src="${pageContext.request.contextPath }/resources/img/kakao/kakao_login_large_wide.png">
 					</a>
+					<button class="logoutBtn" onclick="kakaoLogout()">로그아웃</button>
 
 				</form>
 			</div>
@@ -84,6 +85,7 @@ $("#loginBtn").click(function() {
 
 </script>
 
+
 <!-- 회원가입 페이지 이동 -->
 <script>
 	$("#joinBtn").click(function() {
@@ -113,35 +115,69 @@ $("#loginBtn").click(function() {
 <!-- 카카오 로그인 기능 -->
 <!-- https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js -->
 <script type="text/javascript">
+	//카카오 로그인 실행
 	function loginWithKakao() {
-		Kakao.Auth.login({
-			scope: 'account_email',
+		//loginForm: 새 창에서 카카오 로그인
+		Kakao.Auth.loginForm ({
+			//scope: 'profile, account_email',
 			success : function(authObj) {
 				console.log(authObj);//받아온 오브젝트 데이터
-				
-				window.Kakao.API.request({
+
+				//사용자 정보 가져오기, 카카오 API(Kakao.API.request)
+				Kakao.API.request({
 					url:'/v2/user/me',
 					success: function(response) {
-						const kakao_account = res.kakao_account;
-						console.log(kakao_account);
+						console.log(response);
+						var userId = response.id + '@k';//카카오아이디 구분
+						var email = response.kakao_account.email;
+						var name = response.properties.nickname;
+						console.log(userId);
+						console.log(email);
+						console.log(name);
+						
+						//받은 사용자 정보 -> ajax를 통해 회원가입 시키기
+						$.ajax({
+							type: "POST",
+							url: "kidCheck", //아이디 중복 검사(카카오테이블 따로 구현?)
+							data : JSON.stringify({
+								"kuserId": userId
+							}),
+							contentType : "application/json; charset=utf-8",//전송 방식
+							success: function (res) { //아이디 검사 후
+								
+							}
+						})
 						
 					},
 					fail: function(error){
 						console.log(error);
 					}
 					
-						
-					
 				})
-				alert(JSON.stringify(authObj));
-
+				console.info(JSON.stringify(authObj));
 			},
-
-			fail : function(err) {
-				alert(JSON.stringify(err))
+			fail : function(error) {
+				console.error('에러 발생');
+				console.error(JSON.stringify(err))
 			},
 		})
 	}
+</script>
+
+<!-- 카카오 로그아웃 -->
+<script type="text/javascript">
+function kakaoLogout() {
+	//가지고 있는 토큰 확인
+    if (!Kakao.Auth.getAccessToken()) {
+      console.log('Not logged in.');
+      return;
+    }
+    Kakao.Auth.logout(function () {
+    	//가지고 있는 토큰이 존재하는지 확인
+      console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+    })
+  }
+
 </script>
 
 

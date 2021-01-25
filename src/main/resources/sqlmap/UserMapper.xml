@@ -25,21 +25,27 @@
   
 	<!-- ==================================================== -->
 	<select id="showmypage" resultType="Reserve_imgVO">
-		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.userId=r.id left join product p 
-		on r.pro_no=p.pro_no where u.userId=#{id}
+		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel 
+		from users u 
+		left join reservation r on u.userId=r.id 
+		left join product p on r.pro_no=p.pro_no 
+		where u.userId=#{id}
 	</select>
 	
 	<select id="getreview" resultType="Review_imgVO">
-		select r.*,p.name,tel from users u left join review r on u.userId = r.id left join product p on r.pro_no=p.pro_no 
+		select r.*,p.name,tel 
+		from users u 
+		left join review r on u.userId = r.id 
+		left join product p on r.pro_no=p.pro_no 
 		where u.userId=#{id}
 	</select>
 	
 	<update id="update">
-		update users set pwd=#{pwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where id=#{id}
+		update users set userPwd=#{userPwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where userId=#{userId}
 	</update>
 	
 	<delete id="delete">
-		delete from users where id=#{id}
+		delete from users where userId=#{userId}
 	</delete>
 
 </mapper>	

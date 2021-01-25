@@ -129,11 +129,11 @@
         <tbody class="m-control">
           <tr>
             <td class="m-title">*ID</td>
-            <td><input type="text" class="form-control m-md" name="id" value="${userVO.id}" readonly></td>
+            <td><input type="text" class="form-control m-md" name="id" value="${userVO.userId}" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*이름</td>
-            <td><input type="text" class="form-control m-md" name="name" value="${userVO.name }" readonly></td>
+            <td><input type="text" class="form-control m-md" name="name" value="${userVO.userName }" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*비밀번호</td>

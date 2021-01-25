@@ -6,8 +6,8 @@ create table users(
     phone VARCHAR2(50) not null,
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
-    addrBasic VARCHAR2(50),
-    addrDetail VARCHAR2(50),
+    addrBasic VARCHAR2(100), --짧아서 변경
+    addrDetail VARCHAR2(100),
     zipNo VARCHAR2(50),
     regdate date default sysdate
 );
