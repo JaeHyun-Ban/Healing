@@ -26,10 +26,15 @@
 	<!-- ==================================================== -->
 	<select id="showmypage" resultType="Reserve_imgVO">
 		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel 
+<<<<<<< HEAD
 		from users u 
 		left join reservation r on u.userId=r.id 
 		left join product p on r.pro_no=p.pro_no 
 		where u.userId=#{id}
+=======
+		from users u left join reservation r on u.userId=r.id left join product p 
+		on r.pro_no=p.pro_no where u.userId=#{id}
+>>>>>>> 823e58a121fc83503e7e574fa871e1d659490a22
 	</select>
 	
 	<select id="getreview" resultType="Review_imgVO">

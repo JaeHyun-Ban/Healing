@@ -186,7 +186,7 @@
       <hr>
       <div class="title-foot">
         <button type="button" class="btn" id="update-btn">수정</button>
-        <button type="button" class="btn" id="delete-btn" onclick="location.href='delete?id=${userVO.id}'">회원탈퇴</button>
+        <button type="button" class="btn" id="delete-btn" onclick="location.href='delete?id=${userVO.userId}'">회원탈퇴</button>
       </div>
       </form>
     </div>
