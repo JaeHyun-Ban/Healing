@@ -228,7 +228,7 @@
 	}
 </script>
 
-<<<<<<< HEAD
+
 <!-- 이름에 특수문자, 숫자 안됨 -->
 <script>
 	var userName = document.getElementById("userName");
@@ -267,9 +267,9 @@
 </script>
 
 <!-- 회원가입 버튼 클릭시 최종 확인 -->
-=======
+
 <!-- 회원가입 버튼 클릭 -->
->>>>>>> dc1ec654eed2da2641c24e7e5e8665dc93b9a490
+
 <script type="text/javascript">
 
 	joinBtn.onclick = function() {
@@ -339,6 +339,8 @@
 			})
 			addrDetail.focus();
 			return;
+		} else{
+			$("#joinForm").submit();//Form전송
 		}
 
 	}

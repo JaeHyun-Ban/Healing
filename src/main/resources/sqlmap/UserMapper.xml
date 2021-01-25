@@ -25,7 +25,8 @@
   
 	<!-- ==================================================== -->
 	<select id="showmypage" resultType="Reserve_imgVO">
-		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.userId=r.id left join product p 
+		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel 
+		from users u left join reservation r on u.userId=r.id left join product p 
 		on r.pro_no=p.pro_no where u.userId=#{id}
 	</select>
 	

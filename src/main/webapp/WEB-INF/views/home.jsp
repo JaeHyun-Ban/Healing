@@ -22,17 +22,17 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner">
 			<div class="item active">
-				<a href="#"><img src="resources/img/1.jpg" alt="1"
+				<a href="#"><img src="resources/img/a.jpg" alt="1"
 					style="width: 100%;"></a>
 			</div>
 
 			<div class="item">
-				<a href="#"><img src="resources/img/2.jpg" alt="2"
+				<a href="#"><img src="resources/img/b.png" alt="2"
 					style="width: 100%;"></a>
 			</div>
 
 			<div class="item">
-				<a href="#"><img src="resources/img/3.jpg" alt="3"
+				<a href="#"><img src="resources/img/c.png" alt="3"
 					style="width: 100%;"></a>
 			</div>
 		</div>
