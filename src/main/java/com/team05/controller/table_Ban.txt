@@ -45,14 +45,14 @@ create SEQUENCE question_seq INCREMENT by 1 START with 1 NOCACHE;
 
 --질문게시판 댓글 테이블
 create table reply(
-    reno NUMBER(10) not null, --pk
-    re_content VARCHAR2(500) not null,
+    rno NUMBER(10) not null, --pk
+    rcontent VARCHAR2(500) not null,
     regdate date default sysdate,
     updatedate date default sysdate,
     qno NUMBER(10) not null, --fk
-    id VARCHAR2(50) not null --fk
+    rid VARCHAR2(50) not null --fk
 );
-alter table qboard_reply add CONSTRAINT reply_pk PRIMARY KEY (qreno);
+alter table reply add CONSTRAINT reply_pk PRIMARY KEY (rno);
 create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
 
 

@@ -9,22 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardVO {
+public class ReplyVO {
 	
-	//notice
-	private int nno;
-	private int nviews;
-	private String ntitle;
-	private String nid;
-	private String ncontent;
+	private int qno;
+	private int rno;
+	private String rid;
 	private Timestamp regdate;
 	private Timestamp updatedate;
-	
-	//???????????????
-	
-	
-	
-	
+	private String rcontent;
 	
 	
 }
