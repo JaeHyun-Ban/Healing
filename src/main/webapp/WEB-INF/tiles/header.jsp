@@ -24,7 +24,7 @@
                                 <a href="${pageContext.request.contextPath }/notice/board">공지사항</a>
                             </li>
                             <li>
-                                <a href="##">고객센터</a>
+                                <a href="${pageContext.request.contextPath }/question/board">고객센터</a>
                             </li>
                             
                             <c:choose>
