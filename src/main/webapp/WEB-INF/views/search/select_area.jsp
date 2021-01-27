@@ -86,19 +86,25 @@
   <div id="London" class="tabcontent">
     <ul class="seoul">
         <li class="space">
-            <span class="left">강남</span>
+            <span class="left">영등포</span>
             <span class="right">
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>
         </li>
         <li class="space">
-            <span class="left">종로</span>
+            <span class="left">서대문</span>
             <span class="right">
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>
         </li>
         <li class="space">
-            <span class="left">강북</span>
+            <span class="left">강동구</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">은평구</span>
             <span class="right">
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>
@@ -111,19 +117,73 @@
   <div id="Paris" class="tabcontent">
     <ul class="gyeonggi">
         <li class="space">
+            <span class="left">가평</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">고양</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">광주</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">구리</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">군포</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">김포</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">남양주</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">동두천</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">부천</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
+            <span class="left">성남</span>
+            <span class="right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </span>
+        </li>
+        <li class="space">
             <span class="left">수원</span>
             <span class="right">
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>
         </li>
         <li class="space">
-            <span class="left">용인</span>
-            <span class="right">
-                <i class="glyphicon glyphicon-chevron-right"></i>
-            </span>
-        </li>
-        <li class="space">
-            <span class="left">수원</span>
+            <span class="left">안산</span>
             <span class="right">
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </span>

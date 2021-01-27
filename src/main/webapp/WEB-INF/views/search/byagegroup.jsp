@@ -27,7 +27,7 @@
                         <div id="after20" class="tab-pane fade in active">
 							<c:forEach items="${twentylist}" var="twenty">
                             <li class="col-lg-6 col-sm-12 mainviewimg">
-                                <a href="##" class="selecttype">
+                                <a href="room_info?pro_no=${twenty.pro_no }" class="selecttype">
                                     <img src="display/${twenty.fileloca}/${twenty.filename}" alt="1">
 
                                     <div class="gra_black">
@@ -39,11 +39,11 @@
 			                            			reviewmean();
 			                            			function reviewmean() {
 			                         
-			                            				$.getJSON("reviewcountMean/"+ ${twenty.pro_no}, function(map){
+			                            				$.getJSON("reviewcountMean/"+${twenty.pro_no}, function(map){
 															console.log(map.mean);
 															$("#twenty${twenty.pro_no}").html(map.mean.toFixed(1));
 												
-														});
+														})
 													}	
 			                            	</script>
                                             <p style="margin: 0; font-size: 19px;">${twenty.basic_address}</p>
@@ -67,7 +67,7 @@
 
                             <c:forEach items="${thirtylist}" var="thirty">
                             <li class="col-lg-6 col-sm-12 mainviewimg">
-                                <a href="##" class="selecttype">
+                                <a href="room_info?pro_no=${thirty.pro_no }" class="selecttype">
                                     <img src="display/${thirty.fileloca}/${thirty.filename}" alt="1">
 
                                     <div class="gra_black">
@@ -106,7 +106,7 @@
 
                             <c:forEach items="${fortylist}" var="forty">
                             <li class="col-lg-6 col-sm-12 mainviewimg">
-                                <a href="##" class="selecttype">
+                                <a href="room_info?pro_no=${forty.pro_no }" class="selecttype">
                                     <img src="display/${forty.fileloca}/${forty.filename}" alt="1">
 
                                     <div class="gra_black">

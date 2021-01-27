@@ -44,23 +44,13 @@
 							id="joinBtn">회원가입</button>
 						<!-- 클릭시 회원가입 창 이동 -->
 					</div>
-					
 					<!-- 카카오  -->
-					<%-- <a id="custom-login-btn" href="javascript:loginWithKakao()"> <img
+					<a id="custom-login-btn" href="javascript:loginWithKakao()"> <img
 						alt=""
 						src="${pageContext.request.contextPath }/resources/img/kakao/kakao_login_large_wide.png">
-					</a> --%>
-					<button type="button" class="btn btn-block kLoginBtn" onclick="loginWithKakao()"><img src="${pageContext.request.contextPath }/resources/img/kakao/kakao_login_large_wide.png"></button>
+					</a>
+					<button class="logoutBtn" onclick="kakaoLogout()">로그아웃</button>
 
-				</form>
-				
-				<!-- hidden처리로 kakaoLogin을 따로 전송>>>이렇게 해야하는 건가;; -->
-				<form action="kLogin" id="kForm" method="post">
-					<input type="hidden" id="kUserId" name="kUserId">
-					<input type="hidden" id="userName" name="userName">
-					<input type="hidden" id="userAge" name="userAge">
-					<input type="hidden" id="email" name="email">
-					<input type="hidden" id="email2" name="email2">
 				</form>
 			</div>
 		</div>
@@ -126,9 +116,6 @@ $("#loginBtn").click(function() {
 <!-- https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js -->
 <script type="text/javascript">
 	//카카오 로그인 실행
-	//카카오 API호출: 엑세스 토큰(Access Token)
-	//엑세스 토큰 갱신: 리프레시 토큰(Refresh Teken)
-
 	function loginWithKakao() {
 		//loginForm: 새 창에서 카카오 로그인
 		Kakao.Auth.loginForm ({
@@ -140,65 +127,30 @@ $("#loginBtn").click(function() {
 				Kakao.API.request({
 					url:'/v2/user/me',
 					success: function(response) {
-
-						console.log('응답: ' + response);
+						console.log(response);
 						var userId = response.id + '@k';//카카오아이디 구분
-						var userName = response.properties.nickname;
-						var userAge = response.kakao_account.age_range;
-						var userEmail = response.kakao_account.email;
-						console.log('유저아이디: ' + userId);
-						console.log('이메일: ' + userEmail);
-						
-						var find = userEmail.indexOf('@')
-						console.log("앞에:" + userEmail.substr(0, find))
-						var email = userEmail.substr(0, find);
-						console.log("뒤에: " + userEmail.substring(find, userEmail.length))
-						var email2 = userEmail.substring(find, userEmail.length);
-						
-						console.log("find: " + find, userEmail[find])
-						console.log('이름: ' + userName);
-						console.log('age_range: ' + userAge);
-						console.log(userAge.substring(0, 2));
-						
-						
-						//hidden에 값 대입
-						document.getElementById("kUserId").value = userId;
-						document.getElementById("userName").value = userName;
-						document.getElementById("userAge").value = userAge.substring(0, 2);
-						document.getElementById("email").value = email;
-						document.getElementById("email2").value = email2;
-						
-						//전송 >>>>>>>>>이제야되네
-						document.getElementById("kForm").submit();
-						
+						var email = response.kakao_account.email;
+						var name = response.properties.nickname;
+						console.log(userId);
+						console.log(email);
+						console.log(name);
 						
 						//받은 사용자 정보 -> ajax를 통해 회원가입 시키기
-						//이거 할 필요가 없나?
-						/* $.ajax({
+						$.ajax({
 							type: "POST",
-							//아니 url왜 안가는거야;;;
-							url: "/kLogin", //아이디 중복 검사(카카오테이블 따로 구현?)
+							url: "kidCheck", //아이디 중복 검사(카카오테이블 따로 구현?)
 							data : JSON.stringify({
-								"userId": userId,
-								"userName": userName,
-								"userAge":userAge.substring(0,2),
-								"email": email,
-								"email2":email2
+								"kuserId": userId
 							}),
 							contentType : "application/json; charset=utf-8",//전송 방식
-							
 							success: function (res) { //아이디 검사 후
-								console.log(res);
-							},
-							fail: function (res) {
-								console.log("실패: " + res);
+								
 							}
-						}) */
+						})
 						
 					},
 					fail: function(error){
 						console.log(error);
-
 					}
 					
 				})
@@ -213,7 +165,7 @@ $("#loginBtn").click(function() {
 </script>
 
 <!-- 카카오 로그아웃 -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 function kakaoLogout() {
 	//가지고 있는 토큰 확인
     if (!Kakao.Auth.getAccessToken()) {
@@ -226,7 +178,7 @@ function kakaoLogout() {
     })
   }
 
-</script> -->
+</script>
 
 
 

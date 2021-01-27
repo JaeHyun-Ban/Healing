@@ -79,7 +79,7 @@
 }
 
 /*==============================*/
-/* login.jsp 로그인 화면 */
+/* 로그인 화면 */
 .login-title {
 	text-align: center;
 	font-size: x-large;
@@ -106,10 +106,4 @@
 .login-btn {
 	padding-top: 10px;
 	border-top: 1px solid #e1e1e1;
-}
-
-.kLoginBtn {
-	margin-top: 20px;
-	background-color: #FEE500;
-	border-radius: 12px;
 }

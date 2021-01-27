@@ -9,7 +9,7 @@
             출처: https://araikuma.tistory.com/62 [프로그램 개발 지식 공유]-->
         <div class="row">
           <div class="res-form col-xs-12 col-sm-7 col-md-7">
-            <form action="reservationForm">
+            <form action="reservationForm" name="reservepayment">
               <div class="res-content">
 
                 <div class="left">
@@ -26,17 +26,14 @@
                       <strong>객실 타입</strong>
                       ${infovo.title}
                     </p>
-                    <p>
-                      <strong>기간</strong>
-                      2021.01.28 ~ 2021.01.29
-                    </p>
+                   
                     <p>
                       <strong>체크인</strong>
-                      ${infovo.checkin}
+                      ${infovo.checkin}:00
                     </p>
                     <p>
                       <strong>체크아웃</strong>
-                      ${infovo.checkout}
+                      ${infovo.checkout}:00
                   </div>
                 </div>
               </div>
@@ -67,27 +64,27 @@
               <section class="agree">
                 <p class="checkbox all-check">
                   <!-- 클릭시 체크박스 모두 체크되게 처리 -->
-                  <label><input type="checkbox" value="" /><span>전체 동의</span></label>
+                  <label><input type="checkbox" id="all" value="" onclick="checkall();"/><span>전체 동의</span></label>
                 </p>
                 <!-- 
                   자바스크립트
                   클릭시 약관이 보이도록 처리 할 것(참고: 여기어때 예약페이지)
                  -->
                 <p class="checkbox">
-                  <label><input type="checkbox" value="">
+                  <label><input type="checkbox" name="checkbox" id="one" value="" >
                     <i>숙소 이용규칙 및 취소/환불규정 동의</i><b>(필수)</b>
                   </label>
                 </p>
                 <p class="checkbox">
-                  <label><input type="checkbox" value=""><i>개인정보 수집 및 이용 동의</i><b>(필수)</b></label>
+                  <label><input type="checkbox" name="checkbox" id="two" value=""><i>개인정보 수집 및 이용 동의</i><b>(필수)</b></label>
                 </p>
                 <p class="checkbox">
-                  <label><input type="checkbox" value=""><i>개인정보 제 3자 제공 동의</i><b>(필수)</b></label>
+                  <label><input type="checkbox" name="checkbox" id="three" value=""><i>개인정보 제 3자 제공 동의</i><b>(필수)</b></label>
                 </p>
               </section>
               <!-- ====================================== -->
               <h3 class="pay">총 결제 금액: ${infovo.price}원</h3>
-              <button type="submit" class="btnpay btn btn-primary btn-block">결제하기</button>
+              <button type="button" class="btnpay btn btn-primary btn-block" id="payment">결제하기</button>
 				
 				<!-- 예약시 넘길폼값 -->
 				<input type="hidden" name="checkin" value="${infovo.checkin}">
@@ -103,3 +100,31 @@
       </div>
 
     </section>
+    
+    <script>
+    	document.getElementById("all");
+    	function checkall (){
+    		if(document.getElementById("all").checked==true){
+    			$("input[name='checkbox']").prop("checked",true);
+    		}else{
+    			$("input[name='checkbox']").prop("checked",false);
+    		}
+    	}
+    	$("#payment").click(function(){
+    		if( document.getElementById("one").checked==false){
+    			alert('첫번째 약관에 동의해주세요')
+    			return;
+    		}else if(document.getElementById("two").checked==false){
+    			alert('두번째 약관에 동의해주세요')
+    			return;
+    		}else if(document.getElementById("three").checked==false){
+    			alert('세번째 약관에 동의해주세요')
+    			return;
+    		}else{
+    			document.reservepayment.submit();
+    		}
+    	})
+    	
+    	
+    	
+    </script>

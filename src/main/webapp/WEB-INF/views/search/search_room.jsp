@@ -177,8 +177,8 @@
                             				$.getJSON("reviewcountMean/"+${product.pro_no}, function(map){
 												console.log(map.count);
 												console.log(map.mean);
-												$("#${product.name}").parent().prev().html("("+map.count+")");
-												$("#${product.name}").parent().prev().prev().prev().children().last().html(map.mean.toFixed(1));
+												$("#${product.pro_no}no").parent().prev().html("("+map.count+")");
+												$("#${product.pro_no}no").parent().prev().prev().prev().children().last().html(map.mean.toFixed(1));
 									
 											})
 										}	
@@ -188,7 +188,7 @@
                             <strong>추천해요</strong>
                             	<span></span>
                             <p>
-                            	<span id="${product.name}"></span> |
+                            	<span id="${product.pro_no}no"></span> |
                             		<script>
 	                            		var lat2 = "${product.latitude}";
 	                            		var lng2 = "${product.hardness}";
@@ -196,9 +196,9 @@
 	                            		var result=getDistanceFromLatLonInKm(lat2,lng2);
 	                            		
 	                            		if(range<= result){
-	                            			$("#${product.name}").parent().parent().parent().css("display","none");
+	                            			$("#${product.pro_no}no").parent().parent().parent().css("display","none");
 	                            		}else{
-		                            		$("#${product.name}").html(result.toFixed(2)+"km");	                            			
+		                            		$("#${product.pro_no}no").html(result.toFixed(2)+"km");	                            			
 	                            		}
                             		</script>
                                 <span>${product.basic_address}</span>

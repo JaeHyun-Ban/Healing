@@ -51,6 +51,7 @@ public class SearchController {
 	@RequestMapping(value = "reservation",method=RequestMethod.POST)
 	public String reservation(Room_infoVO infovo,Model model) {
 		System.out.println(infovo.toString());
+		
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH");
 		Date date1 = new Date();
 		Date date2 = new Date();
@@ -68,6 +69,8 @@ public class SearchController {
 		String checkout = format1.format(date2);
 		infovo.setCheckin(checkin);
 		infovo.setCheckout(checkout);
+		
+	
 		
 		String pro_title=searchService.getproductTitle(infovo.getPro_no());
 		infovo.setPro_title(pro_title);
@@ -161,7 +164,7 @@ public class SearchController {
 						@RequestParam("title") String title,
 						@RequestParam("content") String content,HttpSession session) {
 		try {
-			UserVO uservo=(UserVO)session.getAttribute("uservo");
+			UserVO uservo=(UserVO)session.getAttribute("userVO");
 			String writer=uservo.getUserId();
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -214,13 +217,17 @@ public class SearchController {
 										@PathVariable("pageNum") int pageNum) {
 		System.out.println(pro_no);
 		Criteria cri = new Criteria(pageNum,10);
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		//리뷰개수
 		int count=searchService.reviewtotal(pro_no);
-		//리뷰점수합
-		int total=searchService.reviewtotalSum(pro_no);
-		double mean = (double)total /count;
+		double mean =0.0;
+		if(count > 0) {
+			//리뷰점수합
+			int total=searchService.reviewtotalSum(pro_no);
+			mean = (double)total /count;			
+		}
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("count", count);
 		map.put("mean",mean);
 		map.put("list",searchService.getreview(cri,pro_no));

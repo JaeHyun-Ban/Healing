@@ -171,10 +171,7 @@
             padding-left: 60px;
             position: relative;
         }
-        .reply-img{
-            position: absolute; 
-            top: 10px; 
-            left: 10px;}
+        
         
         .fileDiv{padding-left: 60px;}
 
@@ -236,7 +233,7 @@
             	<c:forEach items="${roomlist}" var="room">
                 <div class="room">
                     <div class="room-img">
-                        <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg">
+                        <img src="display/${room.fileloca }/${room.filename}">
                     </div>
                     <div>
                         <strong>${room.title }</strong>
@@ -327,31 +324,31 @@
                 <div class="swiper-container" style="padding-top: 10px;">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/493.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/494.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/495.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/496.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/497.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/498.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/499.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/500.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img src="e13e9ca5a6796ccd14841168f0de4b64.jpg" >
+                            <img src="${pageContext.request.contextPath }/resources/img/501.jpg">
                         </div>
                         
                     </div>
@@ -363,8 +360,8 @@
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
-
-                <div class="container guest-content">
+				
+                <!-- <div class="container guest-content">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 load-info">
                             <p>오시는길</p>
@@ -375,7 +372,7 @@
                             <div id="map" style="width:100%;height:350px;"></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 
 
@@ -437,9 +434,7 @@
                             <img id="fileImg" src="../resources/img/img_ready.png">
                         </div> -->
                         <div class="reply-content">
-                            <div class="reply-img">
-                                <img src="img/human.png">
-                            </div>
+                            
                             <p id="star_grade">
                                 <a href="#" data-star="1">★</a>
                                 <a href="#" data-star="2">★</a>
@@ -472,10 +467,16 @@
 
         </div>
     </div>
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<hr>
+<div style="padding: 0px 140px">
+<div id="map" style="width:100%;height:350px;"></div>
+</div>
+    <script src="ht	tps://unpkg.com/swiper/swiper-bundle.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- Initialize Swiper -->
+    
+ 
+
     
     <script>
     var address = "${address}";
@@ -550,7 +551,7 @@
         	$("#uploadBtn").click(regist);
         	
 	        function regist() {
-				var writer = "${uservo.id}";
+				var writer = "${userVO.userId}";
 				var file = $("#file").val();
 				var pro_no = $("input[name='pro_no']").val();
 				var score=$("#star-result").html()

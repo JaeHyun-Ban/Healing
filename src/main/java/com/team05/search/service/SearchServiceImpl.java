@@ -92,6 +92,12 @@ public class SearchServiceImpl implements SearchService{
 		return searchMapper.productlist(list);
 	}
 
+	@Override
+	public ArrayList<ProductVO> reviewRank() {
+		
+		return searchMapper.reviewRank();
+	}
+
 	
 	
 }

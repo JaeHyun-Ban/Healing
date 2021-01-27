@@ -1,56 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/board.css">
-	
-	<section>
-		<div class="container">
-			<div class="board-detail">
-				<div class="board-title">
-					<p>공지내용</p>
-				</div>
-				<form action="update" method="post" name="update">
-					<div class="detail-body">
-						<div class="box">
-							<div class="first">							
-								<span style="font-size: 20px">제목:<input type="text" name="qtitle" value="${vo.qtitle }"/></span>
-								<span ><strong >${vo.qno }</strong></span><strong>num:</strong>
-								<input type="hidden" name="qno" value="${vo.qno }"/>
-							</div>
-							<div class="second">
-								<span>조회수:<strong >${vo.qviews }</strong></span> <span>작성일:<strong><fmt:formatDate value="${vo.updatedate }" pattern="yyyy년MM월dd일 "/></strong></span>
-								<span> 작성자:<strong >${vo.qid }</strong></span>  
-							</div>
-							<div class="third">
-								<div class="content">내용</div>
-								<div class="content-detail">
-									<textarea name="qcontent">${vo.qcontent }</textarea>
-								</div>
-							</div>
-	
-						</div>
-						<div class="button">
-							<button type="button" class="btn btn-danger btn-lage" id="deletebtn">삭제</button>
-							<button type="button" class="btn btn-success btn-large" id="updatebtn">수정</button>
-							<button type="button" class="btn btn-info btn-large" onclick="location.href='board'">목록</button>
-								
-						</div>
-	
-					</div>
-				</form>	
-			</div>
-		</div>
-	</section>
-	
-	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/realboard.css">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9 write-wrap">
+                        <div class="titlebox">
+                            <p>수정하기</p>
+                        </div>
+                        
+                        <form action="freeUpdate" method="post" name="update">
+                            <div>
+                                <label>DATE</label>
+                                <p><fmt:formatDate value="${vo.regdate }" pattern="yyyy년MM월dd일"/></p>
+                            </div>   
+                            <div class="form-group">
+                                <label>번호</label>
+                                <input class="form-control" name='qno' value="${vo.qno }" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>작성자</label>
+                                <input class="form-control" name='qid' value="${vo.qid }" readonly>
+                            </div>    
+                            <div class="form-group">
+                                <label>제목</label>
+                                <input class="form-control" name='qtitle' value="${vo.qtitle }">
+                            </div>
+
+                            <div class="form-group">
+                                <label>내용</label>
+                                <textarea class="form-control" rows="10" name='qcontent'>${vo.qcontent }</textarea>
+                            </div>
+
+                            <button type="button" class="btn btn-dark" id="listBtn">목록</button>    
+                            <button type="button" class="btn btn-primary" id="updateBtn">변경</button>
+                            <button type="button" class="btn btn-info" id="deleteBtn">삭제</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+   </section>
 	
 	
-	<div class="end"></div>
+	
+	
 	
 	<script type="text/javascript">
 	
-	var updatebtn = document.getElementById("updatebtn");
+	var updatebtn = document.getElementById("updateBtn");
 	updatebtn.onclick = function(){
 
 			if (document.update.qtitle.value === '') {
@@ -67,7 +66,7 @@
 			}
 		}
 	
-	var deletebtn = document.getElementById("deletebtn");
+	var deletebtn = document.getElementById("deleteBtn");
 		deletebtn.onclick = function() {
 			
 			document.update.action = "delete"; 

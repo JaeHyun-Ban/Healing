@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/main.css">
 
@@ -54,33 +56,29 @@
 <section>
 	<div class="container" style="margin-top: 90px;">
 		<div class="row">
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="search/select_area"
+				class="selecttype typeselect"> <img
+					src="resources/img/icon/region.png" alt="region" class="typeimg ">
+					<p class="typetext">지역별 보기</p>
+			</a></li>
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="search/byagegroup"
+				class="selecttype"> <img
+					src="resources/img/icon/recommendation.png" alt="recommendation"
+					class="typeimg">
+					<p class="typetext">연령별 추천</p>
 
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-				<a href="search/select_area" class="selecttype typeselect"> 
-					<img src="resources/img/icon/region.png" alt="region" class="typeimg ">
-						<p class="typetext">지역별 보기</p>
-				</a>
-			</li>
-
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-				<a href="search/byagegroup" class="selecttype"> 
-					<img src="resources/img/icon/recommendation.png" alt="recommendation" class="typeimg">
-						<p class="typetext">연령별 추천</p>
-				</a>
-			</li>
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-				<a href="##"
+			</a></li>
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="##"
 				class="selecttype"> <img src="resources/img/icon/travel.png"
 					alt="travel" class="typeimg">
 					<p class="typetext">여행지 주변</p>
 			</a></li>
-
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-				<a href="search/search_room?range=30&searchname=" class="selecttype"> 
-					<img src="resources/img/icon/free-icon-nearby-2041118.png" alt="arround" class="typeimg">
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="search/search_room?range=30&searchname="
+				class="selecttype"> <img
+					src="resources/img/icon/free-icon-nearby-2041118.png" alt="arround"
+					class="typeimg">
 					<p class="typetext">내 주변</p>
-				</a>
-			</li>
+			</a></li>
 		</div>
 
 	</div>
@@ -104,76 +102,39 @@
 <!-- 객실 뷰 영역 -->
 <section class="mainview">
 
-	<h2 style="text-align: center;">*인기추천*</h2>
+	<h2 style="text-align: center;">*별점순위*</h2>
 	<div class="container">
 		<div class="row" style="text-align: center;">
-			<a href = "##">
+			<c:forEach items="${productlist }" var="product">
+			<a href = "search/room_info?pro_no=${product.pro_no }">
 				<li class="col-lg-6 col-sm-12 mainviewimg"><img
-					src="resources/img/viewimg/5743fc4cd44d8.jpg" alt="">
+					src="search/display/${product.fileloca }/${product.filename}" >
 					<div class="gra_black">
 
 						<div class="mainviewinfo" style="text-align: left;">
-							<p style="margin: 0; font-size: 25px;">숙박업소 이름</p>
-							<p style="margin: 0; font-size: 15px;">5.0</p>
-							<p style="margin: 0; font-size: 19px;">강남구</p>
+							<p style="margin: 0; font-size: 25px;">${product.name }</p>
+							<p style="margin: 0; font-size: 15px;" id="${product.pro_no }no">5.0</p>
+							               	<script type="text/javascript">
+			                            			reviewmean();
+			                            			function reviewmean() {
+			                         
+			                            				$.getJSON("search/reviewcountMean/"+${product.pro_no}, function(map){
+															console.log(map.mean);
+															$("#${product.pro_no }no").html(map.mean.toFixed(1));
+												
+														})
+													}	
+			                            	</script>
+							<p style="margin: 0; font-size: 19px;">${product.basic_address }</p>
 						</div>
 
 						<div class="mainviewprice">
-							<p style="margin: 0; font-size: 25px;">89,500</p>
+							<p style="margin: 0; font-size: 25px;">${product.rental_price }</p>
 						</div>
 					</div></li>
 			</a>
+			</c:forEach>
 			
-			<a href = "##">
-				<li class="col-lg-6 col-sm-12 mainviewimg"><img
-					src="resources/img/viewimg/5743fc4cd44d8.jpg" alt="">
-					<div class="gra_black">
-
-						<div class="mainviewinfo" style="text-align: left;">
-							<p style="margin: 0; font-size: 25px;">숙박업소 이름</p>
-							<p style="margin: 0; font-size: 15px;">5.0</p>
-							<p style="margin: 0; font-size: 19px;">강남구</p>
-						</div>
-
-						<div class="mainviewprice">
-							<p style="margin: 0; font-size: 25px;">89,500</p>
-						</div>
-					</div></li>
-			</a>
-			
-			<a href = "##">
-				<li class="col-lg-6 col-sm-12 mainviewimg"><img
-					src="resources/img/viewimg/5743fc4cd44d8.jpg" alt="">
-					<div class="gra_black">
-
-						<div class="mainviewinfo" style="text-align: left;">
-							<p style="margin: 0; font-size: 25px;">숙박업소 이름</p>
-							<p style="margin: 0; font-size: 15px;">5.0</p>
-							<p style="margin: 0; font-size: 19px;">강남구</p>
-						</div>
-
-						<div class="mainviewprice">
-							<p style="margin: 0; font-size: 25px;">89,500</p>
-						</div>
-					</div></li>
-			</a>
-			
-			<a href = "##">
-				<li class="col-lg-6 col-sm-12 mainviewimg">
-					<img src="resources/img/viewimg/5743fc4cd44d8.jpg" alt="">
-					<div class="gra_black">
-
-						<div class="mainviewinfo" style="text-align: left;">
-							<p style="margin: 0; font-size: 25px;">숙박업소 이름</p>
-							<p style="margin: 0; font-size: 15px;">5.0</p>
-							<p style="margin: 0; font-size: 19px;">강남구</p>
-						</div>
-
-						<div class="mainviewprice">
-							<p style="margin: 0; font-size: 25px;">89,500</p>
-						</div>
-					</div></li>
-			</a>
 		</div>
 	</div>
 </section>

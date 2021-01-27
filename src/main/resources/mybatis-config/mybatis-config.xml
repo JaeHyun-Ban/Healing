@@ -15,10 +15,9 @@
 		
 		<typeAlias type="com.team05.command.UserVO" alias="UserVO"/>
 
-		<!-- 공지사항 게시판 VO -->
- 		<typeAlias type="com.team05.command.NoticeBoardVO" alias="NoticeBoardVO"/>
+ 		<typeAlias type="com.team05.command.NoticeVO" alias="NoticeVO"/>
 
- 		<!-- <typeAlias type="com.team05.command.QuestionVO" alias="QuestionVO"/> -->
+ 		<typeAlias type="com.team05.command.QuestionVO" alias="QuestionVO"/>
  		<typeAlias type="com.team05.command.ReplyVO" alias="ReplyVO"/>
 
  	</typeAliases>
