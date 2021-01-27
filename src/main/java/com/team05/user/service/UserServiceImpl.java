@@ -53,5 +53,11 @@ public class UserServiceImpl implements UserService {
 		
 		return userMapper.delete(id);
 	}
+	
+	@Override
+	public int kJoin(UserVO vo) {
+		return userMapper.kJoin(vo);
+	}
+
 
 }

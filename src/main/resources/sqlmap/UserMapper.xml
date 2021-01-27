@@ -9,37 +9,45 @@
 
 	<!-- 회원가입 진행 -->
 	<insert id="userJoin">
-		insert into users (id, pwd, name, phone, email, email2, zipNo, addrBasic, addrDetail)
-		values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
+		insert into users (userId, userPwd, userName, phone, email, email2, zipNo, addrBasic, addrDetail)
+		values(#{userId}, #{userPwd}, #{userName}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
 	</insert>
 	
 	<!-- 로그인 처리 -->
 	<select id="userLogin" resultType="UserVO">
-		select * from users where id = #{id} and pwd = #{pwd}
+		select * from users where userId = #{userId} and userPwd = #{userPwd}
 	</select>
 	
 	<!-- ID중복 확인 -->
 	<select id="idCheck" resultType="int">
-		select count(*) as result from users where id = #{id}
+		select count(*) as result from users where userId = #{userId}
 	</select>
   
 	<!-- ==================================================== -->
 	<select id="showmypage" resultType="Reserve_imgVO">
-		select r.*,p.name,uploadpath,filename,filerealname,fileloca,tel from users u left join reservation r on u.id=r.id left join product p 
-		on r.pro_no=p.pro_no where u.id=#{id}
+		select r.*, p.name, uploadpath, filename, filerealname, fileloca, tel 
+		from users u 
+		left join reservation r on u.userId=r.id 
+		left join product p on r.pro_no=p.pro_no 
+		where u.userId=#{userId}
+
 	</select>
 	
 	<select id="getreview" resultType="Review_imgVO">
-		select r.*,p.name,tel from users u left join review r on u.id = r.id left join product p on r.pro_no=p.pro_no 
-		where u.id=#{id}
+		select r.*, p.name,tel 
+		from users u 
+		left join review r on u.userId = r.id 
+		left join product p on r.pro_no=p.pro_no 
+		where u.userId=#{userId}
 	</select>
 	
 	<update id="update">
-		update users set pwd=#{pwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where id=#{id}
+		update users set userPwd=#{userPwd},phone=#{phone},email=#{email},email2=#{email2},zipNo=#{zipNo},addrbasic=#{addrBasic},addrdetail=#{addrDetail} where userId=#{userId}
 	</update>
 	
 	<delete id="delete">
-		delete from users where id=#{id}
+		delete from users where userId=#{userId}
 	</delete>
+
 </mapper>	
 	

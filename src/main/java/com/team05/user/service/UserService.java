@@ -18,8 +18,11 @@ public interface UserService {
 	public ArrayList<Reserve_imgVO> showmypage(UserVO uservo);
 	
 	public ArrayList<Review_imgVO> getreview(UserVO uservo);
+
 	
 	public int update(UserVO uservo);
 	public int delete(String id);
-	
+
+	public int kJoin(UserVO vo);
+
 }

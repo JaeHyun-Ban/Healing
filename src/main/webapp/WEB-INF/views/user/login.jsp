@@ -10,6 +10,7 @@
 <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script
 	src="${pageContext.request.contextPath }/resources/js/sweetalert/sweetalert.min.js"></script>
+<!-- kakao JavaScript SDK포함, SDK안에 name객체가 이미 존재한다 -->
 
 <section>
 	<div class="container">
@@ -19,9 +20,10 @@
 
 				<form action="userLogin" id="loginForm" method="post">
 					<div class="form-group">
-						<label for="id">아이디</label>
+						<label for="userId">아이디</label>
 						<div class="input-shadow">
-							<input type="text" class="form-control" id="id" name="id" required="required" 
+							<input type="text" class="form-control" id="userId" name="userId"
+								required="required"
 								oninvalid="this.setCustomValidity('아이디를 입력하세요')" />
 						</div>
 					</div>
@@ -29,21 +31,29 @@
 
 						<label for="pwd">비밀번호</label>
 						<div class="input-shadow">
-							<input type="password" class="form-control" id="pwd" name="pwd" required="required"
+							<input type="password" class="form-control" id="userPwd"
+								name="userPwd" required="required"
 								oninvalid="this.setCustomValidity('비밀번호를 입력하세요')">
 						</div>
 					</div>
 					<!-- 구분선 생성-->
 					<div class="login-btn">
-						<button type="submit" class="btn btn-success btn-block btn-login" id="loginBtn">로그인</button>
-						<button type="button" class="btn btn-primary btn-block btn-join" id="joinBtn">회원가입</button>
+						<button type="button" class="btn btn-success btn-block btn-login"
+							id="loginBtn">로그인</button>
+						<button type="button" class="btn btn-primary btn-block btn-join"
+							id="joinBtn">회원가입</button>
 						<!-- 클릭시 회원가입 창 이동 -->
 					</div>
-				</form>
+					<!-- 카카오  -->
+					<a id="custom-login-btn" href="javascript:loginWithKakao()"> <img
+						alt=""
+						src="${pageContext.request.contextPath }/resources/img/kakao/kakao_login_large_wide.png">
+					</a>
+					<button class="logoutBtn" onclick="kakaoLogout()">로그아웃</button>
 
+				</form>
 			</div>
 		</div>
-
 	</div>
 
 </section>
@@ -51,15 +61,33 @@
 <!-- 메세지 알림창 -->
 <script>
 	var msg = "${msg}";
-	if(msg != ""){
+	if (msg != "") {
 		swal({
-			title: msg
+			title : msg
 		})
 	}
 </script>
 
+<!-- 로그인 버튼 처리 -->
 <script>
-	//회원가입 페이지 이동
+$("#loginBtn").click(function() {
+	//console.log($("#userId").val());
+	if($("#userId").val() == '' || $("#userPwd").val() == ''){
+		swal({
+			title : '아이디, 비밀번호를 확인해주세요'
+		})
+		return;
+	}else {
+		$("#loginForm").submit();
+		
+	}
+})
+
+</script>
+
+
+<!-- 회원가입 페이지 이동 -->
+<script>
 	$("#joinBtn").click(function() {
 		location.href = "join";
 	})
@@ -70,7 +98,87 @@
 	
 </script>
 
+<!-- 카카오 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	//카카오 SDK초기화
+	//f80c539288e6a1c0860c93c58b8a3cc1
+	//https://www.youtube.com/watch?v=Re2R2rid1K4&ab_channel=%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9D%98%ED%92%88%EA%B2%A9
+	window.Kakao.init('f80c539288e6a1c0860c93c58b8a3cc1');
+	console.log('카카오SDK 초기화여부: ', Kakao.isInitialized());//SDK초기화 여부를 판단
+</script>
 
+<!-- 카카오 로그인 창이 사라질 때는,
+토큰이 유지되어 있어서 나타나는 현상이라 
+인터넷 어플리케이션을 종료하거나, 
+쿠키를 삭제해주면 해결된다 -->
+<!-- 카카오 로그인 기능 -->
+<!-- https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js -->
+<script type="text/javascript">
+	//카카오 로그인 실행
+	function loginWithKakao() {
+		//loginForm: 새 창에서 카카오 로그인
+		Kakao.Auth.loginForm ({
+			//scope: 'profile, account_email',
+			success : function(authObj) {
+				console.log(authObj);//받아온 오브젝트 데이터
+
+				//사용자 정보 가져오기, 카카오 API(Kakao.API.request)
+				Kakao.API.request({
+					url:'/v2/user/me',
+					success: function(response) {
+						console.log(response);
+						var userId = response.id + '@k';//카카오아이디 구분
+						var email = response.kakao_account.email;
+						var name = response.properties.nickname;
+						console.log(userId);
+						console.log(email);
+						console.log(name);
+						
+						//받은 사용자 정보 -> ajax를 통해 회원가입 시키기
+						$.ajax({
+							type: "POST",
+							url: "kidCheck", //아이디 중복 검사(카카오테이블 따로 구현?)
+							data : JSON.stringify({
+								"kuserId": userId
+							}),
+							contentType : "application/json; charset=utf-8",//전송 방식
+							success: function (res) { //아이디 검사 후
+								
+							}
+						})
+						
+					},
+					fail: function(error){
+						console.log(error);
+					}
+					
+				})
+				console.info(JSON.stringify(authObj));
+			},
+			fail : function(error) {
+				console.error('에러 발생');
+				console.error(JSON.stringify(err))
+			},
+		})
+	}
+</script>
+
+<!-- 카카오 로그아웃 -->
+<script type="text/javascript">
+function kakaoLogout() {
+	//가지고 있는 토큰 확인
+    if (!Kakao.Auth.getAccessToken()) {
+      console.log('Not logged in.');
+      return;
+    }
+    Kakao.Auth.logout(function () {
+    	//가지고 있는 토큰이 존재하는지 확인
+      console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+    })
+  }
+
+</script>
 
 
 

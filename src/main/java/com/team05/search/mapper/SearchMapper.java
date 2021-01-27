@@ -28,4 +28,5 @@ public interface SearchMapper {
 	
 	//예약등록
 	public int reservationForm(ReservationVO vo);
+	public ArrayList<ProductVO> productlist(int[] list);
 }

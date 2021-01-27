@@ -10,6 +10,8 @@
 
       body {
         font-family: "Lato", sans-serif;
+        margin-top:200px;
+        margin-bottom:200px;
       }
 
       /* Style the tab */
@@ -129,11 +131,11 @@
         <tbody class="m-control">
           <tr>
             <td class="m-title">*ID</td>
-            <td><input type="text" class="form-control m-md" name="id" value="${userVO.id}" readonly></td>
+            <td><input type="text" class="form-control m-md" name="id" value="${userVO.userId}" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*이름</td>
-            <td><input type="text" class="form-control m-md" name="name" value="${userVO.name }" readonly></td>
+            <td><input type="text" class="form-control m-md" name="name" value="${userVO.userName }" readonly></td>
           </tr>
           <tr>
             <td class="m-title">*비밀번호</td>
@@ -184,7 +186,7 @@
       <hr>
       <div class="title-foot">
         <button type="button" class="btn" id="update-btn">수정</button>
-        <button type="button" class="btn" id="delete-btn" onclick="location.href='delete?id=${userVO.id}'">회원탈퇴</button>
+        <button type="button" class="btn" id="delete-btn" onclick="location.href='delete?id=${userVO.userId}'">회원탈퇴</button>
       </div>
       </form>
     </div>

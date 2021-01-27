@@ -1,30 +1,34 @@
 package com.team05.command;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserVO {
 //	-- 유저 테이블
 //	create table users(
-//	    id VARCHAR2(50) not null, --pk 
-//	    pwd VARCHAR2(50) not null,
-//	    name VARCHAR2(50) not null,
+//	    userId VARCHAR2(50) not null, --pk 
+//	    userPwd VARCHAR2(50) not null,
+//	    userName VARCHAR2(50) not null,
 //	    phone VARCHAR2(50) not null,
 //	    email VARCHAR2(50) not null,
-//	    addrbasic VARCHAR2(50),
-//	    addrdetail VARCHAR2(50),
+//	   	email2 VARCHAR2(50) not null,
+//	    addrBasic VARCHAR2(50),
+//	    addrDetail VARCHAR2(50),
 //	    zipNo VARCHAR2(50),
-//	    regdate date default sysdate,
-//	    grade_num NUMBER(10) not null --fk
+//	    regdate date default sysdate
 //	);
-//	alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
+//	alter table users add CONSTRAINT user_pk PRIMARY KEY (userId);
 	
-	private String id;
-	private String pwd;
-	private String name;
+	private String userId;
+	private String userPwd;
+	private String userName;
+	private String userAge;
 	private String phone;
 	private String email;
 	private String email2;

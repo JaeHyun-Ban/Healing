@@ -1,18 +1,18 @@
 -- 유저 테이블
 create table users(
-    id VARCHAR2(50) not null, --pk 
-    pwd VARCHAR2(50) not null,
-    name VARCHAR2(50) not null,
+    userId VARCHAR2(50) not null, --pk 
+    userPwd VARCHAR2(50) not null,
+    userName VARCHAR2(50) not null,
     phone VARCHAR2(50) not null,
-    email varchar2(100),
-    email2 varchar2(100),
+    email VARCHAR2(50) not null,
+   	email2 VARCHAR2(50) not null,
+    addrBasic VARCHAR2(100), --짧아서 변경
+    addrDetail VARCHAR2(100),
     zipNo VARCHAR2(50),
-    addrbasic VARCHAR2(50),
-    addrdetail VARCHAR2(50),
     regdate date default sysdate
-    
 );
-alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
+alter table users add CONSTRAINT user_pk PRIMARY KEY (userId);
+
 
 insert into users values ('test','1234','조영준','01012345678','duwns@naver,com','수원','아파트','12345',sysdate,0);
 
@@ -41,22 +41,15 @@ create table qboard_reply(
 alter table qboard_reply add CONSTRAINT reply_pk PRIMARY KEY (qreno);
 create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
 
-
--- 회원등급 테이블
-create table user_grade(
-    grade_num NUMBER(10) not null, --pk
-    grade_name VARCHAR2(50) not null
-);
-alter table user_grade add CONSTRAINT grade_pk PRIMARY KEY (grade_num);
-
 -- 공지사항 테이블
 create table notice(
     nno NUMBER(10) not null, -- pk
+    nviews number(10) not null,
     ntitle VARCHAR2(100) not null,
+    nid VARCHAR2(50) not null, --fk
     ncontent VARCHAR2(500) not null,
     regdate date default sysdate,
-    updatedate date default sysdate,
-    id VARCHAR2(50) not null --fk
+    updatedate date default sysdate
 );
 alter table notice add CONSTRAINT notice_pk PRIMARY KEY (nno);
 create SEQUENCE notice_seq INCREMENT by 1 START WITH 1 NOCACHE;

@@ -1,17 +1,17 @@
 -- 유저 테이블
 create table users(
-    id VARCHAR2(50) not null, --pk 
-    pwd VARCHAR2(50) not null,
-    name VARCHAR2(50) not null,
+    userId VARCHAR2(50) not null, --pk 
+    userPwd VARCHAR2(50) not null,
+    userName VARCHAR2(50) not null,
     phone VARCHAR2(50) not null,
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
-    addrBasic VARCHAR2(50),
-    addrDetail VARCHAR2(50),
+    addrBasic VARCHAR2(100), --짧아서 변경
+    addrDetail VARCHAR2(100),
     zipNo VARCHAR2(50),
     regdate date default sysdate
 );
-alter table users add CONSTRAINT user_pk PRIMARY KEY (id);
+alter table users add CONSTRAINT user_pk PRIMARY KEY (userId);
 
 -- 예약정보 테이블
 drop table reservation;
@@ -30,40 +30,41 @@ alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
 ==============================================================================
 
 --질문게시판 테이블
-create table qboard(
+create table question(
     qno NUMBER(10) not null, -- pk
+    qviews  NUMBER(10) default 0,
     qtitle VARCHAR2(100)  not null,
     qcontent VARCHAR2(500) not null,
     regdate date default sysdate,
     updatedate date default sysdate,
-    id VARCHAR2(50) not null --fk
+    qid VARCHAR2(50) not null --fk
 );
-alter table qboard add CONSTRAINT qboard_pk PRIMARY KEY (qno);
-create SEQUENCE qboard_seq INCREMENT by 1 START with 1 NOCACHE;
+alter table question add CONSTRAINT qboard_pk PRIMARY KEY (qno);
+create SEQUENCE question_seq INCREMENT by 1 START with 1 NOCACHE;
 
 
 --질문게시판 댓글 테이블
-create table qboard_reply(
-    qreno NUMBER(10) not null, --pk
-    qre_content VARCHAR2(500) not null,
+create table reply(
+    rno NUMBER(10) not null, --pk
+    rcontent VARCHAR2(500) not null,
     regdate date default sysdate,
     updatedate date default sysdate,
     qno NUMBER(10) not null, --fk
-    id VARCHAR2(50) not null --fk
+    rid VARCHAR2(50) not null --fk
 );
-alter table qboard_reply add CONSTRAINT reply_pk PRIMARY KEY (qreno);
+alter table reply add CONSTRAINT reply_pk PRIMARY KEY (rno);
 create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
 
 
 -- 공지사항 테이블
 create table notice(
     nno NUMBER(10) not null, -- pk
-    nviews NUMBER(10) not null,
+    nviews NUMBER(10) default 0,
     ntitle VARCHAR2(100) not null,
     ncontent VARCHAR2(500) not null,
     regdate date default sysdate,
     updatedate date default sysdate,
-    id VARCHAR2(50) not null --fk
+    nid VARCHAR2(50) not null --fk
 );
 alter table notice add CONSTRAINT notice_pk PRIMARY KEY (nno);
 create SEQUENCE notice_seq INCREMENT by 1 START WITH 1 NOCACHE;

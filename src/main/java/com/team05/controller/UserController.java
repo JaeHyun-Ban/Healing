@@ -1,6 +1,8 @@
 package com.team05.controller;
 
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -66,7 +68,12 @@ public class UserController {
 		
 		if(result != null) { //로그인 성공
 			session.setAttribute("userVO", result);//세션생성
-//			ra.addFlashAttribute("userVO", result);
+
+			ra.addFlashAttribute("userVO", result);
+			
+			System.out.println(session.getAttribute("userVO") + "입니다");
+			
+
 			return "redirect:/";
 		} else {//로그인 실패
 			ra.addFlashAttribute("msg", "로그인을 실패 하였습니다.");//실패문구
@@ -83,7 +90,7 @@ public class UserController {
 		System.out.println("아이디 중복확인 시작");
 		//중복확인
 		int result = userService.idCheck(vo);
-		
+		System.out.println(result);
 		return result;
 	}
 	
@@ -96,14 +103,21 @@ public class UserController {
 		model.addAttribute("reservelist", reservelist);
 
 		ArrayList<Review_imgVO> reviewlist=userService.getreview(uservo);
+
 		model.addAttribute("reviewlist", reviewlist);
 
 		System.out.println(reservelist.toString());
 		System.out.println(reviewlist.toString());
 
+
 		return "user/mypage";
 	}
 	
+	@RequestMapping("logout")
+	public String userLogout(HttpSession session) {
+		session.invalidate();	
+		return "redirect:/"; //홈으로
+	}
 	
 	@RequestMapping("update")
 	public String update(UserVO uservo,RedirectAttributes ra,HttpSession session) {
@@ -133,10 +147,40 @@ public class UserController {
 		
 	}
 	
-
+	//이건 아닌가봄
+//	@RequestMapping(value = "/kLogin", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/kLogin", method = RequestMethod.POST)
+	public String kLogin(UserVO vo,
+						@RequestParam("kUserId") String kUserId,
+						HttpSession session) {
+		
+		System.out.println(vo.toString());
+		System.out.println(kUserId);
+		vo.setUserId(kUserId);
+		System.out.println(vo.toString());
+		//아이디 중복 확인
+		int result = userService.idCheck(vo);
+		
+		if(result == 0) {//아이디가 없을 시
+			int result2 = userService.kJoin(vo);//회원가입 진행
+			
+			System.out.println("카카오 회원가입 성공");			
+			//세션 생성
+			session.setAttribute("userVO", vo);
+			
+			return "redirect:/";//홈으로 리턴
+		} else {//존재할 시
+			session.setAttribute("userVO", vo);
+			
+			return "redirect:/";//홈으로 리턴
+			
+		}
+		
+		
+	}
+	
+	
 }
-
-
 
 
 

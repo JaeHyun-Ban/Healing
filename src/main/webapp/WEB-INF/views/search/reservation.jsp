@@ -45,7 +45,7 @@
               <div class="form-group res-content2">
                 <div>
                   <label>이름</label>
-                  <input class="form-control" type="text" style="width: 30%" value="${userVO.id}">
+                  <input class="form-control" type="text" style="width: 30%" value="${userVO.userId}">
                   <label>휴대폰 번호</label>
                   <p>개인 정보 보호를 위해 안심번호로 숙소에 전송됩니다.</p>
                   <input class="form-control" type="text" style="width: 50%">
@@ -94,7 +94,7 @@
 				<input type="hidden" name="checkout" value="${infovo.checkout}">
 				<input type="hidden" name="price" value="${infovo.price}">
 				<input type="hidden" name="reserve_type" value="${infovo.pro_type}">
-				<input type="hidden" name="id" value="${userVO.id}">
+				<input type="hidden" name="id" value="${userVO.userId}">
 				<input type="hidden" name="pro_no" value="${infovo.pro_no}">
 				<input type="hidden" name="room_no" value="${infovo.room_no}">
             </form>

@@ -13,6 +13,7 @@ import java.util.UUID;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
+import org.rosuda.REngine.Rserve.RConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -71,6 +72,7 @@ public class SearchController {
 		String pro_title=searchService.getproductTitle(infovo.getPro_no());
 		infovo.setPro_title(pro_title);
 		model.addAttribute("infovo", infovo);
+		System.out.println(infovo.toString());
 
 		return "search/reservation";
 	}
@@ -100,11 +102,7 @@ public class SearchController {
 	}
 	
 	
-//	@RequestMapping("search_area1")
-//	public String search_area(SearchAreaVO searchvo,Model model) {
-//		model.addAttribute("searchvo", searchvo);
-//		return "search/search_area";
-//	}
+
 	@RequestMapping("search_area")
 	public String search_area(SearchAreaVO searchvo,Model model) {
 		
@@ -115,7 +113,7 @@ public class SearchController {
 		System.out.println(productlist.toString());
 		return "search/search_area";
 	}
-	
+
 	
 	@ResponseBody
 	@RequestMapping("display/{fileloca}/{filename:.+}")
@@ -164,7 +162,7 @@ public class SearchController {
 						@RequestParam("content") String content,HttpSession session) {
 		try {
 			UserVO uservo=(UserVO)session.getAttribute("uservo");
-			String writer=uservo.getId();
+			String writer=uservo.getUserId();
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			String fileloca=sdf.format(date);
@@ -248,6 +246,59 @@ public class SearchController {
 		map.put("count", count);
 		map.put("mean", mean);
 		return map;
+	}
+	
+	
+	@RequestMapping("byagegroup")
+	public String agePopul(Model model) {
+		RConnection conn =null;
+		try {
+			conn = new RConnection("127.0.0.1",6311);
+			conn.eval("library(rJava)");
+			conn.eval("library(DBI)");
+			conn.eval("library(RJDBC)");
+			conn.eval("library(dplyr)");
+			conn.eval("library(ggplot2)");
+			conn.eval("drv_oracle = JDBC(driverClass = 'oracle.jdbc.OracleDriver',classPath ='D:/R/basic_r/ojdbc8.jar')");
+			conn.eval("con_oracle = dbConnect(drv_oracle,'jdbc:oracle:thin:@localhost:1521/XEPDB1','HEALING','HEALING')");
+			conn.eval("query = 'select pro_no,u.userage from reservation r left join users u on r.id=u.userid'");
+			conn.eval("data = dbGetQuery(con_oracle,query)");
+			conn.eval("data$temp = ifelse(data$USERAGE>=40,'40대',ifelse(data$USERAGE>=30,'30대','20대'))");
+			conn.eval("data1=data %>% filter(temp=='20대')");
+			conn.eval("data2=data %>% filter(temp=='30대')");
+			conn.eval("data3=data %>% filter(temp=='40대')");
+			conn.eval("data1=data1 %>%group_by(PRO_NO) %>% summarise(count=n()) %>% arrange(desc(count)) %>% head(10)");
+			conn.eval("data2=data2 %>%group_by(PRO_NO) %>% summarise(count=n()) %>% arrange(desc(count)) %>% head(10)");
+			conn.eval("data3=data3 %>%group_by(PRO_NO) %>% summarise(count=n()) %>% arrange(desc(count)) %>% head(10)");
+			conn.eval("data1=data.frame(data1)");
+			conn.eval("data2=data.frame(data2)");
+			conn.eval("data3=data.frame(data3)");
+			
+			int[] twenty_prono=conn.eval("data1$PRO_NO").asIntegers();
+			int[] thirty_prono=conn.eval("data2$PRO_NO").asIntegers();
+			int[] forty_prono=conn.eval("data3$PRO_NO").asIntegers();
+			if(twenty_prono.length >0) {
+				ArrayList<ProductVO> twentylist=searchService.productlist(twenty_prono);				
+				model.addAttribute("twentylist", twentylist);
+			}
+			if(thirty_prono.length >0) {
+				ArrayList<ProductVO> thirtylist=searchService.productlist(thirty_prono);				
+				model.addAttribute("thirtylist", thirtylist);
+			}
+			if(forty_prono.length >0) {
+				ArrayList<ProductVO> fortylist=searchService.productlist(forty_prono);				
+				model.addAttribute("fortylist", fortylist);
+			}
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			conn.close();
+		}
+		
+		return "search/byagegroup";
+		
 	}
 	
 }

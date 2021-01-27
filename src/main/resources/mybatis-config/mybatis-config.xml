@@ -15,7 +15,10 @@
 		
 		<typeAlias type="com.team05.command.UserVO" alias="UserVO"/>
 
- 		<typeAlias type="com.team05.command.BoardVO" alias="BoardVO"/>
+ 		<typeAlias type="com.team05.command.NoticeVO" alias="NoticeVO"/>
+
+ 		<typeAlias type="com.team05.command.QuestionVO" alias="QuestionVO"/>
+ 		<typeAlias type="com.team05.command.ReplyVO" alias="ReplyVO"/>
 
  	</typeAliases>
  	   

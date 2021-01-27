@@ -4,7 +4,7 @@
     <footer class="mainfooter">
             <div class="container">
                 <div class="footercontent">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-6">
                         <div class="footer">
                             <a href="#"><img src="${pageContext.request.contextPath }/resources/img/logo.svg" alt="부3" width="20"></a>
                             대표자 : 5조 | E-MAIL : null<br />
@@ -15,7 +15,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-6">
                         <ul class="footer-menu text-right">
                             <li><a href="#">이용약관</a></li>
                             <li><a href="#">고객센터</a></li>
