@@ -14,8 +14,13 @@
 
 	<!-- 회원가입 진행 -->
 	<insert id="userJoin">
+<<<<<<< HEAD
 		insert into users (userId, userPwd, userName, userAge, phone, email, email2, zipNo, addrBasic, addrDetail)
 		values(#{userId}, #{userPwd}, #{userName}, #{userAge}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
+=======
+		insert into users (userId, userPwd, userName, phone, email, email2, zipNo, addrBasic, addrDetail)
+		values(#{userId}, #{userPwd}, #{userName}, #{phone}, #{email}, #{email2}, #{zipNo}, #{addrBasic}, #{addrDetail})
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 	</insert>
 	
 	<!-- 로그인 처리 -->

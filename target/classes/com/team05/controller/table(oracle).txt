@@ -1,10 +1,22 @@
 -- 유저 테이블
 create table users(
     userId VARCHAR2(50) not null, --pk 
+<<<<<<< HEAD
+<<<<<<<< HEAD:target/classes/com/team05/controller/table(oracle).txt
+=======
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
     userPwd VARCHAR2(50),
     userName VARCHAR2(50) not null,
     userAge VARCHAR2(30) not null,
     phone VARCHAR2(50),
+<<<<<<< HEAD
+========
+    userPwd VARCHAR2(50) not null,
+    userName VARCHAR2(50) not null,
+    phone VARCHAR2(50) not null,
+>>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246:target/classes/com/team05/controller/table
+=======
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
     addrBasic VARCHAR2(100), --짧아서 변경
@@ -14,6 +26,7 @@ create table users(
 );
 alter table users add CONSTRAINT user_pk PRIMARY KEY (userId);
 
+<<<<<<< HEAD
 
 insert into users values ('test','1234','조영준','01012345678','duwns@naver,com','수원','아파트','12345',sysdate,0);
 
@@ -122,3 +135,5 @@ create table room(
 );
 alter table room add CONSTRAINT room_pk PRIMARY KEY (room_no);
 
+=======
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246

@@ -75,4 +75,13 @@
 	<insert id="reservationForm">
 		insert into reservation values (reservation_seq.nextval,#{checkin},#{checkout},#{price},#{reserve_type},sysdate,#{id},#{pro_no},#{room_no})
 	</insert>
+	
+	<select id="productlist" parameterType="java.util.ArrayList" resultType="ProductVO">
+		select * from product 
+		where pro_no in (
+			<foreach collection="array" item="item" index="index" separator=",">
+            ${item}
+        	</foreach>	
+		)
+	</select>
 </mapper>

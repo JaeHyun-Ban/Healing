@@ -153,12 +153,19 @@ public class UserController {
 	public String kLogin(UserVO vo,
 						@RequestParam("kUserId") String kUserId,
 						HttpSession session) {
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 		System.out.println(vo.toString());
 		System.out.println(kUserId);
 		vo.setUserId(kUserId);
 		System.out.println(vo.toString());
 		//아이디 중복 확인
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 		int result = userService.idCheck(vo);
 		
 		if(result == 0) {//아이디가 없을 시

@@ -164,7 +164,7 @@
         $(".seoul").on("click",function(){
           var big = "서울";
           var small = event.target.children[0].innerHTML
-          location.href="search_area1?city="+big+"&gu="+small
+          location.href="search_area?city="+big+"&gu="+small
           
         })
         

@@ -50,6 +50,7 @@
 						src="${pageContext.request.contextPath }/resources/img/kakao/kakao_login_large_wide.png">
 					</a>
 					<button class="logoutBtn" onclick="kakaoLogout()">로그아웃</button>
+<<<<<<< HEAD
 				</form>
 				
 				<!-- hidden처리로 kakaoLogin을 따로 전송>>>이렇게 해야하는 건가;; -->
@@ -61,6 +62,10 @@
 					<input type="hidden" id="email2" name="email2">
 				</form>
 				
+=======
+
+				</form>
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 			</div>
 		</div>
 	</div>
@@ -125,8 +130,11 @@ $("#loginBtn").click(function() {
 <!-- https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js -->
 <script type="text/javascript">
 	//카카오 로그인 실행
+<<<<<<< HEAD
 	//카카오 API호출: 엑세스 토큰(Access Token)
 	//엑세스 토큰 갱신: 리프레시 토큰(Refresh Teken)
+=======
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 	function loginWithKakao() {
 		//loginForm: 새 창에서 카카오 로그인
 		Kakao.Auth.loginForm ({
@@ -138,6 +146,7 @@ $("#loginBtn").click(function() {
 				Kakao.API.request({
 					url:'/v2/user/me',
 					success: function(response) {
+<<<<<<< HEAD
 						console.log('응답: ' + response);
 						var userId = response.id + '@k';//카카오아이디 구분
 						var userName = response.properties.nickname;
@@ -194,6 +203,32 @@ $("#loginBtn").click(function() {
 					},
 					fail: function(error){
 						console.log("에러 " + error);
+=======
+						console.log(response);
+						var userId = response.id + '@k';//카카오아이디 구분
+						var email = response.kakao_account.email;
+						var name = response.properties.nickname;
+						console.log(userId);
+						console.log(email);
+						console.log(name);
+						
+						//받은 사용자 정보 -> ajax를 통해 회원가입 시키기
+						$.ajax({
+							type: "POST",
+							url: "kidCheck", //아이디 중복 검사(카카오테이블 따로 구현?)
+							data : JSON.stringify({
+								"kuserId": userId
+							}),
+							contentType : "application/json; charset=utf-8",//전송 방식
+							success: function (res) { //아이디 검사 후
+								
+							}
+						})
+						
+					},
+					fail: function(error){
+						console.log(error);
+>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 					}
 					
 				})

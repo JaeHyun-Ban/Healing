@@ -86,6 +86,12 @@ public class SearchServiceImpl implements SearchService{
 		return searchMapper.reservationForm(vo);
 	}
 
+	@Override
+	public ArrayList<ProductVO> productlist(int[] list) {
+		
+		return searchMapper.productlist(list);
+	}
+
 	
 	
 }
