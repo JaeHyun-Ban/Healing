@@ -51,23 +51,31 @@
 					<div class="form-group">
 						<label for="pwdChk">비밀번호 확인</label>
 						<!-- 숨겨진 경고창 -->
-						<span id="pwdWran" style="float: right"></span>
+						<span id="pwdWarn" style="float: right"></span>
 						<div class="input-shadow">
 							<input id="pwdChk" type="password" class="form-control"
 								name="pwdChk" placeholder="비밀번호 확인">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="name">이름</label> <span id="nameWran"
-							style="float: right"></span>
+						<label for="name">이름</label> 
+						<span id="nameWarn"	style="float: right"></span>
 						<div class="input-shadow">
 							<input type="text" class="form-control" name="userName"
 								id="userName">
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="age">나이</label> 
+						<span id="ageWarn"	style="float: right"></span>
+						<div class="input-shadow">
+							<input type="text" class="form-control" name="userAge"
+								id="userAge">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="phone">휴대폰</label>
-						<span id="phWran" style="float: right"></span>
+						<span id="phWarn" style="float: right"></span>
 						<div class="input-shadow">
 							<input id="phone" type="text" class="form-control" name="phone"
 								placeholder="- 를 제외하고 입력하세요" />
@@ -194,13 +202,13 @@
 	}
 	//비밀번호 확인 검사
 	var pwdChk = document.getElementById("pwdChk");
-	var pwdWran = document.getElementById("pwdWran");
+	var pwdWarn = document.getElementById("pwdWarn");
 	pwdChk.onkeyup = function() {
 		if (userPwd.value !== pwdChk.value) { //다름
 			pwdChk.style.border = "1px solid #fe5757";
 		} else {//같음
 			pwdChk.style.border = "1px solid #71e901";
-			pwdWran.innerHTML = "";//경고문구 제거
+			pwdWarn.innerHTML = "";//경고문구 제거
 		}
 
 	};
@@ -232,18 +240,18 @@
 <!-- 이름에 특수문자, 숫자 안됨 -->
 <script>
 	var userName = document.getElementById("userName");
-	var nameWran = document.getElementById("nameWran");
+	var nameWarn = document.getElementById("nameWarn");
 
 	//이름 패턴(한글, 영어(대,소))
 	var regexName = /^[가-힣A-Za-z]{1,}/;
 	userName.onkeyup = function() {
 		if (regexName.test(userName.value) === false) {
-			nameWran.innerHTML = "잘못된 이름 형식입니다";
-			nameWran.style.color = "red";
+			nameWarn.innerHTML = "잘못된 이름 형식입니다";
+			nameWarn.style.color = "red";
 			userName.style.borderColor = "#fe5757";//#적색
 
 		} else {
-			nameWran.innerHTML = "";
+			nameWarn.innerHTML = "";
 			userName.style.borderColor = "#e5e5e5";
 		}
 	}
@@ -265,11 +273,25 @@
 		}
 	}
 </script>
+<!-- 나이 검증 -->
+<script>
+	var userAge = document.getElementById("userAge");
+	var ageWarn = document.getElementById("ageWarn");
+	var regexId = /^[0-9]{1,2}$/;
+	
+	userAge.onkeyup = function(){
+		if(regexId.test(userAge.value) !== true){
+			userAge.style.borderColor = "#fe5757";//적색
+			ageWarn.innerHTML = "정확한 나이를 입력하세요";
+		} else {
+			userAge.style.borderColor = "#e5e5e5";
+			ageWarn.innerHTML = "";
+		}	
+	}
+</script>
 
 <!-- 회원가입 버튼 클릭시 최종 확인 -->
-
 <!-- 회원가입 버튼 클릭 -->
-
 <script type="text/javascript">
 
 	joinBtn.onclick = function() {
@@ -277,7 +299,6 @@
 		var zipNo = document.getElementById("zipNo");
 		var addrBasic = document.getElementById("addrBasic");
 		var addrDetail = document.getElementById("addrDetail");
-		
 		//console.log(email);
 
 		/* 아이디 확인 검사: readonly면 ok */
@@ -316,8 +337,8 @@
 				icon : 'error',
 				title : '휴대폰번호를 다시 확인주세요'
 			});
-			pwdWran.innerHTML = "휴대폰번호를 다시 확인해주세요";
-			pwdWran.color = "red";
+			pwdWarn.innerHTML = "휴대폰번호를 다시 확인해주세요";
+			pwdWarn.color = "red";
 			phone.focus();
 			return;
 			//이메일 검사
@@ -339,7 +360,16 @@
 			})
 			addrDetail.focus();
 			return;
-		} else{
+			
+		}else if(userAge.value === ''){//나이 검증
+			swal({
+				icon : 'error',
+				title : '나이를 작성해주세요'
+			})
+			addrDetail.focus();
+			return;
+			
+		} else{ //모두 문제 없을 시
 			$("#joinForm").submit();//Form전송
 		}
 

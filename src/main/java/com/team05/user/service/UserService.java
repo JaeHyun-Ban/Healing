@@ -23,4 +23,6 @@ public interface UserService {
 	public int update(UserVO uservo);
 	public int delete(String id);
 
+	public int kJoin(UserVO vo);
+
 }

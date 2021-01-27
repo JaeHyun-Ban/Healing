@@ -1,0 +1,108 @@
+-- 유저 테이블
+create table users(
+    userId varchar(50) primary key not null, -- pk
+    userPwd varchar(50),
+    userName varchar(50) not null,
+    userAge varchar(30) not null,
+    phone varchar(50),
+    email varchar(50) not null,
+   	email2 varchar(50) not null,
+    addrBasic varchar(100), -- 짧아서 변경
+    addrDetail varchar(100),
+    zipNo varchar(50),
+    regtimestamp timestamp default current_timestamp
+);
+
+-- 질문게시판 테이블
+create table qboard(
+    qno int(10) not null primary key auto_increment, -- pk, 시퀀스
+    qtitle varchar(100)  not null,
+    qcontent varchar(500) not null,
+    regtimestamp timestamp default current_timestamp,
+    uptimestamptimestamp timestamp default current_timestamp,
+    id varchar(50) not null -- fk
+);
+
+
+
+-- 질문게시판 댓글 테이블
+create table qboard_reply(
+    qreno int(10) not null primary key auto_increment, -- pk, 시퀀스 
+    qre_content varchar(500) not null,
+    regtimestamp timestamp default current_timestamp,
+    uptimestamptimestamp timestamp default current_timestamp,
+    qno int(10) not null, -- fk
+    id varchar(50) not null -- fk
+);
+
+-- 공지사항 테이블
+create table notice(
+    nno int(10) not null primary key auto_increment, -- pk, 시퀀스
+    nviews int(10) not null,
+    ntitle varchar(100) not null,
+    nid varchar(50) not null, -- fk
+    ncontent varchar(500) not null,
+    regtimestamp timestamp default current_timestamp,
+    uptimestamptimestamp timestamp default current_timestamp
+);
+
+-- 예약정보 테이블
+create table reservation(
+    resno int(10) not null primary key auto_increment, -- 예약번호, pk, 시퀀스
+    checkin  varchar(30) not null,
+    checkout varchar(30) not null,
+    price varchar(30) not null,
+    reserve_type varchar(30) not null, -- 숙박/대실
+    regtimestamp timestamp DEFAULT current_timestamp, -- 예약날짜 
+    id varchar(50) not null, -- fk
+    pro_no int(10) not null, -- fk
+    room_no int(10) not null
+);
+
+-- 상품(호텔, 모텔) 테이블
+create table product(
+    pro_no int(10) not null primary key auto_increment, -- pk, 시퀀스
+    name varchar(50) not null,
+    tel varchar(50) not null,
+    basic_address varchar(50) not null,
+    detail_address varchar(50) not null,
+    pro_type varchar(30) not null, -- 모텔, 호텔인지 작성
+    rental_price int(10) not null, -- 추천페이지에서 대표하는 가격(숙박)
+    half_price int(10) not null, -- 추천페이지에서 대표하는 가격(대실)
+    uploadpath varchar(200) not null,-- 호텔 사진
+    filename varchar(50) not null,
+    filerealname varchar(50) not null,
+    regtimestamp timestamp default current_timestamp,
+    fileloca varchar(50) not null
+);
+
+
+-- 호텔 리뷰 테이블
+create table review(
+    renum int(10) not null primary key auto_increment, -- pk, 시퀀스
+    id varchar(50) not null, -- fk
+    pro_no int(10) not null, -- fk
+    score int(10) not null, 
+    content varchar(100) not null,
+    title varchar(100) not null,
+    uploadpath varchar(200) not null,-- 호텔 사진
+    filename varchar(50) ,
+    filerealname varchar(50),
+    fileloca varchar(50),
+    regtimestamp timestamp default current_timestamp,
+    uptimestamptimestamp timestamp default current_timestamp
+);
+
+-- 객실 정보
+create table room(
+    room_no int(10) not null primary key auto_increment, -- pk, 시퀀스
+    title varchar(50) not null,
+    checkin varchar(50) not null,
+    checkout varchar(50) not null,
+    half_time varchar(50) not null, -- 대실 시간
+    rental_price int(10) not null, -- 숙박
+    half_price int(10) not null,  -- 대실
+    pro_no int(10) not null -- fk
+);
+
+

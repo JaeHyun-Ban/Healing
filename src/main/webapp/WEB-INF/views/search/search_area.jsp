@@ -178,7 +178,7 @@
                             		<script type="text/javascript">
                             			reviewmean();
                             			function reviewmean() {
-											$.getJSON("reviewcountMean/"+ ${product.pro_no},function(map){
+											$.getJSON("reviewcountMean/"+ ${product.pro_no}, function(map){
 												console.log(map.count);
 												console.log(map.mean);
 												$("#${product.name}").parent().prev().html("("+map.count+")");

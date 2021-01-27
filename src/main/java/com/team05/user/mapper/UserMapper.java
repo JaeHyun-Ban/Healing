@@ -15,7 +15,8 @@ public interface UserMapper {
 	public int userJoin(UserVO vo);
 	public UserVO userLogin(UserVO vo);//로그인 처리
 	public int idCheck(UserVO vo); //아이디 중복확인
-
+	
+	public int kJoin(UserVO vo);//카카오 회원가입
 	
 	
 }

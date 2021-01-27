@@ -1,6 +1,8 @@
 package com.team05.controller;
 
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -144,6 +146,39 @@ public class UserController {
 		return "redirect:/";
 		
 	}
+	
+	//이건 아닌가봄
+//	@RequestMapping(value = "/kLogin", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/kLogin", method = RequestMethod.POST)
+	public String kLogin(UserVO vo,
+						@RequestParam("kUserId") String kUserId,
+						HttpSession session) {
+		System.out.println(vo.toString());
+		System.out.println(kUserId);
+		vo.setUserId(kUserId);
+		System.out.println(vo.toString());
+		//아이디 중복 확인
+		
+		int result = userService.idCheck(vo);
+		
+		if(result == 0) {//아이디가 없을 시
+			int result2 = userService.kJoin(vo);//회원가입 진행
+			
+			System.out.println("카카오 회원가입 성공");			
+			//세션 생성
+			session.setAttribute("userVO", vo);
+			
+			return "redirect:/";//홈으로 리턴
+		} else {//존재할 시
+			session.setAttribute("userVO", vo);
+			
+			return "redirect:/";//홈으로 리턴
+			
+		}
+		
+		
+	}
+	
 	
 }
 
