@@ -54,45 +54,33 @@
 <section>
 	<div class="container" style="margin-top: 90px;">
 		<div class="row">
-<<<<<<< HEAD
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="##"
-=======
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="search/select_area"
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
-				class="selecttype typeselect"> <img
-					src="resources/img/icon/region.png" alt="region" class="typeimg ">
-					<p class="typetext">지역별 보기</p>
-			</a></li>
-<<<<<<< HEAD
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="##"
-				class="selecttype"> <img
-					src="resources/img/icon/recommendation.png" alt="recommendation"
-					class="typeimg">
-					<p class="typetext">맞춤 추천</p>
-=======
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="search/byagegroup"
-				class="selecttype"> <img
-					src="resources/img/icon/recommendation.png" alt="recommendation"
-					class="typeimg">
-					<p class="typetext">연령별 추천</p>
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 
-			</a></li>
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="##"
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+				<a href="search/select_area" class="selecttype typeselect"> 
+					<img src="resources/img/icon/region.png" alt="region" class="typeimg ">
+						<p class="typetext">지역별 보기</p>
+				</a>
+			</li>
+
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+				<a href="search/byagegroup" class="selecttype"> 
+					<img src="resources/img/icon/recommendation.png" alt="recommendation" class="typeimg">
+						<p class="typetext">연령별 추천</p>
+				</a>
+			</li>
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+				<a href="##"
 				class="selecttype"> <img src="resources/img/icon/travel.png"
 					alt="travel" class="typeimg">
 					<p class="typetext">여행지 주변</p>
 			</a></li>
-<<<<<<< HEAD
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="##"
-=======
-			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><a href="search/search_room?range=30&searchname="
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
-				class="selecttype"> <img
-					src="resources/img/icon/free-icon-nearby-2041118.png" alt="arround"
-					class="typeimg">
+
+			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+				<a href="search/search_room?range=30&searchname=" class="selecttype"> 
+					<img src="resources/img/icon/free-icon-nearby-2041118.png" alt="arround" class="typeimg">
 					<p class="typetext">내 주변</p>
-			</a></li>
+				</a>
+			</li>
 		</div>
 
 	</div>
@@ -171,8 +159,8 @@
 			</a>
 			
 			<a href = "##">
-				<li class="col-lg-6 col-sm-12 mainviewimg"><img
-					src="resources/img/viewimg/5743fc4cd44d8.jpg" alt="">
+				<li class="col-lg-6 col-sm-12 mainviewimg">
+					<img src="resources/img/viewimg/5743fc4cd44d8.jpg" alt="">
 					<div class="gra_black">
 
 						<div class="mainviewinfo" style="text-align: left;">

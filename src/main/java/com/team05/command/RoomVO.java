@@ -17,4 +17,6 @@ public class RoomVO {
 	private int half_price;
 	private int pro_no;
 	
+	private String fileloca;
+	private String filename;
 }

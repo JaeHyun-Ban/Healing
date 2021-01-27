@@ -1,0 +1,74 @@
+CREATE TABLE freeboard(
+    bno number(10),
+    title varchar2(200) not null,
+    writer varchar2(50) not null,
+    content varchar2(2000),
+    regdate date default sysdate,
+    updatedate date default sysdate
+);
+ALTER TABLE freeboard ADD CONSTRAINT freeboard_pk PRIMARY KEY (bno);
+CREATE SEQUENCE freeboard_seq INCREMENT BY 1 START WITH 1 NOCACHE;
+///////////////////////////////////////////////////////////////////////////
+--댓글 테이블
+CREATE TABLE freereply(
+    bno number(10), -- 글번호 FK
+    rno number(10), -- 댓글번호 PK
+    reply varchar2(500), -- 댓글
+    replyId varchar2(50), -- 글쓴이
+    replyPw varchar2(50), -- 비밀번호
+    replydate date default sysdate, --등록일
+    updatedate date default sysdate -- 수정일
+);
+alter table freereply add CONSTRAINT freereply_pk PRIMARY KEY (rno);
+create SEQUENCE freereply_seq START WITH 1 INCREMENT by 1 NOCACHE;
+/////////////////////////////////////////////////////////////////////
+///회원 테이블
+CREATE TABLE users(
+    userId VARCHAR2(50) NOT NULL,
+    userPw VARCHAR2(50) NOT NULL,
+    userName VARCHAR2(50) NOT NULL,
+    userPhone1 VARCHAR2(50),
+    userPhone2 VARCHAR2(50),
+    userEmail1 VARCHAR2(50),
+    userEmail2 varchar2(50),
+    addrBasic varchar2(300),
+    addrDetail varchar2(300),
+    addrZipNum varchar2(50),
+    regdate date default sysdate
+
+);
+alter table users add CONSTRAINT userid_pk PRIMARY KEY (userId);
+/////////////////////////////////////////////////////////////////////
+-- snsboard
+-- pk, 작성자, 내용, 이미지정보(업로드된 경로, 변경된 파일이름, 실제파일 이름), 등록일
+CREATE TABLE snsboard(
+    bno number(10) not null,
+    writer varchar2(100) not null,
+    content varchar2(2000),
+    uploadpath varchar2(200) not null,
+    filename varchar2(50) not null,
+    flierealname varchar2(50) not null,
+    regdate date default sysdate,
+    fileloca varchar2(50) not null
+);
+ALTER TABLE snsboard ADD CONSTRAINT snsboard_pk PRIMARY KEY (bno);
+CREATE SEQUENCE snsboard_seq INCREMENT BY 1 START WITH 1 NOCACHE;
+/////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

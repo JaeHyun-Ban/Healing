@@ -15,10 +15,7 @@ public class UserVO {
 //	    userId VARCHAR2(50) not null, --pk 
 //	    userPwd VARCHAR2(50) not null,
 //	    userName VARCHAR2(50) not null,
-<<<<<<< HEAD
 //		userAge VARCHAR2(30) not null,
-=======
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 //	    phone VARCHAR2(50) not null,
 //	    email VARCHAR2(50) not null,
 //	   	email2 VARCHAR2(50) not null,

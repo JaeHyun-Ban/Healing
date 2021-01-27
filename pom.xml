@@ -228,7 +228,7 @@
 			<groupId>org.rosuda.REngine</groupId>
 			<artifactId>REngine</artifactId>
 			<version>2.1.0</version>
-<<<<<<< HEAD
+
 		</dependency>
 
 		<!-- mysql연결 -->
@@ -240,20 +240,10 @@
 
 
 
-=======
-		</dependency>
-
-		<!-- 카카오 로그인을 위한용도 -->
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.12</version>
-		</dependency>
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
 
 
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>

@@ -39,11 +39,11 @@
 			                            			reviewmean();
 			                            			function reviewmean() {
 			                         
-			                            				$.getJSON("reviewcountMean/"+${twenty.pro_no}, function(map){
+			                            				$.getJSON("reviewcountMean/"+ ${twenty.pro_no}, function(map){
 															console.log(map.mean);
 															$("#twenty${twenty.pro_no}").html(map.mean.toFixed(1));
 												
-														})
+														});
 													}	
 			                            	</script>
                                             <p style="margin: 0; font-size: 19px;">${twenty.basic_address}</p>

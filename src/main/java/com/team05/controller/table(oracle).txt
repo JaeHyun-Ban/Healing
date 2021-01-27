@@ -1,22 +1,10 @@
 -- 유저 테이블
 create table users(
     userId VARCHAR2(50) not null, --pk 
-<<<<<<< HEAD
-<<<<<<<< HEAD:src/main/java/com/team05/controller/table(oracle).txt
-=======
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
     userPwd VARCHAR2(50),
     userName VARCHAR2(50) not null,
     userAge VARCHAR2(30) not null,
     phone VARCHAR2(50),
-<<<<<<< HEAD
-========
-    userPwd VARCHAR2(50) not null,
-    userName VARCHAR2(50) not null,
-    phone VARCHAR2(50) not null,
->>>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246:src/main/java/com/team05/controller/table
-=======
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246
     email VARCHAR2(50) not null,
    	email2 VARCHAR2(50) not null,
     addrBasic VARCHAR2(100), --짧아서 변경
@@ -26,24 +14,21 @@ create table users(
 );
 alter table users add CONSTRAINT user_pk PRIMARY KEY (userId);
 
-<<<<<<< HEAD
 
-insert into users values ('test','1234','조영준','01012345678','duwns@naver,com','수원','아파트','12345',sysdate,0);
-
---질문게시판 테이블
+--고객센터 테이블
 create table qboard(
     qno NUMBER(10) not null, -- pk
     qtitle VARCHAR2(100)  not null,
     qcontent VARCHAR2(500) not null,
     regdate date default sysdate,
     updatedate date default sysdate,
-    id VARCHAR2(50) not null --fk
+    qid VARCHAR2(50) not null --fk
 );
 alter table qboard add CONSTRAINT qboard_pk PRIMARY KEY (qno);
 create SEQUENCE qboard_seq INCREMENT by 1 START with 1 NOCACHE;
 
 
---질문게시판 댓글 테이블
+-- 고객센터 댓글 테이블
 create table qboard_reply(
     qreno NUMBER(10) not null, --pk
     qre_content VARCHAR2(500) not null,
@@ -54,6 +39,7 @@ create table qboard_reply(
 );
 alter table qboard_reply add CONSTRAINT reply_pk PRIMARY KEY (qreno);
 create SEQUENCE reply_seq INCREMENT by 1 start with 1 NOCACHE;
+
 
 -- 공지사항 테이블
 create table notice(
@@ -67,6 +53,7 @@ create table notice(
 );
 alter table notice add CONSTRAINT notice_pk PRIMARY KEY (nno);
 create SEQUENCE notice_seq INCREMENT by 1 START WITH 1 NOCACHE;
+
 
 -- 예약정보 테이블
 drop table reservation;
@@ -84,8 +71,7 @@ create table reservation(
 alter table reservation add CONSTRAINT res_pk PRIMARY KEY (resno);
 
 
-drop table product;
--- 상품(호텔, 모텔) 테이블
+-- 숙박업소(호텔, 모텔) 테이블
 create table product(
     pro_no NUMBER(10) not null, -- pk
     name VARCHAR2(50) not null,
@@ -103,7 +89,7 @@ create table product(
 );
 alter table product add CONSTRAINT pro_pk PRIMARY key (pro_no);
 
--- 호텔 리뷰 테이블
+-- 숙박업소 리뷰 테이블
 create table review(
     renum NUMBER(10) not null, --pk
     id VARCHAR2(50) not null, --fk
@@ -122,7 +108,7 @@ alter table review add CONSTRAINT review_pk PRIMARY KEY (renum);
 
 
 
--- 객실 정보
+-- 숙박업소_객실 테이블
 create table room(
     room_no NUMBER(10) not null, --pk, 사진번호
     title VARCHAR2(50) not null, --방_이름
@@ -135,5 +121,3 @@ create table room(
 );
 alter table room add CONSTRAINT room_pk PRIMARY KEY (room_no);
 
-=======
->>>>>>> 0d6bf2c7ab26bc809b41439ca9d65d36f7199246

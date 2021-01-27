@@ -21,7 +21,7 @@
 
                         <ul class="nav navbar-nav topmenu">
                             <li>
-                                <a href="${pageContext.request.contextPath }/notice/board">공지사항</a>
+                                <a href="${pageContext.request.contextPath }/noticeBoard/noticeList">공지사항</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath }/question/board">고객센터</a>
@@ -33,7 +33,7 @@
                                 <a href="${pageContext.request.contextPath }/user/login">로그인</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath }/user/join">회원가입</a>
+                                <a href="${pageContext.request.contextPath }/user/join" onclick="kakaoLogout()">회원가입</a>
                             </li>
                             </c:when>
                             
@@ -54,5 +54,24 @@
                 </div>
             </nav>
 
-
         </header>
+        
+<!-- 카카오 로그아웃 토큰제거 추가-->
+<script type="text/javascript">
+function kakaoLogout() {
+	//가지고 있는 토큰 확인
+    if (!Kakao.Auth.getAccessToken()) {
+      console.log('Not logged in.');
+      return;
+    }
+    Kakao.Auth.logout(function () {
+    	//가지고 있는 토큰이 존재하는지 확인
+      console.log('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken());
+    })
+  }
+
+</script>       
+        
+        
+        
+        
