@@ -165,7 +165,7 @@
             </td>
           </tr>
           <tr>
-            <td class="m-title">*우편번호</td>
+            <td class="m-title">*주소</td>
             <td>
             	<input id="zipNo" type="text" class="form-control addr-input"
 								name="zipNo" placeholder="우편번호" style="display: inline; width: 70%" value="${userVO.zipNo }" readonly>
@@ -174,11 +174,11 @@
             </td>
           </tr>
           <tr>
-            <td class="m-title">*주소</td>
+            <td class="m-title">*상세주소</td>
             <td><input type="text" class="form-control" id="addrBasic"  name="addrBasic" value="${userVO.addrBasic}" readonly></td>
           </tr>
           <tr>
-            <td class="m-title">*상세주소</td>
+            <td class="m-title">*우편번호</td>
             <td><input type="text" class="form-control" id="addrDetail" name="addrDetail" value="${userVO.addrDetail}" readonly></td>
           </tr>
         </tbody>
@@ -199,7 +199,7 @@
         <c:forEach items="${reservelist}" var="reserve">
 	        <div class="reserve">
 	          <div class="motelimg">
-	            <img src="98eee517dd344e7bfc4cb1dc1688e7eb.jpg" alt="">
+	            <img src="../search/display/${reserve.fileloca}/${reserve.filename}" alt="">
 	          </div>
 	          <div class="left">
 	            <h4 style="margin-bottom: 25px">
@@ -248,7 +248,7 @@
 	            <img src="../search/display/${review.fileloca}/${review.filename}" alt="">
 	          </div>
 	          <div class="left">
-	            <h4>${review.name }</h4>
+	            <h4><a href="../search/room_info?pro_no=${review.pro_no}">${review.name }</a></h4>
 	            <p>
 	              <span><em>9.0</em></span>
 	            </p>

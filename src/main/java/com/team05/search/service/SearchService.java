@@ -28,4 +28,7 @@ public interface SearchService {
 	//예약등록
 	public int reservationForm(ReservationVO vo);
 	public ArrayList<ProductVO> productlist(int[] list);
+	
+	//호텔평점상위 5개
+	public ArrayList<ProductVO> reviewRank();
 }

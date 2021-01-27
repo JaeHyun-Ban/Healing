@@ -84,4 +84,13 @@
         	</foreach>	
 		)
 	</select>
+	
+	<select id="reviewRank" resultType="ProductVO">
+		select p.* from 
+			(select * from 
+				(select pro_no from review group by pro_no ORDER by AVG(score) desc) 
+				<![CDATA[
+				where rownum<= 5) a left join product p on a.pro_no=p.pro_no
+				]]>
+	</select>
 </mapper>
